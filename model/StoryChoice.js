@@ -39,7 +39,7 @@ StoryChoice.init(
         },
         allowNull: false
     },
-    post_time: {
+    create_time: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     }
