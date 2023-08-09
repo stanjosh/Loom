@@ -1,30 +1,48 @@
 const User = require('./User');
 const Story = require('./Story');
-const StoryChoice = require('./StoryChoice');
 const Branch = require('./Branch')
+const StoryChoice = require('./StoryChoice')
+
+
+
+
+
+User.hasMany(Story);
+Story.belongsTo(User, {
+    foreignKey: 'user_id',
+});
+Story.hasMany(Branch)
 
 User.hasMany(Branch);
-User.hasMany(StoryChoice);
 Branch.belongsTo(User, {
-  foreignKey: 'user_id',
+    foreignKey: 'user_id',
 });
 Branch.hasMany(StoryChoice);
+Branch.hasOne(Story)
+
+User.hasMany(StoryChoice);
 StoryChoice.belongsTo(User, {
-  foreignKey: 'user_id',
+    foreignKey: 'user_id',
 });
+StoryChoice.hasOne(Branch);
+
+
+
+
 
 
 
 module.exports = {
   User,
-  Comment,
-  Story
+  Story,
+  Branch,
+  StoryChoice
 };
 
 const db = {
 
-  createComment: async (comment) => {
-    return await Comment.create(comment)
+  createStory: async (story) => {
+    return await Story.create(story)
     .catch((err) => {
       console.log(err)
       return err
@@ -42,22 +60,8 @@ const db = {
 
 
 
-  getAllComments: async () => {
-    return await Comment.findAll({
-      include: [{ 
-        model: User,
-        attributes: ["id", "author_name"],
-        as: "user",
-       }],
-      order: [["comment_time", "DESC"]]
-    })
-    .catch((err) => {
-      return err
-    });
-  },
-
-  getComment: async (id) => {
-    return await Comment.findByPk(id, {
+  getStory: async (id) => {
+    return await Story.findByPk(id, {
       include: [
         { model: User, 
           attributes: ["id", "author_name"], 
@@ -69,40 +73,12 @@ const db = {
     });
   },
 
-  getBlogPosts: async (id=null) => {
-    return await BlogPost.findAll({
-      where: id ? { user_id: id } : {},
-      include: [
-        { model: User, 
-          attributes: ["id", "author_name"], 
-          as: "user" },
-        {
-          model: Comment,
-          include: {
-            model: User,
-            attributes: ["id", "author_name"],
-            as: "user",
-          },
-        },
-      ],
-      order: [["post_time", "DESC"]]
-    })
-    .then((blogs) => {
-      return blogs.map((blog) => {
-        return blog.get({plain: true})
-      })
-    })
-    .catch((err) => {
-      return err
-    });
-  },
-
-  getBlogPost: async (id) => {
-    return await BlogPost.findByPk(id, {
+   getBranch: async (id) => {
+    return await Branch.findByPk(id, {
       include: [
         { model: User, attributes: ["id", "author_name"], as: "user" },
         {
-          model: Comment,
+          model: Story,
           include: [{ 
             model: User, 
             attributes: ["id", "author_name"], 
@@ -117,28 +93,19 @@ const db = {
     });
   },
 
-  getAllUsers: async () => {
-    return await User.scope('withoutPassword').findAll({
-      include: [{ model: BlogPost }, { model: Comment }],
-    })
-    .catch((err) => {
-      return err
-    });
-  },
-
   getUser: async (id) => {
     return await User.scope('withoutPassword').findByPk(id, {
-      include: [{ model: BlogPost }, { model: Comment }],
+      include: [{ model: Branch }, { model: Comment }],
     })
     .catch((err) => {
       return err
     });
   },
 
-  createBlogPost: async (sessionUserId, blogPost) => {
-    blogPost.user_id = sessionUserId
-    console.log(blogPost)
-    return await BlogPost.create(blogPost)
+  createBranch: async (sessionUserId, branch) => {
+    branch.user_id = sessionUserId
+    console.log(branch)
+    return await Branch.create(branch)
     .catch((err) => {
       console.log(err)
       return err
@@ -147,11 +114,11 @@ const db = {
   },
 
 
-  updateBlogPost: async (sessionUserId, blogPostID, blogPost) => {
-    console.log(sessionUserId, blogPost)
-    return await BlogPost.update(blogPost, { 
+  updateBranch: async (sessionUserId, branchID, branch) => {
+    console.log(sessionUserId, branch)
+    return await Branch.update(branch, { 
       where: { 
-        id: blogPostID, 
+        id: branchID, 
         user_id: sessionUserId 
       } 
     })
@@ -173,11 +140,11 @@ const db = {
   },
 
 
-  deleteBlogPost: async (sessionUserId, blogpostId) => {
-    console.log(sessionUserId, blogpostId)
-    return await BlogPost.destroy({ 
+  deleteBranch: async (sessionUserId, branchId) => {
+    console.log(sessionUserId, branchId)
+    return await Branch.destroy({ 
       where: { 
-        id: blogpostId, 
+        id: branchId, 
         user_id: sessionUserId 
       } 
     })
@@ -189,14 +156,14 @@ const db = {
     });
   },
 
-  deleteComment: async (sessionUserId, commentID) => {
-    return await Comment.destroy({ 
+  deleteStory: async (sessionUserId, storyID) => {
+    return await Story.destroy({ 
       where: { 
-        id: commentID, 
+        id: storyID, 
         user_id: sessionUserId 
       } 
     })
-    .then((comment) => {
+    .then((story) => {
       return true
     })
     .catch((err) => {
@@ -204,8 +171,6 @@ const db = {
     });
     
   },
-
-
 
   authUser: async (user) => {
     console.log(user)
@@ -221,4 +186,4 @@ const db = {
   },
 }
 
-module.exports = { db, User, Story, StoryChoice, Branch };
+module.exports = { db, User, Story, Branch, StoryChoice };
