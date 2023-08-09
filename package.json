@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/julianlosak/project-2#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "connect-session-sequelize": "^7.1.7",
     "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.9",
