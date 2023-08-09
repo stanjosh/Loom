@@ -19,13 +19,11 @@ const branchData = [
                 branch: "4"
             }
         ]
-
-
     },
     {
         reference: "2",
-        branch_title: "You go east. Your dad is not here.",
-        branch_content: "This is what happened and where you are",
+        branch_title: "East of the starting point",
+        branch_content: "You go east. Your dad is not here",
         story_choices: [
             {
                 text: "Go west and back to where you started",

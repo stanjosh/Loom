@@ -19,6 +19,11 @@ Branch.init(
       },
       allowNull: false
     },
+    reference: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
     branch_title: {
       type: DataTypes.STRING,
       allowNull: false
