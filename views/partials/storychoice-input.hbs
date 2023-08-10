@@ -1,0 +1,14 @@
+
+<div style="padding: 5%">
+{{branch}}
+</div>
+
+<div style="padding: 5%">
+<form action="/branch/{{branch.id}}/choice/" method="post">
+
+    <input type="text" name="choice_text" id="choice_text" placeholder="Choice Text" required />
+    <input type="text" name="next_branch" id="next_branch" placeholder="Next Story Branch Name" required />
+
+</form>
+
+</div>

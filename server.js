@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const views = require('./views');
+const controllers = require('./controllers')
 const dayjs = require('dayjs');
 const engine = require('express-handlebars');
 const sequelize = require('./config/connection');
@@ -55,7 +56,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/public')));
 
-
+app.use(controllers)
 app.use(views);
 
 

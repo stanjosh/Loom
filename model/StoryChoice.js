@@ -2,7 +2,6 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const User = require('./User');
 const Branch = require('./Branch')
-const Story = require('./Story')
 class StoryChoice extends Model {}
 
 StoryChoice.init(
@@ -20,14 +19,6 @@ StoryChoice.init(
       },
       allowNull: false
     },
-    story_id: {
-      type: DataTypes.UUID,
-      references: {
-          model: Story,
-          key: 'id'
-      },
-      allowNull: false
-    },
     branch_id: {
       type: DataTypes.UUID,
       references: {
@@ -41,11 +32,7 @@ StoryChoice.init(
       allowNull: false
     },
     next_branch: {
-        type: DataTypes.UUID,
-        references: {
-            model: Branch,
-            key: 'id'
-        },
+        type: DataTypes.STRING,
         allowNull: true
     },
     create_time: {

@@ -13,22 +13,24 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    await db.createBranch(req.session.user_id, req.body)
+      .then((branch) => {
+        return res.status(200).json(branch);
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  });
+
+
+router.post('/', async (req, res) => {
   await db.createBranch(req.session.user_id, req.body)
     .then((branch) => {
       return res.status(200).json(branch);
     })
     .catch((err) => {
       console.log(err);
-      return res.status(500).json(err);
-    });
-});
-
-router.put('/:id', async (req, res) => {
-  await db.updateBranch(req.session.user_id, req.params.id, req.body)
-  .then((branch) => {
-      return res.status(200).json(branch);
-    })
-  .catch((err) => {
       return res.status(500).json(err);
     });
 });

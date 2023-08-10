@@ -19,9 +19,9 @@ Story.init(
       allowNull: false
     },
     reference_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     },
     story_title: {
         type: DataTypes.STRING,
