@@ -1,8 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const User = require('./User');
-const Branch = require('./Branch.js')
-const Story = require('./Story.js')
+const Branch = require('./Branch')
+const Story = require('./Story')
 class StoryChoice extends Model {}
 
 StoryChoice.init(
@@ -21,11 +21,20 @@ StoryChoice.init(
       allowNull: false
     },
     story_id: {
-        type: DataTypes.UUID,
-        references: {
-            model: Story,
-            key: 'id'
-        }
+      type: DataTypes.UUID,
+      references: {
+          model: Story,
+          key: 'id'
+      },
+      allowNull: false
+    },
+    branch_id: {
+      type: DataTypes.UUID,
+      references: {
+        model: Branch,
+        key: 'id'
+      },
+      allowNull: false
     },
     choice_text: {
       type: DataTypes.TEXT,
@@ -37,7 +46,7 @@ StoryChoice.init(
             model: Branch,
             key: 'id'
         },
-        allowNull: false
+        allowNull: true
     },
     create_time: {
       type: DataTypes.DATE,

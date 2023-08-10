@@ -1,16 +1,39 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const User = require('./User');
-const Branch = require('./Branch')
 class Story extends Model {}
 
 Story.init(
   {
-    starting_branch: {
-        references: {
-            model: Branch,
-            key: id
-        }
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+      },
+    user_id:{
+      type: DataTypes.UUID,
+      references: {
+        model: User,
+        key: 'id'
+      },
+      allowNull: false
+    },
+    reference_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    story_title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    story_content: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    create_time: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
     }
   },
   {

@@ -4,6 +4,7 @@
   "description": "Bootcamp project 2",
   "main": "server.js",
   "scripts": {
+    "seed": "node ./model/seeds/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,15 +19,18 @@
   "homepage": "https://github.com/julianlosak/project-2#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "connect-session-sequelize": "^7.1.7",
     "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "express-handlebars": "^7.1.2",
+    "express-handlebars": "^7.1.0",
     "express-session": "^1.17.3",
+    "handlebars": "^4.7.7",
     "mariadb": "^3.2.0",
-    "mysql2-promise": "^0.1.4",
-    "sequelize": "^6.32.1"
+    "mysql2": "^3.5.2",
+    "sequelize": "^6.32.1",
+    "sequelize-bcrypt": "^1.2.0"
   }
 }
