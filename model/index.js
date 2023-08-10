@@ -2,7 +2,7 @@ const User = require('./User');
 const Story = require('./Story');
 const Branch = require('./Branch')
 const StoryChoice = require('./StoryChoice')
-
+const sequelize = require('sequelize')
 
 
 
@@ -21,16 +21,9 @@ Branch.hasMany(StoryChoice);
 Branch.hasOne(Story)
 
 User.hasMany(StoryChoice);
-StoryChoice.belongsTo(User, {
-    foreignKey: 'user_id',
+StoryChoice.belongsTo(Branch, {
+  foreignKey: 'branch_id'
 });
-StoryChoice.hasOne(Branch);
-
-
-
-
-
-
 
 module.exports = {
   User,
@@ -49,32 +42,86 @@ const db = {
     })
   },
 
-  createUser: async (user) => {
-    console.log(user)
-    return await User.create(user)
-    .catch((err) => {
-      console.log(err)
-      return err
-    })
-  },
-
-
-
   getStory: async (id) => {
-    return await Story.findByPk(id, {
+    let story = await Story.findAll({
+      where: { reference_id : id },
       include: [
         { model: User, 
           attributes: ["id", "author_name"], 
           as: "user" },
+        { model: Branch,
+          include: [ { model: StoryChoice } ] }
       ]
+    })
+    .catch((err) => {
+      return err
+    });
+    return story.get({plain:true})
+
+  },
+
+  getUserStories: async (userId) => {
+    let stories = await Story.findAll({
+      where: { user_id : userId },
+      include: [
+        { model: User, 
+          attributes: ["id", "author_name"], 
+          as: "user" },
+        { model: Branch,
+          include: [ { model: StoryChoice } ] }
+      ]
+    })
+    .catch((err) => {
+      return err
+    });
+    return stories.map(story => story.get({plain:true}))
+  },
+
+  getAllStories: async () => {
+    let stories = await Story.findAll({
+      include: [
+        { model: User, 
+          attributes: ["id", "author_name"], 
+          as: "user" },
+        { model: Branch,
+          include: [ 
+            { model: StoryChoice },
+          ] },
+      ],
+    })
+    .catch((err) => {
+      return err
+    });
+    console.log(stories)
+    //return stories.map(stories => stories.get({ plain:true }))
+  },
+
+  createBranch: async (sessionUserId, branch) => {
+    branch.user_id = sessionUserId
+    console.log(branch)
+
+    return await Branch.create(branch)
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
+    
+  },
+
+  getBranch: async (id) => {
+    return await Branch.findByPk(id, {
+      include: [
+        { model: User, attributes: ["author_name"], as: "author" },
+        { model: StoryChoice }
+      ],
     })
     .catch((err) => {
       return err
     });
   },
 
-   getBranch: async (id) => {
-    return await Branch.findByPk(id, {
+  getBranch: async (id) => {
+    return await Branch.findAll(id, {
       include: [
         { model: User, attributes: ["id", "author_name"], as: "user" },
         {
@@ -93,26 +140,6 @@ const db = {
     });
   },
 
-  getUser: async (id) => {
-    return await User.scope('withoutPassword').findByPk(id, {
-      include: [{ model: Branch }, { model: Comment }],
-    })
-    .catch((err) => {
-      return err
-    });
-  },
-
-  createBranch: async (sessionUserId, branch) => {
-    branch.user_id = sessionUserId
-    console.log(branch)
-    return await Branch.create(branch)
-    .catch((err) => {
-      console.log(err)
-      return err
-    })
-    
-  },
-
 
   updateBranch: async (sessionUserId, branchID, branch) => {
     console.log(sessionUserId, branch)
@@ -126,19 +153,6 @@ const db = {
       return err 
     });
   },
-
-  updateUser: async (sessionUserId, userId, info) => {
-    return await User.update(info, { 
-      where: { 
-        id: userId && sessionUserId 
-      }, 
-        individualHooks: true 
-      })
-    .catch((err) => {
-      return false 
-    });
-  },
-
 
   deleteBranch: async (sessionUserId, branchId) => {
     console.log(sessionUserId, branchId)
@@ -170,6 +184,36 @@ const db = {
       return err 
     });
     
+  },
+
+  createUser: async (user) => {
+    console.log(user)
+    return await User.create(user)
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
+  },
+
+  getUser: async (id) => {
+    return await User.scope('withoutPassword').findByPk(id, {
+      include: [{ model: Branch }, { model: Comment }],
+    })
+    .catch((err) => {
+      return err
+    });
+  },
+
+  updateUser: async (sessionUserId, userId, info) => {
+    return await User.update(info, { 
+      where: { 
+        id: userId && sessionUserId 
+      }, 
+        individualHooks: true 
+      })
+    .catch((err) => {
+      return false 
+    });
   },
 
   authUser: async (user) => {

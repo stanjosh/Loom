@@ -12,15 +12,15 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Go east and find your dad who is probably still at the store",
-                next_branch: "2"
+                next_branch: "East of the starting point"
             },
             {
                 choice_text: "Go west and get a hamburger",
-                next_branch: "3"
+                next_branch: "Dairy Queen."
             },
             {
                 choice_text: "lay down and take a nap",
-                next_branch: "4"
+                next_branch: "You lay down and take a nap..."
             }
         ]
     },
@@ -32,11 +32,11 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Go west and back to where you started",
-                next_branch: "1"
+                next_branch: "Well, you're back at the start."
             },
             {
                 choice_text: "Look for trinkets",
-                next_branch: "5"
+                next_branch: "You look for treasure in the general area."
             }
         ]
     },
@@ -50,11 +50,11 @@ const branchData = [
             {   
                 
                 choice_text: "Get a burger",
-                next_branch: "6"
+                next_branch: "You order a burger from the lady at the counter."
             },
             {
                 choice_text: "Get a shake",
-                next_branch: "7"
+                next_branch: "You order a shake from the lady at the counter."
             }
         ]
     }
@@ -68,37 +68,38 @@ const branchData = [
 
 
 const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
+    // assign story UUIDs to branches
+    console.log(storyRefUUIDs)
     branchData.forEach((branch) => {
         branch.story_id = storyRefUUIDs[branch.story_id]
         branch.user_id = userUUIDs[0]
     })
     
-    
+    // create branch data so we can get the UUIDs and have it return the 
+    // objects and clean them up
+    let branches = await Branch.bulkCreate(branchData, { returning: true});
+    branches = branches.map(branch => branch.get({ plain: true }));
 
-    await Branch.bulkCreate(branchData);
-
- 
-    let branchUUIDs = {}
-    let branches = await Branch.findAll()
-
-    branches = branches.map(branch => branch.get({ plain: true }))
-
-    
+    //assign the UUIDs to the local data
+    let branchUUIDs = {};
     branches.forEach((branch) => {
-        console.log(branch)
         branchUUIDs[branch.reference_id] = branch.id;
     });
-    
-    let choiceData = branchData.map((branch) => {
-        branch.story_choices.forEach((choice) => {
-            choice.branch_id = branchUUIDs[branch.reference_id];
-            choice.next_branch = branchUUIDs[choice.next_branch] ? branchUUIDs[choice.next_branch] : null;
-        })
-        return branch.story_choices;
-    });
-    console.log(choiceData)
+    //assign branch and story UUIDs or null to story choice objects 
+    // and return only story choice objects as array to be created
 
-    // await StoryChoice.bulkCreate(choiceData)
+    let storyChoicesData = []
+
+    branchData.forEach((branchStoryChoices) => {
+        let branch_id = branchUUIDs[branchStoryChoices.reference_id]
+        branchStoryChoices = branchStoryChoices.story_choices
+        branchStoryChoices.forEach((branchStoryChoice) => {
+            branchStoryChoice.branch_id = branch_id
+            storyChoicesData.push(branchStoryChoice)
+        })
+    })
+    console.log(storyChoicesData)
+    await StoryChoice.bulkCreate(storyChoicesData)
 
 }
 

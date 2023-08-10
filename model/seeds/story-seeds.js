@@ -4,7 +4,13 @@ const storyData = [
     {
         user_id: "",
         reference_id: "1",
-        story_title: "This is the title of the story",
+        story_title: "Story Title # 1",
+        story_content: "This is a preface to the story.",
+    },
+    {
+        user_id: "",
+        reference_id: "2",
+        story_title: "Story Title # 2",
         story_content: "This is a preface to the story.",
     }
    

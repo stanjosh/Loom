@@ -9,10 +9,10 @@ const withAuth = (req, res, next) => {
     } else next()
 }
 
-router.use('/branch', branchRoutes);
-router.use('/story', storyRoutes);
-router.use('/user', userRoutes);
+router.use('/api/branch', branchRoutes);
+router.use('/api/story', storyRoutes);
+router.use('/api/user', userRoutes);
 
 
 
-module.exports = { router, withAuth };
+module.exports = router;

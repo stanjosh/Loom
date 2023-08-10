@@ -28,8 +28,8 @@ const seedAll = async () => {
   const storyRefUUIDs = async () => {
     let storyUUIDs = {}
     let stories = await Story.findAll()
-    console.log(stories)
     stories = stories.map(story => story.get({ plain: true }));
+    console.log(stories)
     stories.forEach(story => storyUUIDs[story.reference_id] = story.id);
     console.log(storyUUIDs)
     return storyUUIDs

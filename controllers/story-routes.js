@@ -14,6 +14,28 @@ router.post('/', async (req, res) => {
   })
 });
 
+router.get('/:id', async (req, res) => {
+  return db.getStory(req.params.id)
+  .then((story) => {
+    return res.status(200).json(story);
+  })
+  .catch((err) => {
+    console.log(err)
+    return res.status(500)
+  })
+});
+
+router.get('/', async (req, res) => {
+  return db.getAllStories()
+  .then((stories) => {
+    return res.status(200).json(stories);
+  })
+  .catch((err) => {
+    console.log(err)
+    return res.status(500)
+  })
+});
+
 router.delete('/:id', async (req, res) => {
     await db.deleteStory(req.session.user_id, req.params.id)
     .then((story) => {
@@ -24,7 +46,7 @@ router.delete('/:id', async (req, res) => {
       console.log(err)
       return res.status(500)
     })
-});
+});`1`
 
 
 

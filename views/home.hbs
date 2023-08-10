@@ -1,12 +1,28 @@
 
 
 <!--blog-->
-<div class="">
+{{> header}}
 
-    <a href="/story">Click to start story</a>
+<div class="">
+    {{#if session.loggedIn}}
+
+    current story and branch
+    {{#each session.choice_history}}
+        {{> branchDisplay @last}}
+    {{/each}}
+    {{else}}
+
+    {{#each stories}}
+        {{> storylist this}}
+    {{/each}}
+
+    <a href="/story">Click to start a new story</a>
+
+    {{/if}}
+
 
 </div>
 
 
-
+{{> footer}}
 
