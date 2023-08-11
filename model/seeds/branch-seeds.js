@@ -6,7 +6,7 @@ const branchData = [
 
     {   
         story_id: "1",
-        reference_id: "1",
+        reference_id: "Start",
         branch_title:"Awakening",
         branch_content:
          `You awake in a panic! You look around and realize you are in a hospital and while everything seems vaguely 
@@ -63,7 +63,7 @@ const branchData = [
             },
             {
                 choice_text: "Go down the hall",
-                next_branch: "Stairwell Hallway"
+                next_branch: "Stairwell Hallway Init"
             }
         ]
     },
@@ -140,14 +140,14 @@ const branchData = [
     {   
         story_id: "1",
         reference_id: "9",
-        branch_title:"Stairwell Hallway",
+        branch_title:"Stairwell Hallway Init",
         branch_content:
          `The one unlocked door is to the stairwell.
           There is nothing blocking from going up or down`,
         story_choices: [
             {
                 choice_text: "Go Down",
-                next_branch: "Down Stairs"
+                next_branch: "Down Stairs Init"
             },
             {
                 choice_text: "Go Up",
@@ -159,8 +159,263 @@ const branchData = [
             },
         ]
     },
+    {   
+        story_id: "1",
+        reference_id: "10",
+        branch_title:"Stairwell Hallway",
+        branch_content:
+         `Which way to go?`,
+        story_choices: [
+            {
+                choice_text: "Go Down",
+                next_branch: "Down Stairs"
+            },
+            {
+                choice_text: "Go Up",
+                next_branch: "Up Stairs"
+            },
+            {
+                choice_text: "Check reception desk",
+                next_branch: "Reception Desk"
+            },
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "11",
+        branch_title:"Down Stairs Init",//////
+        branch_content:
+         `!Ah! An exit door. Finally I can get out of here.
+         *Giggle Giggle*
+         Of course it's locked! Why wouldn't it be locked?!
+         *You feel dread as you wollow in your mind*
+         I have to find another way.`,
+        story_choices: [
+            {
+                choice_text: "Go up",
+                next_branch: "Stairwell Hallway"
+            },
+            {
+                choice_text: "Go to main lobby",
+                next_branch: "Main Lobby"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "12",
+        branch_title:"Down Stairs",//////
+        branch_content:
+         `Back at the bottom of the stairs`,
+        story_choices: [
+            {
+                choice_text: "Go up",
+                next_branch: "Stairwell Hallway"
+            },
+            {
+                choice_text: "Go to main lobby",
+                next_branch: "Main Lobby Init"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "13",
+        branch_title:"Up Stairs",
+        branch_content:
+         `You notice another locked door labeled roof access`,
+        story_choices: [
+            {
+                choice_text: "Try door",
+                next_branch: "Final Door"///////////////////////////////////////////////////////////////////////////
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Stairwell Hallway"
+            },
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "14",
+        branch_title:"Main Lobby Init",
+        branch_content:
+         `A Dormant room with cobwebs and.....Is that a person? A real person?!`,
+        story_choices: [
+            {
+                choice_text: "Approach Person",
+                next_branch: "Figure Dialog"
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Down Stairs"
+            },
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "15",
+        branch_title:"Figure Dialog",
+        branch_content:
+         ` ══════════════▒████████████████████
+         ════════════▓█████████▓███▓▓██▓███▓█████
+         ══════════██▓████████▓██▓███▓██▒▒▒███▓██
+         ═══════▒██████▓████▓██▓██▓▒▒▒▓▓▓▓▓▒█████
+         ═══════██████▓████▓██▓▓██▒▒▓▓▒▓▓▒▒▒▒████
+         ═════▓██████████▓███▓▓████▓▓▓▒▓█████▓▓██
+         ═════█████▓████▓▓███▓█████═█▓▒██▓████▓▓█
+         ════█████▓████▓▓███▓▓████░═▒█████▓████▓█
+         ════████▓█████▓███▓▓▓████════░████▓████▓
+         ═══▒████▓████▓████▓▓████══════▒████▓████
+         ═══████▓████▓████▓▓█▓██════════░████████
+         ═══████▓███▓▓███▓▓█▒▒█════████▒══███▓███
+         ═══▓██▓████████▓██▓═█════██═══▒▓══██████
+         ════██████▓███▓███═█════█▓════════██▓███
+         ════████▓███▓███▒═░═══════════════██▓███
+         ════▓██▓███▓██▓══════════════════▓█▓████
+         ═════█▓██████═══════════════▓███═▒█▓████
+         ═════██▓███═══░════════════██████▓█▓████
+         ════▒█████═══███▓═════════██═░█▒████████
+         ════████▓██═██░▒██═══════░█═░▓██▒═▒█▓███
+         ═══████▓███═█═══██░══════▒══████═══█████
+         ══▓███▓████▓══░███════════════▒════██▓██
+         ══███▓▓█████════▓══════════════════██▓▓█
+         ═▓███▓███▓██══════════════════════░███▓█
+         ═▓███▓▓█████░════════════════════▒██████
+         ══████▓▓████▒═══════════════════███▓███▓
+         ══░████▓▓███▓══════════════════════▒███▓
+         ═══▒████▓▓███═════════════════════▓████▓
+         ════▒████▓███▒═══════════════════██████▓
+         ═════████▓████═════░███▓════════██████▓█
+         ═════▒█████▓███════▓▒══░█══════██████▓▓█
+         ═════███▓██▓████════█▒▓█▓═════▒████▓▓███
+         ════██▓███▓██████═══▒██▓══════████▓▓████
+         ═══██▓█████▓██████═══════════░███▓▓█████
+         ═▒██████▓██▓▓██████══════════▓███▓██████
+         ░█░████▓█████▓███▓██░════════▒████▓█████
+         █═░███▓██████▓███▓███▓══░═════█████▓████
+         ═░███▓██████▓███▓████████═══════████▓███
 
-]
+         
+         "Oh! You are awake"`,
+        story_choices: [
+            {
+                choice_text: "Where am I?",
+                next_branch: "Where"
+            },
+            {
+                choice_text: "Who am I?",
+                next_branch: "Who"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "16",
+        branch_title:"Where",
+        branch_content:
+         `"You are where you are meant to be......"`,
+        story_choices: [
+            {
+                choice_text: "Who am I?",
+                next_branch: "Who"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "17",
+        branch_title:"Who",
+        branch_content:
+         `"You are the man that killed them....Don't you remember?"
+         
+         You almost collapse to the sound of screeching metal.
+        When you regain your sanity the figure dissapeared.`,
+        story_choices: [
+            {
+                choice_text: "Go back to Main Lobby",
+                next_branch: "Main Lobby"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "18",
+        branch_title:"Main Lobby",
+        branch_content:
+         `You notice a pitch black hallway where sound is defened by the darkness?`,
+        story_choices: [
+            {
+                choice_text: "Go back to stairwell",
+                next_branch: "Down Stairs"
+            },
+            {
+                choice_text: "Investigate hallway with flashlight",
+                next_branch: "1st Floor Hall"
+            },
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "19",
+        branch_title:"1st Floor Hall Init",
+        branch_content:
+         `With your flashlight in hand you can conquer the darkness.
+          You notice a open hospital room with a faint light.`,
+        story_choices: [
+            {
+                choice_text: "Go Into Hospital Room",
+                next_branch: "Hospital Room Scripted"
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Main Lobby"
+            },
+            {
+                choice_text: "Keep going through hallway",
+                next_branch: "Hospital Chapel"///////////
+            }
+        ]
+    },
+
+    {   
+        story_id: "1",
+        reference_id: "20",
+        branch_title:"1st Floor Hall Fail",
+        branch_content:
+         `its too dark. I need to find a way to make it through.`,
+        story_choices: [
+            {
+                choice_text: "Go Back",
+                next_branch: "Main Lobby"
+            },
+
+        ]
+    },
+    //TODO: Write Scripted Hospital visit
+//     {   
+//         story_id: "1",
+//         reference_id: "21",
+//         branch_title:"1st Floor Hall",
+//         branch_content:
+//          `With your flashlight in hand you can conquer the darkness.
+//           You notice a open hospital room with a faint light.`,
+//         story_choices: [
+//             {
+//                 choice_text: "Go Into Hospital Room",
+//                 next_branch: "Hospital Room Scripted"
+//             },
+//             {
+//                 choice_text: "Go back",
+//                 next_branch: "Main Lobby"
+//             },
+//             {
+//                 choice_text: "Keep going through hallway",
+//                 next_branch: "Hospital Chapel"///////////
+//             }
+//         ]
+//     },
+// ]
 
 
 
