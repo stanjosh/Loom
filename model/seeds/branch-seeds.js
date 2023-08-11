@@ -7,36 +7,31 @@ const branchData = [
     {   
         story_id: "1",
         reference_id: "1",
-        branch_title: "This is the title to the starting branch",
-        branch_content: "This is what happened and where you are",
+        branch_title:"Awakening",
+        branch_content:
+         `You awake in a panic! You look around and realize you are in a hospital and while everything seems vaguely 
+        familiar but then you realize you have no memory. You stand but almost collapse over your own weight.
+         You Must find a purpose`,
         story_choices: [
             {
-                choice_text: "Go east and find your dad who is probably still at the store",
-                next_branch: "East of the starting point"
+                choice_text: "Look around",
+                next_branch: "Initial Items"
             },
             {
-                choice_text: "Go west and get a hamburger",
-                next_branch: "Dairy Queen."
-            },
-            {
-                choice_text: "lay down and take a nap",
-                next_branch: "You lay down and take a nap..."
+                choice_text: "Exit the room",
+                next_branch: "Hospital Halls"
             }
         ]
     },
     {
         story_id: "1",
         reference_id: "2",
-        branch_title: "East of the starting point",
-        branch_content: "You go east. Your dad is not here",
+        branch_title: "Initial Items",
+        branch_content: "You see a flashlight",
         story_choices: [
             {
-                choice_text: "Go west and back to where you started",
-                next_branch: "Well, you're back at the start."
-            },
-            {
-                choice_text: "Look for trinkets",
-                next_branch: "You look for treasure in the general area."
+                choice_text: "Pick up flashlight",
+                next_branch: "Flashlight description"
             }
         ]
     },
@@ -44,20 +39,126 @@ const branchData = [
     {
         story_id: "1",
         reference_id: "3",
-        branch_title: "Dairy Queen.",
-        branch_content: "You're at Dairy Queen.",
+        branch_title: "Flashlight description",
+        branch_content: "You notice the flashlight does not have batteries but you take it anyway",
         story_choices: [
             {   
                 
-                choice_text: "Get a burger",
-                next_branch: "You order a burger from the lady at the counter."
-            },
-            {
-                choice_text: "Get a shake",
-                next_branch: "You order a shake from the lady at the counter."
+                choice_text: "Exit the room",
+                next_branch: "Hospital Halls"
             }
         ]
-    }
+    },
+    {   
+        story_id: "1",
+        reference_id: "4",
+        branch_title:"Hospital Halls",
+        branch_content:
+         `You exit the room and notice no staff or life of any kind in the building.
+          You see a receptionist desk that looks abandoned and tattered.`,
+        story_choices: [
+            {
+                choice_text: "Go to reception desk",
+                next_branch: "Reception Desk"
+            },
+            {
+                choice_text: "Go down the hall",
+                next_branch: "Stairwell Hallway"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "5",
+        branch_title:"Reception Desk",
+        branch_content:
+         `A messy desk with a with a locked drawer`,
+        story_choices: [
+            {
+                choice_text: "Unlock Drawer",
+                next_branch: "Locked Drawer"
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Hospital Halls"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "6",
+        branch_title:"Locked Drawer",
+        branch_content:
+         `The drawer is locked with a 3 digit keypad combination.
+         You see a sticky note that says. The meaning of the universe`,
+        story_choices: [
+            {
+                type: "input",
+                choice_text: "What could the code be?",
+                next_branch: "Drawer Success",
+                fail_branch: "Drawer Fail"
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Reception Desk"
+            }
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "7",
+        branch_title:"Drawer Fail",
+        branch_content:
+         `You giggle the lock but it does not open`,
+        story_choices: [
+            {
+                type: "input",
+                choice_text: "What could the code be?",
+                next_branch: "Drawer Success",
+                fail_branch: "Drawer Fail"
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Reception Desk"
+            },
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "8",
+        branch_title:"Drawer Success",
+        branch_content:
+         `*click*
+         The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
+        story_choices: [
+            {
+                choice_text: "Go back",
+                next_branch: "Hospital Halls"
+            },
+        ]
+    },
+    {   
+        story_id: "1",
+        reference_id: "9",
+        branch_title:"Stairwell Hallway",
+        branch_content:
+         `The one unlocked door is to the stairwell.
+          There is nothing blocking from going up or down`,
+        story_choices: [
+            {
+                choice_text: "Go Down",
+                next_branch: "Down Stairs"
+            },
+            {
+                choice_text: "Go Up",
+                next_branch: "Up Stairs"
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Hospital Halls"
+            },
+        ]
+    },
 
 ]
 
