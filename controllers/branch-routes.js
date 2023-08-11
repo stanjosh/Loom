@@ -1,6 +1,17 @@
 const router = require('express').Router();
 const { db } = require('../model');
 
+
+router.get('/:id', async (req, res) => {
+  let branches = await db.getBranch(req.params.id);
+  if (branches) {
+    return res.status(200).json(branches)
+  }
+  else {
+    return res.status(404).send('No blog posts found')
+  }
+});
+
 router.get('/', async (req, res) => {
   let branches = await db.getBranches();
   if (branches) {

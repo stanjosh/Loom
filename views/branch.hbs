@@ -4,7 +4,10 @@
 
 {{log this}}
 
-{{#each story_choices}}
+<div>{{branch.branch_title}}</div>
+<div>{{branch.branch_content}}</div>
+
+{{#each branch.choices}}
     {{> storychoice this}}
 {{/each}}
 

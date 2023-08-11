@@ -20,7 +20,6 @@ const storySeeds = async (users) => {
     storyData.forEach((story) => {
         story.user_id = users[0]
     });
-    console.log(storyData)
     await Story.bulkCreate(storyData)
   };
 

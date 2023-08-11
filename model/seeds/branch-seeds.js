@@ -1,4 +1,4 @@
-const { StoryChoice, Story, Branch } = require("..");
+const { Choice, Story, Branch } = require("..");
 
 
 
@@ -15,15 +15,15 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Go east and find your dad who is probably still at the store",
-                next_branch: "East of the starting point"
+                next_branch: "2"
             },
             {
                 choice_text: "Go west and get a hamburger",
-                next_branch: "Dairy Queen."
+                next_branch: "3"
             },
             {
                 choice_text: "lay down and take a nap",
-                next_branch: "You lay down and take a nap..."
+                next_branch: "4"
             }
         ]
     },
@@ -36,13 +36,13 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Go west and back to where you started",
-                next_branch: "Well, you're back at the start.",
+                next_branch: "1",
                 type: "input",
-                fail_branch: ""
+                fail_branch: "2"
             },
             {
                 choice_text: "Look for trinkets",
-                next_branch: "You look for treasure in the general area."
+                next_branch: "5"
             }
         ]
     },
@@ -55,11 +55,11 @@ const branchData = [
         story_choices: [
             {   
                 choice_text: "Get a burger",
-                next_branch: "You order a burger from the lady at the counter."
+                next_branch: "6"
             },
             {
                 choice_text: "Get a shake",
-                next_branch: "You order a shake from the lady at the counter."
+                next_branch: "7"
             }
         ]
     }
@@ -75,7 +75,6 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
     console.log(storyRefUUIDs)
     branchData.forEach((branch) => {
         branch.story_id = storyRefUUIDs[branch.story_reference_id]
-        console.log(userUUIDs)
         branch.user_id = userUUIDs[0]
     })
     
@@ -89,21 +88,27 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
     branches.forEach((branch) => {
         branchUUIDs[branch.reference_id] = branch.id;
     });
+
     //assign branch and story UUIDs or null to story choice objects 
     // and return only story choice objects as array to be created
 
     let storyChoicesData = []
-
+    console.log(branchData)
     branchData.forEach((branchStoryChoices) => {
+        
         let branch_id = branchUUIDs[branchStoryChoices.reference_id]
+        let story_id = storyRefUUIDs[branchStoryChoices.story_reference_id]
+        
         branchStoryChoices = branchStoryChoices.story_choices
         branchStoryChoices.forEach((branchStoryChoice) => {
+            branchStoryChoice.next_branch = branchUUIDs[branchStoryChoice.next_branch]
+            branchStoryChoice.story_id = story_id
             branchStoryChoice.branch_id = branch_id
             storyChoicesData.push(branchStoryChoice)
         })
     })
     console.log(storyChoicesData)
-    await StoryChoice.bulkCreate(storyChoicesData)
+    await Choice.bulkCreate(storyChoicesData)
 
 }
 

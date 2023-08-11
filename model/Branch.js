@@ -28,9 +28,9 @@ Branch.init(
         allowNull: false
     },
     reference_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        unique: true,
     },
     branch_title: {
         type: DataTypes.STRING,
