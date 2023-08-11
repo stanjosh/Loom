@@ -5,10 +5,13 @@ const { StoryChoice, Story, Branch } = require("..");
 const branchData = [
 
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "1",
+        start_here: true,
         branch_title: "This is the title to the starting branch",
-        branch_content: "This is what happened and where you are",
+        branch_content: 
+        `This is what happened and where you are. You are here.
+        You find a small carrot. It is rotten.`,
         story_choices: [
             {
                 choice_text: "Go east and find your dad who is probably still at the store",
@@ -25,14 +28,17 @@ const branchData = [
         ]
     },
     {
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "2",
         branch_title: "East of the starting point",
         branch_content: "You go east. Your dad is not here",
+        recieved_item: "Coconut",
         story_choices: [
             {
                 choice_text: "Go west and back to where you started",
-                next_branch: "Well, you're back at the start."
+                next_branch: "Well, you're back at the start.",
+                type: "input",
+                fail_branch: ""
             },
             {
                 choice_text: "Look for trinkets",
@@ -42,13 +48,12 @@ const branchData = [
     },
 
     {
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "3",
         branch_title: "Dairy Queen.",
         branch_content: "You're at Dairy Queen.",
         story_choices: [
             {   
-                
                 choice_text: "Get a burger",
                 next_branch: "You order a burger from the lady at the counter."
             },
@@ -65,13 +70,12 @@ const branchData = [
 
 
 
-
-
 const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
     // assign story UUIDs to branches
     console.log(storyRefUUIDs)
     branchData.forEach((branch) => {
-        branch.story_id = storyRefUUIDs[branch.story_id]
+        branch.story_id = storyRefUUIDs[branch.story_reference_id]
+        console.log(userUUIDs)
         branch.user_id = userUUIDs[0]
     })
     

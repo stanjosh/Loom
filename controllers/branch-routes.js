@@ -4,8 +4,7 @@ const { db } = require('../model');
 router.get('/', async (req, res) => {
   let branches = await db.getBranches();
   if (branches) {
-    let branchs = branchs.map((branch) => branch.get({ plain: true }));
-    return res.status(200).json(branchs)
+    return res.status(200).json(branches)
   }
   else {
     return res.status(404).send('No blog posts found')

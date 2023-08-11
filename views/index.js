@@ -12,15 +12,24 @@ router.get('/', async (req, res) => {
     res.render('home', { stories: storyData });
 });
 
-router.get('/story', async (req, res) => {
-    let storyData = await db.getAllStories();   
-    res.render('story', { stories: storyData });
+router.get('/story/:id', async (req, res) => {
+    let storyData = await db.getStory(req.params.id);   
+    res.render('story', { story: storyData });
 });
 
-router.get('/story/:storyID/branch/:branchID', async (req, res) => {
-    let storyData = await db.getStory(req.params.storyID)   
-    res.render('story', { story: storyData, branch: req.params.branchID });
+router.get('/story/:id/start', async (req, res) => {
+    console.log(req.params.id)
+    let branchData = await db.getBranch(branchID=null, start=true, storyID=req.params.id);
+    res.render('branch', { branch: branchData });
 });
+
+router.get('/story/:branchID', async (req, res) => {
+    let branchData = await db.getBranch(req.params.branchID);
+    console.log(branchData)
+    res.render('branch', { branch: branchData });
+});
+
+
 
 router.get('/create/story', async (req, res) => {  
     res.render('create', { stories: storyData });

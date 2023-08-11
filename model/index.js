@@ -2,28 +2,32 @@ const User = require('./User');
 const Story = require('./Story');
 const Branch = require('./Branch')
 const StoryChoice = require('./StoryChoice')
-const sequelize = require('sequelize')
 
 
+Branch.belongsTo(Story, {
+  foreignKey: 'story_id'
+})
 
-
-User.hasMany(Story);
-Story.belongsTo(User, {
-    foreignKey: 'user_id',
-});
-Story.hasMany(Branch)
-
-User.hasMany(Branch);
-Branch.belongsTo(User, {
-    foreignKey: 'user_id',
-});
-Branch.hasMany(StoryChoice);
-Branch.hasOne(Story)
-
-User.hasMany(StoryChoice);
 StoryChoice.belongsTo(Branch, {
   foreignKey: 'branch_id'
 });
+
+StoryChoice.hasOne(User, {
+  foreignKey: 'user_id'
+})
+Story.hasOne(User, {
+  foreignKey: 'user_id'
+})
+Branch.hasOne(User, {
+  foreignKey: 'user_id'
+})
+
+
+User.hasMany(Branch);
+User.hasMany(Story)
+User.hasMany(StoryChoice)
+Story.hasMany(Branch)
+Branch.hasMany(StoryChoice);
 
 module.exports = {
   User,
@@ -42,9 +46,11 @@ const db = {
     })
   },
 
-  getStory: async (id) => {
+  getStory: async (reference_id) => {
     let story = await Story.findAll({
-      where: { reference_id : id },
+      where: { reference_id : reference_id },
+      raw: true,
+      nest: true,
       include: [
         { model: User, 
           attributes: ["id", "author_name"], 
@@ -56,13 +62,14 @@ const db = {
     .catch((err) => {
       return err
     });
-    return story.get({plain:true})
-
+    return story
   },
 
   getUserStories: async (userId) => {
     let stories = await Story.findAll({
       where: { user_id : userId },
+      raw: true,
+      nest: true,
       include: [
         { model: User, 
           attributes: ["id", "author_name"], 
@@ -74,11 +81,13 @@ const db = {
     .catch((err) => {
       return err
     });
-    return stories.map(story => story.get({plain:true}))
+    return stories
   },
 
   getAllStories: async () => {
     let stories = await Story.findAll({
+      raw: true,
+      nest: true,
       include: [
         { model: User, 
           attributes: ["id", "author_name"], 
@@ -86,6 +95,7 @@ const db = {
         { model: Branch,
           include: [ 
             { model: StoryChoice },
+
           ] },
       ],
     })
@@ -93,7 +103,7 @@ const db = {
       return err
     });
     console.log(stories)
-    //return stories.map(stories => stories.get({ plain:true }))
+    return stories
   },
 
   createBranch: async (sessionUserId, branch) => {
@@ -108,11 +118,23 @@ const db = {
     
   },
 
-  getBranch: async (id) => {
-    return await Branch.findByPk(id, {
+  getBranch: async (branchID=null, start=false, storyID) => {
+    let branchTerms = start ? { start_here : true, story_id : storyID } : { id : branchID }
+    console.log(branchTerms)
+    return await Branch.findAll({
+      where: branchTerms,
+      raw: true,
+      nest: true,
       include: [
-        { model: User, attributes: ["author_name"], as: "author" },
-        { model: StoryChoice }
+        { model: Story, attributes: ['story_title']},
+        { model: User, attributes: ['author_name'] },
+        { model: StoryChoice, attributes: [
+          'choice_text', 
+          'choice_type', 
+          'next_branch',  
+          'required_item',  
+          'fail_branch' 
+        ]}
       ],
     })
     .catch((err) => {
@@ -120,26 +142,26 @@ const db = {
     });
   },
 
-  getBranch: async (id) => {
-    return await Branch.findAll(id, {
+  getBranches: async (branchID=null, start=false, storyID) => {
+    return await Branch.findAll({
+      raw: true,
+      nest: true,
       include: [
-        { model: User, attributes: ["id", "author_name"], as: "user" },
-        {
-          model: Story,
-          include: [{ 
-            model: User, 
-            attributes: ["id", "author_name"], 
-            as: "user" 
-            },
-          ]
-        },
+        { model: Story, attributes: ['story_title']},
+        { model: User, attributes: ['author_name'] },
+        { model: StoryChoice, attributes: [
+          'choice_text', 
+          'choice_type', 
+          'next_branch',  
+          'required_item',  
+          'fail_branch' 
+        ]}
       ],
     })
     .catch((err) => {
       return err
     });
   },
-
 
   updateBranch: async (sessionUserId, branchID, branch) => {
     console.log(sessionUserId, branch)
@@ -197,6 +219,7 @@ const db = {
 
   getUser: async (id) => {
     return await User.scope('withoutPassword').findByPk(id, {
+      plain: true,
       include: [{ model: Branch }, { model: Comment }],
     })
     .catch((err) => {

@@ -35,6 +35,19 @@ StoryChoice.init(
         type: DataTypes.STRING,
         allowNull: true
     },
+    required_item: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    choice_type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'choice'
+    },
+    fail_branch: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     create_time: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,

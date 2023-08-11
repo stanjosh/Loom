@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const User = require('./User');
+const Branch = require('./Branch')
 class Story extends Model {}
 
 Story.init(

@@ -23,10 +23,10 @@ User.init(
         isEmail: true
       }
     },
-    // choice_history: {
-    //     type: DataTypes.ARRAY,
-    //     allowNull: true,
-    // },
+    choice_history: {
+        type: DataTypes.JSON,
+        allowNull: true,
+    },
     password:{
       type: DataTypes.STRING,
       allowNull: false,

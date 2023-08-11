@@ -40,6 +40,18 @@ Branch.init(
         type: DataTypes.TEXT,
         allowNull: false
     },
+    received_item: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    start_here: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    end_here: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
     create_time: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,

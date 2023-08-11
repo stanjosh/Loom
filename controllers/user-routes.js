@@ -12,6 +12,7 @@ router.post('/login', async (req,res) => {
     req.session.author_name=authUser.author_name;
     req.session.email=authUser.email;
     req.session.choice_history=authUser.choice_history;
+    req.session.inventory=authUser.inventory;
     req.session.loggedIn=true;
     req.session.save(function(err) {
       if (err) {
@@ -37,6 +38,7 @@ router.post('/', async (req, res) => {
     req.session.author_name=authUser.author_name;
     req.session.email=authUser.email;
     req.session.choice_history=authUser.choice_history;
+    req.session.inventory=authUser.inventory;
     req.session.loggedIn=true;
     req.session.save(function(err) {
       if (err) {
