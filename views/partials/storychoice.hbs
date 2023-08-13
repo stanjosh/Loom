@@ -1,8 +1,13 @@
 
-{{log this}}
-<div>
-    <a href="/branch/{{next_branch}}">
 
+<div>
+    <a href="
+        {{#if next_branch}}
+            /branch/{{next_branch}}/
+        {{else}}
+            /branch/create/{{id}}/
+        {{/if}}
+    ">
         <div>
             {{choice_text}}
         </div>

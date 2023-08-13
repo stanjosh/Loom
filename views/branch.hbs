@@ -2,12 +2,12 @@
 
 
 
-{{log this}}
 
-<div>{{branch.branch_title}}</div>
-<div>{{branch.branch_content}}</div>
 
-{{#each branch.choices}}
+<div>{{session.branchData.branch_title}}</div>
+<div>{{session.branchData.branch_content}}</div>
+
+{{#each session.branchData.choices}}
     {{> storychoice this}}
 {{/each}}
 

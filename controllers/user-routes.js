@@ -4,48 +4,47 @@ const { db } = require('../model')
 router.post('/login', async (req,res) => {
   let authUser = await db.authUser(req.body)
   .catch((err) => {
-    return res.status(500).send("There was an error logging in.")
+    return res.status(500).render('error', { error: "There was an error logging in."})
   });
   if ( authUser ) {  
     console.log(authUser);
     req.session.user_id=authUser.id;
     req.session.author_name=authUser.author_name;
     req.session.email=authUser.email;
-    req.session.choice_history=authUser.choice_history;
     req.session.inventory=authUser.inventory;
     req.session.loggedIn=true;
     req.session.save(function(err) {
       if (err) {
-        return res.status(500).send("There was an error logging in.")
+        return res.status(500).render('error', { error: "There was an error logging in."})
       }
       else {
-        return res.status(200).redirect('/dashboard');
+        return res.status(200).redirect('/');
       }
     });
   }
   else {
-    return res.status(401).send("Incorrect email or password.");
+    return res.status(401).render('error', { error: "Incorrect email or password."});
   }
 })
 
 router.post('/', async (req, res) => {
   let authUser = await db.createUser(req.body)
   .catch((err) => {
-    return res.status(500).send("There was an error creating the user.")
+    return res.status(500).render('error', { error: "There was an error creating the user."})
   });;
   if ( authUser ) {  
     req.session.user_id=authUser.id;
     req.session.author_name=authUser.author_name;
     req.session.email=authUser.email;
-    req.session.choice_history=authUser.choice_history;
+    req.session.choice_history=[];
     req.session.inventory=authUser.inventory;
     req.session.loggedIn=true;
     req.session.save(function(err) {
       if (err) {
-        return res.status(500).send("There was an error logging in.")
+        return res.status(500).render('error', { error: "There was an error creating the user"})
       }
       else {
-        return res.status(200).redirect('/dashboard');
+        return res.status(200).redirect('/');
       }
     });
   }

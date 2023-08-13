@@ -105,58 +105,25 @@ const db = {
     .catch((err) => {
       return err
     });
-    console.log(stories)
     return stories
   },
 
-  createBranch: async (sessionUserId, data) => {
-    data.user_id = sessionUserId
-    data.end_here = 'on' ? true : false
-    console.log(data)
+
+  createBranch: async (data) => {
     let branchData = await Branch.create(data, {returning: true})
     .catch((err) => {
       console.log(err)
       return err
     })
-    if (data.choice_text) {
-    let choicesData = [
-      { 
-        branch_id : branchData.id,
-        user_id : sessionUserId,
-        choice_text : data.choice_text,
-        required_item : data.required_item,
-        next_branch : null
-      },
-      { 
-        branch_id : branchData.id,
-        user_id : sessionUserId,
-        choice_text : data.choice_text_2,
-        required_item : data.required_item_2,
-        next_branch : null
-      },
-      { 
-        branch_id : branchData.id,
-        user_id : sessionUserId,
-        choice_text : data.choice_text_3,
-        required_item : data.required_item_3,
-        next_branch : null
-      }
-    ]
-
-    await Choice.bulkCreate(choicesData)
-    .catch((err) => {
-      console.log(err)
-      return err
-    })
-    console.log(branchData)
-    console.log(choicesData)
-
-    return branchData.id
+    
+    return branchData
   },
 
-  getBranch: async (branchID=null, start=false, storyID) => {
-    let branchTerms = start ? {  start_here : true, story_id : storyID } : { id : branchID }
-    console.log(branchTerms)
+  getBranch: async (branchID=null, storyID=null) => {
+    let branchTerms = branchID 
+      ? { id : branchID }
+      : { start_here : true, story_id : storyID }
+       
     let branchData = await Branch.findOne({
       where: branchTerms,
       plain: true,
@@ -189,7 +156,6 @@ const db = {
   },
 
   updateBranch: async (sessionUserId, branchID, branch) => {
-    console.log(sessionUserId, branch)
     return await Branch.update(branch, { 
       where: { 
         id: branchID, 
@@ -202,7 +168,6 @@ const db = {
   },
 
   deleteBranch: async (sessionUserId, branchId) => {
-    console.log(sessionUserId, branchId)
     return await Branch.destroy({ 
       where: { 
         id: branchId, 
@@ -215,6 +180,26 @@ const db = {
     .catch((err) => {
       return err 
     });
+  },
+
+
+  createChoices: async (data) => {
+    console.log(data)
+    return await Choice.bulkCreate(data, {returning: true})
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
+  },
+
+  updateChoice: async (id, data) => {
+    return await Choice.update(data, { 
+      where : { id : id }
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
   },
 
   deleteStory: async (sessionUserId, storyID) => {
@@ -234,7 +219,6 @@ const db = {
   },
 
   createUser: async (user) => {
-    console.log(user)
     return await User.create(user)
     .catch((err) => {
       console.log(err)
@@ -265,7 +249,6 @@ const db = {
   },
 
   authUser: async (user) => {
-    console.log(user)
     let password = user.password;
     let authUser = await User.findOne({
       where: { email: user.email }
@@ -277,5 +260,8 @@ const db = {
     }
   },
 }
+
+
+
 
 module.exports = { db, User, Story, Branch, BranchChoice, Choice };

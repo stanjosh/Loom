@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const User = require('./User');
 const Story = require('./Story')
+const Choice = require('./Choice')
 class Branch extends Model {}
 
 Branch.init(
@@ -65,5 +66,7 @@ Branch.init(
     modelName: 'branch',
   }
 );
+
+
 
 module.exports = Branch;

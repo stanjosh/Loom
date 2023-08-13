@@ -101,7 +101,12 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
         
         branchStoryChoices = branchStoryChoices.story_choices
         branchStoryChoices.forEach((branchStoryChoice) => {
-            branchStoryChoice.next_branch = branchUUIDs[branchStoryChoice.next_branch]
+            branchStoryChoice.next_branch = branchUUIDs[branchStoryChoice.next_branch] 
+                ? branchUUIDs[branchStoryChoice.next_branch] 
+                : null
+            branchStoryChoice.fail_branch = branchUUIDs[branchStoryChoice.fail_branch] 
+                ? branchUUIDs[branchStoryChoice.fail_branch] 
+                : null  
             branchStoryChoice.story_id = story_id
             branchStoryChoice.branch_id = branch_id
             storyChoicesData.push(branchStoryChoice)
