@@ -10,8 +10,8 @@ const storyData = [
     {
         user_id: "",
         reference_id: "strahd",
-        story_title: "Story Title # 1",
-        story_content: "This is a preface to the story.",
+        story_title: "Story Title # 2",
+        story_content: "This is a preface to strahd story.",
     },
    
 ]

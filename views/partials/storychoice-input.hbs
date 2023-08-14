@@ -1,17 +1,15 @@
 
-<div style="padding: 5%">
-{{branch}}
+<div>
+    <div>{{session.branchData.branch_title}}</div>
+    <div>{{session.branchData.branch_content}}</div>
 </div>
 
 <div style="padding: 5%">
-<form action="/branch/{{branch.id}}/choice/" method="post">
-
-    <input type="text" name="choice_text" id="choice_text" placeholder="Choice Text" required />
-    <input type="text" name="next_branch" id="next_branch" placeholder="Next Story Branch Name" required />
-    <input type="checkbox" name="choice_type" id="playerInput" value="input" />
-    <input type="text" name="fail_branch" id="fail_branch" placeholder="Player Input Failure Story Branch Name" required />
-
-
-</form>
-
+    <form action="/choice/" method="post">
+        <input type="text" name="choice_text" id="choice_text" placeholder="choice text" required />
+        <input type="text" name="required_item" id="required_item" placeholder="required item" required />
+        <input type="text" name="next_branch_title" id="next_branch_title" placeholder="next branch title" required />
+        <input type="text" name="next_branch_content" id="next_branch_content" placeholder="next branch content" required />
+        <input type="text" name="received_item" id="received_item" placeholder="optional received item" />
+    </form>
 </div>

@@ -21,10 +21,7 @@ const branchData = [
                 choice_text: "Go west and get a hamburger",
                 next_branch: "3"
             },
-            {
-                choice_text: "lay down and take a nap",
-                next_branch: "4"
-            }
+
         ]
     },
     {
@@ -34,16 +31,7 @@ const branchData = [
         branch_content: "You go east. Your dad is not here",
         recieved_item: "Coconut",
         story_choices: [
-            {
-                choice_text: "Go west and back to where you started",
-                next_branch: "1",
-                type: "input",
-                fail_branch: "2"
-            },
-            {
-                choice_text: "Look for trinkets",
-                next_branch: "5"
-            }
+
         ]
     },
 
@@ -53,14 +41,7 @@ const branchData = [
         branch_title: "Dairy Queen.",
         branch_content: "You're at Dairy Queen.",
         story_choices: [
-            {   
-                choice_text: "Get a burger",
-                next_branch: "6"
-            },
-            {
-                choice_text: "Get a shake",
-                next_branch: "7"
-            }
+
         ]
     }
 
@@ -91,7 +72,7 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
 
     //assign branch and story UUIDs or null to story choice objects 
     // and return only story choice objects as array to be created
-
+    
     let storyChoicesData = []
     console.log(branchData)
     branchData.forEach((branchStoryChoices) => {
@@ -99,21 +80,25 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
         let branch_id = branchUUIDs[branchStoryChoices.reference_id]
         let story_id = storyRefUUIDs[branchStoryChoices.story_reference_id]
         
-        branchStoryChoices = branchStoryChoices.story_choices
-        branchStoryChoices.forEach((branchStoryChoice) => {
-            branchStoryChoice.next_branch = branchUUIDs[branchStoryChoice.next_branch] 
-                ? branchUUIDs[branchStoryChoice.next_branch] 
-                : null
-            branchStoryChoice.fail_branch = branchUUIDs[branchStoryChoice.fail_branch] 
-                ? branchUUIDs[branchStoryChoice.fail_branch] 
-                : null  
-            branchStoryChoice.story_id = story_id
-            branchStoryChoice.branch_id = branch_id
-            storyChoicesData.push(branchStoryChoice)
-        })
+        branchStoryChoices = branchStoryChoices.story_choices 
+            ? branchStoryChoices.story_choices 
+            : null
+        if (branchStoryChoices) {
+            branchStoryChoices.forEach((branchStoryChoice) => {
+                branchStoryChoice.next_branch = branchUUIDs[branchStoryChoice.next_branch] 
+                    ? branchUUIDs[branchStoryChoice.next_branch] 
+                    : null
+                branchStoryChoice.fail_branch = branchUUIDs[branchStoryChoice.fail_branch] 
+                    ? branchUUIDs[branchStoryChoice.fail_branch] 
+                    : null  
+                branchStoryChoice.story_id = story_id
+                branchStoryChoice.branch_id = branch_id
+                storyChoicesData.push(branchStoryChoice)
+            })
+        }
     })
     console.log(storyChoicesData)
-    await Choice.bulkCreate(storyChoicesData)
+    storyChoicesData ? await Choice.bulkCreate(storyChoicesData) : null
 
 }
 

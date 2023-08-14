@@ -105,6 +105,7 @@ const db = {
     .catch((err) => {
       return err
     });
+    console.log(stories)
     return stories
   },
 
@@ -155,6 +156,20 @@ const db = {
     });
   },
 
+  getBranchTitles: async (storyID) => {
+    return await Branch.findAll({
+      attributes: ['id', 'branch_title'],
+      // plain: true,
+      // nest: true,
+      where: {
+        story_id: storyID
+      }
+    })
+    .catch((err) => {
+      return err
+    });
+  },
+
   updateBranch: async (sessionUserId, branchID, branch) => {
     return await Branch.update(branch, { 
       where: { 
@@ -180,6 +195,14 @@ const db = {
     .catch((err) => {
       return err 
     });
+  },
+
+  createChoice: async (data) => {
+    return await Choice.create(data, {returning: true})
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
   },
 
 
