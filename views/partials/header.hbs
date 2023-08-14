@@ -19,14 +19,14 @@
           <a class="nav-link active" href="/dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="user/logout">Logout</a>
+          <a class="nav-link active" href="/user/logout">Logout</a>
         </li>
       </ul>
     </div>
 
     {{else}}
     <button type="submit" class="form-control" id="signupButton" style="max-width: 20%">Sign Up</button>
-    <form class="d-flex" action="api/user/login" method="post">
+    <form class="d-flex" action="user/login" method="post">
       <div class="input-group">
           <input type="text" name="email" id="userFormEmail" class="form-control" placeholder="email" />
           <input type="password" name="password" id="userFormPassword" class="form-control" placeholder="Password" />

@@ -1,12 +1,43 @@
 
-<div style="padding: 5%">
+<div class="container-fluid">
     <form action="/branch/" method="post">
-
-        <input type="text" name="branch_title" id="branch_title" placeholder="Branch Title" required />
-        <textarea type="text" name="branch_content" id="branch_content" placeholder="Branch Text" required></textarea>
-
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <input type="text" class="form-control" name="branch_title" id="branch_title" placeholder="Branch Title" required />
+            </div>
+            <div class="container-fluid">
+                <textarea type="text" class="form-control" name="branch_content" id="branch_content" placeholder="Branch Text" required></textarea>
+            </div>
+            <div class="container-fluid">
+                <input type="text" class="form-control" name="received_item" id="received_item" placeholder="Player receives item" />
+            </div>
+            <div class="container-fluid">
+                <input type="checkbox" name="end_here" id="end_here" aria-label="game over" checked />
+                <label for "end_here">Game Over?</label>
+            </div>
+        </div>
+        {{!-- <div class="container-fluid choice-input-container">
+            <div class="container-fluid choice-input">
+                <input type="text" class="form-control" name="choice_text" id="choice_text" placeholder="Choice Text" disabled="true"/>
+                <input type="text" class="form-control" name="required_item" id="required_item" placeholder="Player Requires Item" disabled="true"/>   
+            </div>
+            <div class="container-fluid choice-input">
+                <input type="text" class="form-control" name="choice_text_2" id="choice_text_2" placeholder="Choice Text"  disabled="true"/>
+                <input type="text" class="form-control" name="required_item_2" id="required_item_2" placeholder="Player Requires Item" disabled="true"/>   
+            </div>
+            <div class="container-fluid choice-input">
+                <input type="text" class="form-control" name="choice_text_3" id="choice_text_3" placeholder="Choice Text"  disabled="true"/>
+                <input type="text" class="form-control" name="required_item_3" id="required_item_3" placeholder="Player Requires Item" disabled="true"/>   
+            </div>
+        </div> --}}
+            <button type="submit" class="btn btn-primary float-right">Submit</button>
+            </div>
+            <input type="hidden" name="choice_id" id="choice_id" value="{{choice_id}}" />
     </form>
 </div>
+
+
+
 
 <script>
 

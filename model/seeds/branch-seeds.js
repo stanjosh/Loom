@@ -1,11 +1,12 @@
-const { StoryChoice, Story, Branch } = require("..");
+const { Choice, Story, Branch } = require("..");
 
 
 
 const branchData = [
 
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
+        start_here: true,
         reference_id: "Start",
         branch_title:"Awakening",
         branch_content:
@@ -24,7 +25,7 @@ const branchData = [
         ]
     },
     {
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "2",
         branch_title: "Initial Items",
         branch_content: "You see a flashlight",
@@ -37,9 +38,10 @@ const branchData = [
     },
 
     {
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "3",
         branch_title: "Flashlight description",
+        recieved_item: "flashlight",
         branch_content: "You notice the flashlight does not have batteries but you take it anyway",
         story_choices: [
             {   
@@ -47,10 +49,10 @@ const branchData = [
                 choice_text: "Exit the room",
                 next_branch: "Hospital Halls"
             }
-        ]
+        ],
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "4",
         branch_title:"Hospital Halls",
         branch_content:
@@ -68,7 +70,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "5",
         branch_title:"Reception Desk",
         branch_content:
@@ -85,7 +87,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "6",
         branch_title:"Locked Drawer",
         branch_content:
@@ -105,7 +107,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "7",
         branch_title:"Drawer Fail",
         branch_content:
@@ -124,7 +126,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "8",
         branch_title:"Drawer Success",
         branch_content:
@@ -138,7 +140,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "9",
         branch_title:"Stairwell Hallway Init",
         branch_content:
@@ -160,7 +162,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "10",
         branch_title:"Stairwell Hallway",
         branch_content:
@@ -181,7 +183,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "11",
         branch_title:"Down Stairs Init",//////
         branch_content:
@@ -202,7 +204,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "12",
         branch_title:"Down Stairs",//////
         branch_content:
@@ -219,7 +221,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "13",
         branch_title:"Up Stairs",
         branch_content:
@@ -236,7 +238,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "14",
         branch_title:"Main Lobby Init",
         branch_content:
@@ -253,7 +255,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "15",
         branch_title:"Figure Dialog",
         branch_content:
@@ -310,7 +312,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "16",
         branch_title:"Where",
         branch_content:
@@ -323,7 +325,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "17",
         branch_title:"Who",
         branch_content:
@@ -339,7 +341,7 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "18",
         branch_title:"Main Lobby",
         branch_content:
@@ -356,12 +358,49 @@ const branchData = [
         ]
     },
     {   
-        story_id: "1",
+        story_reference_id: "andrew's story",
         reference_id: "19",
         branch_title:"1st Floor Hall Init",
         branch_content:
          `With your flashlight in hand you can conquer the darkness.
           You notice a open hospital room with a faint light.`,
+        story_choices: [
+            {
+                choice_text: "Go Into Hospital Room",
+                next_branch: "Hospital Room Scripted"////////
+            },
+            {
+                choice_text: "Go back",
+                next_branch: "Main Lobby"
+            },
+            {
+                choice_text: "Keep going through hallway",
+                next_branch: "Hospital Chapel"///////////
+            }
+        ]
+    },
+
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "20",
+        branch_title:"1st Floor Hall Fail",
+        branch_content:
+         `its too dark. I need to find a way to make it through.`,
+        story_choices: [
+            {
+                choice_text: "Go Back",
+                next_branch: "Main Lobby"
+            },
+
+        ]
+    },
+    //TODO: Write Scripted Hospital visit
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "21",
+        branch_title:"1st Floor Hall",
+        branch_content:
+         `Back in that main hall. Don't want to go back into that creepy room`,
         story_choices: [
             {
                 choice_text: "Go Into Hospital Room",
@@ -377,47 +416,29 @@ const branchData = [
             }
         ]
     },
-
     {   
-        story_id: "1",
-        reference_id: "20",
-        branch_title:"1st Floor Hall Fail",
+        story_reference_id: "andrew's story",
+        reference_id: "22",
+        branch_title:"1st Floor Hall",
         branch_content:
-         `its too dark. I need to find a way to make it through.`,
+         `With your flashlight in hand you can conquer the darkness.
+          You notice a open hospital room with a faint light.`,
         story_choices: [
             {
-                choice_text: "Go Back",
+                choice_text: "Go Into Hospital Room",
+                next_branch: "Hospital Room Scripted"
+            },
+            {
+                choice_text: "Go back",
                 next_branch: "Main Lobby"
             },
-
+            {
+                choice_text: "Keep going through hallway",
+                next_branch: "Hospital Chapel"
+            }
         ]
     },
-    //TODO: Write Scripted Hospital visit
-//     {   
-//         story_id: "1",
-//         reference_id: "21",
-//         branch_title:"1st Floor Hall",
-//         branch_content:
-//          `With your flashlight in hand you can conquer the darkness.
-//           You notice a open hospital room with a faint light.`,
-//         story_choices: [
-//             {
-//                 choice_text: "Go Into Hospital Room",
-//                 next_branch: "Hospital Room Scripted"
-//             },
-//             {
-//                 choice_text: "Go back",
-//                 next_branch: "Main Lobby"
-//             },
-//             {
-//                 choice_text: "Keep going through hallway",
-//                 next_branch: "Hospital Chapel"///////////
-//             }
-//         ]
-//     },
 ]
-
-
 
 
 
@@ -427,7 +448,7 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
     // assign story UUIDs to branches
     console.log(storyRefUUIDs)
     branchData.forEach((branch) => {
-        branch.story_id = storyRefUUIDs[branch.story_id]
+        branch.story_id = storyRefUUIDs[branch.story_reference_id]
         branch.user_id = userUUIDs[0]
     })
     
@@ -441,23 +462,37 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
     branches.forEach((branch) => {
         branchUUIDs[branch.reference_id] = branch.id;
     });
+
     //assign branch and story UUIDs or null to story choice objects 
     // and return only story choice objects as array to be created
-
+    
     let storyChoicesData = []
-
+    console.log(branchData)
     branchData.forEach((branchStoryChoices) => {
+        
         let branch_id = branchUUIDs[branchStoryChoices.reference_id]
-        branchStoryChoices = branchStoryChoices.story_choices
-        branchStoryChoices.forEach((branchStoryChoice) => {
-            branchStoryChoice.branch_id = branch_id
-            storyChoicesData.push(branchStoryChoice)
-        })
+        let story_id = storyRefUUIDs[branchStoryChoices.story_reference_id]
+        
+        branchStoryChoices = branchStoryChoices.story_choices 
+            ? branchStoryChoices.story_choices 
+            : null
+        if (branchStoryChoices) {
+            branchStoryChoices.forEach((branchStoryChoice) => {
+                branchStoryChoice.next_branch = branchUUIDs[branchStoryChoice.next_branch] 
+                    ? branchUUIDs[branchStoryChoice.next_branch] 
+                    : null
+                branchStoryChoice.fail_branch = branchUUIDs[branchStoryChoice.fail_branch] 
+                    ? branchUUIDs[branchStoryChoice.fail_branch] 
+                    : null  
+                branchStoryChoice.story_id = story_id
+                branchStoryChoice.branch_id = branch_id
+                storyChoicesData.push(branchStoryChoice)
+            })
+        }
     })
     console.log(storyChoicesData)
-    await StoryChoice.bulkCreate(storyChoicesData)
+    storyChoicesData ? await Choice.bulkCreate(storyChoicesData) : null
 
 }
-
 
 module.exports = branchSeeds;

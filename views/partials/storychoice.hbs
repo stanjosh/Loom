@@ -1,9 +1,15 @@
 
 
 <div>
-    <a href="{{choice.next_branch}}"></a>
+    <a href="
+        {{#if next_branch}}
+            /branch/{{next_branch}}/
+        {{else}}
+            /branch/create/{{id}}/
+        {{/if}}
+    ">
         <div>
-            {{choice.text}}
+            {{choice_text}}
         </div>
     </a>
 </div>

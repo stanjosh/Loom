@@ -23,15 +23,10 @@ User.init(
         isEmail: true
       }
     },
-    // choice_history: {
-    //     type: DataTypes.ARRAY,
-    //     allowNull: true,
-    // },
     password:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    
   },
   {
     sequelize,

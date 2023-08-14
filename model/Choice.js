@@ -1,10 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
-const User = require('./User');
-const Branch = require('./Branch')
-class StoryChoice extends Model {}
+const User = require('./User.js');
+const Branch = require('./Branch.js')
+const Story = require('./Story.js')
+class Choice extends Model {}
 
-StoryChoice.init(
+Choice.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -19,6 +20,14 @@ StoryChoice.init(
       },
       allowNull: false
     },
+    story_id: {
+      type: DataTypes.UUID,
+      references: {
+        model: Story,
+        key: 'id'
+      },
+      allowNull: false
+    },
     branch_id: {
       type: DataTypes.UUID,
       references: {
@@ -27,13 +36,27 @@ StoryChoice.init(
       },
       allowNull: false
     },
+
     choice_text: {
       type: DataTypes.TEXT,
       allowNull: false
     },
     next_branch: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: true
+    },
+    required_item: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    choice_type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'choice'
+    },
+    fail_branch: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     create_time: {
       type: DataTypes.DATE,
@@ -45,8 +68,8 @@ StoryChoice.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'storychoice',
+    modelName: 'choice',
   }
 );
 
-module.exports = StoryChoice;
+module.exports = Choice;

@@ -1,0 +1,43 @@
+
+
+
+<div>
+    <div>{{session.branchData.branch_title}}</div>
+    <div>{{session.branchData.branch_content}}</div>
+    <input type="hidden" class="storyID" id="storyTitle" value="{{session.branchData.story_id}}"/>
+    {{#if session.storyInventory}}
+    
+    
+    <div style="float: right">
+        Inventory
+        <div>
+            <ul>
+            {{#each session.storyInventory}}
+                <li>{{this}}</li>
+                <input type="hidden" class="inventoryItem" value="{{this}}"/>
+            {{/each}}
+            </ul>
+        </div>
+    </div>
+    {{/if}}
+
+    <div>
+
+        {{#each session.branchData.choices}}
+            {{#if this.required_item}}
+                {{#if session.storyInventory}}
+                    {{#if (contains session.storyInventory this.requiredItem)}}
+                        {{> storychoice this}}
+                    {{/if}}
+                {{/if}}
+            {{else}}
+                {{> storychoice this}}
+            {{/if}}
+        {{/each}}
+
+        <button type="button" class="btn btn-primary" id="newChoiceButton">
+            Create Choice
+        </button>
+
+    </div>
+</div>

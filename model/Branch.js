@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const User = require('./User');
 const Story = require('./Story')
+const Choice = require('./Choice')
 class Branch extends Model {}
 
 Branch.init(
@@ -28,9 +29,9 @@ Branch.init(
         allowNull: false
     },
     reference_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        unique: true,
     },
     branch_title: {
         type: DataTypes.STRING,
@@ -39,6 +40,22 @@ Branch.init(
     branch_content: {
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    received_item: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    removed_item: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    start_here: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    end_here: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
     },
     create_time: {
         type: DataTypes.DATE,
@@ -53,5 +70,7 @@ Branch.init(
     modelName: 'branch',
   }
 );
+
+
 
 module.exports = Branch;

@@ -1,16 +1,40 @@
 const router = require('express').Router();
 const { db } = require('../model');
 
+
+router.get('/titles/:storyID', async (req, res) => {
+  let branches = await db.getBranchTitles(req.params.storyID);
+  if (branches) {
+    return res.status(200).json(branches)
+  }
+  else {
+    return res.status(404).send('No branches found')
+  }
+});
+
+
+router.get('/:id', async (req, res) => {
+  let branches = await db.getBranch(req.params.id);
+  if (branches) {
+    return res.status(200).json(branches)
+  }
+  else {
+    return res.status(404).send('No branch found')
+  }
+});
+
 router.get('/', async (req, res) => {
   let branches = await db.getBranches();
   if (branches) {
-    let branchs = branchs.map((branch) => branch.get({ plain: true }));
-    return res.status(200).json(branchs)
+    return res.status(200).json(branches)
   }
   else {
-    return res.status(404).send('No blog posts found')
+    return res.status(404).send('No branches found')
   }
 });
+
+
+
 
 router.post('/', async (req, res) => {
     await db.createBranch(req.session.user_id, req.body)

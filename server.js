@@ -24,6 +24,9 @@ var hbs = engine.create({
     compare: function (val1, val2) {
       return val1 === val2 ? true : false
     },
+    contains: function (val1, val2) {
+      return val1.includes(val2) ? true : false
+    },
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
       allowProtoMethodsByDefault: true

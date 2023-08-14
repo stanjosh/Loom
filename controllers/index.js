@@ -11,7 +11,7 @@ const withAuth = (req, res, next) => {
 
 router.use('/api/branch', branchRoutes);
 router.use('/api/story', storyRoutes);
-router.use('/api/user', userRoutes);
+router.use('/user', userRoutes);
 
 
 
