@@ -1,5 +1,106 @@
 
 
+<body class="theme-green" onload="onload()">
+		<div id="monitor">
+			<div id="screen">
+				<div id="crt" class="off" onClick="handleClick(event)">
+					<div class="scanline"></div>
+					<div class="terminal"></div>
+				</div>
+			</div>
+
+			<div id="slider">
+				<label class="switch">
+					<input type="checkbox" onclick="togglePower()" />
+					<span class="slider"></span>
+				</label>
+			</div>
+
+			<div id="controls">
+				<!-- <div class="post-it" onClick="fly(event)">Admin<br />only</div> -->
+
+				<div id="themes">
+					<button
+						class="theme"
+						data-theme="red"
+						onClick="theme(event)"
+					></button>
+					<button
+						class="theme active"
+						data-theme="green"
+						onClick="theme(event)"
+					></button>
+					<button
+						class="theme"
+						data-theme="blue"
+						onClick="theme(event)"
+					></button>
+				</div>
+
+				<div id="volume">
+					<span>min</span>
+
+					<div id="dial-container">
+						<x-dial
+							id="dial"
+							min="0"
+							max="0.75"
+							value="0"
+							svgsymbolid="circle-with-dot"
+						>
+						</x-dial>
+					</div>
+					<span>max</span>
+				</div>
+
+				<div id="power">
+					<button id="fullscreen" onClick="fullscreen(event)">
+						⛶
+					</button>
+					<label class="rocker rocker-small">
+						<input
+							id="switch"
+							type="checkbox"
+							onclick="togglePower()"
+							checked
+						/>
+						<span class="switch-left">O</span>
+						<span class="switch-right">I</span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</body>
+
+
+<input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
+
+        {{#each session.branchData.choices}}
+            {{#if this.required_item}}
+                {{#if session.storyInventory}}
+                    {{#if (contains session.storyInventory this.requiredItem)}}
+                    <input type="hidden" class="choiceData" value="{{this.choice_text}}">
+                {{/if}}
+            {{/if}}
+        {{else}}
+                <input type="hidden" class="choiceData" value="{{this.choice_text}}">
+            {{/if}}
+        {{/each}}
+
+
+        {{#if session.storyInventory}}
+    <div style="float: right">
+        Inventory
+        <div>
+            <ul>
+            {{#each session.storyInventory}}
+                <li>{{this}}</li>
+                <input type="hidden" class="inventoryItem" value="{{this}}"/>
+            {{/each}}
+            </ul>
+        </div>
+    </div>
+    {{/if}}
 
 <div >
     <div class="passage title">{{session.branchData.branch_title}}</div>
