@@ -1,9 +1,9 @@
 
 
 
-<div>
-    <div>{{session.branchData.branch_title}}</div>
-    <div>{{session.branchData.branch_content}}</div>
+<div >
+    <div class="passage title">{{session.branchData.branch_title}}</div>
+    <div class="passage" data-type-text="{{session.branchData.branch_content}}" style="overflow-y: auto;"></div>
     <input type="hidden" class="storyID" id="storyTitle" value="{{session.branchData.story_id}}"/>
     {{#if session.storyInventory}}
     
@@ -12,10 +12,10 @@
         Inventory
         <div>
             <ul>
-            {{#each session.storyInventory}}
+                {{#each session.storyInventory}}
                 <li>{{this}}</li>
                 <input type="hidden" class="inventoryItem" value="{{this}}"/>
-            {{/each}}
+                {{/each}}
             </ul>
         </div>
     </div>
@@ -24,20 +24,27 @@
     <div>
 
         {{#each session.branchData.choices}}
-            {{#if this.required_item}}
-                {{#if session.storyInventory}}
-                    {{#if (contains session.storyInventory this.requiredItem)}}
-                        {{> storychoice this}}
-                    {{/if}}
-                {{/if}}
-            {{else}}
-                {{> storychoice this}}
-            {{/if}}
+        {{#if this.required_item}}
+        {{#if session.storyInventory}}
+        {{#if (contains session.storyInventory this.requiredItem)}}
+        {{> choice this}}
+        {{/if}}
+        {{/if}}
+        {{else}}
+        {{> choice this}}
+        {{/if}}
         {{/each}}
 
-        <button type="button" class="btn btn-primary" id="newChoiceButton">
-            Create Choice
-        </button>
-
+        {{#if session.branchData.end_here }}
+        <div class="passage" style="text-align: center;">Game Over</div>
+        {{else}}
+        {{#unless (compare session.branchData.choices.length 3)}}
+        <a href="#" id="newChoiceButton" class="choice hidden">
+            <div>Create Choice</div>
+        </a>
+        {{/unless}}
+        {{/if}}
     </div>
+
 </div>
+        

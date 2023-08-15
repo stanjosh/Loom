@@ -3,25 +3,25 @@
 <!--blog-->
 
 
-<div class="">
+
     {{#if session.loggedIn}}
 
     
-    {{!-- {{#each session.choice_history}}
-        {{> branchDisplay @last}}
-    {{/each}}
-    {{else}} --}}
 
     {{#each stories}}
-        {{> storylist this}}
+        <a href="/story/{{id}}">
+            <div>
+            {{story_title}} {{story_content}}
+            </div>
+        </a>
     {{/each}}
 
-    <a href="/story">Click to start a new story</a>
+    <a href="/story"><div>Click to start a new story</div></a>
 
     {{/if}}
 
 
-</div>
+
 
 
 
