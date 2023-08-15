@@ -7,7 +7,7 @@ const branchData = [
     {   
         story_reference_id: "andrew's story",
         start_here: true,
-        reference_id: "Start",
+        reference_id: "1",
         branch_title:"Awakening",
         branch_content:
          `You awake in a panic! You look around and realize you are in a hospital and while everything seems vaguely 
