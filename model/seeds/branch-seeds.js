@@ -483,7 +483,7 @@ const branchData = [
             },
             {
                 choice_text: "Unlock Door",
-                next_branch: "Chapel Door Unlocked"///////////
+                next_branch: "Chapel Door Unlocked"
             }
         ]
     },
@@ -492,8 +492,7 @@ const branchData = [
         reference_id: "26",
         branch_title:"Main lobby 2",
         branch_content:
-         `Now that power is back this dark and creepy hall isn't so dark and creepy.
-          Don't want to go back into that creepy room.`,
+         `Back at that main lobby, glad that woman isn't there.`,
         story_choices: [
             {
                 choice_text: "Go back to stairwell",
@@ -501,28 +500,67 @@ const branchData = [
             },
             {
                 choice_text: "Keep going through hallway",
-                next_branch: "1st Floor Hall"///////////
+                next_branch: "1st Floor Hall"
             }
         ]
     },
     // TODO ADD CHAPEL UPSTAIRS AND ELEVATOR
-    // {   
-    //     story_reference_id: "andrew's story",
-    //     reference_id: "27",
-    //     branch_title:"Chapel Look",
-    //     branch_content:
-    //      `You see `,
-    //     story_choices: [
-    //         {
-    //             choice_text: "Go back",
-    //             next_branch: "Main Lobby"
-    //         },
-    //         {
-    //             choice_text: "Keep going through hallway",
-    //             next_branch: "Chapel Door locked"///////////
-    //         }
-    //     ]
-    // },
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "27",
+        branch_title:"Chapel Look",
+        branch_content:
+         `You see a path that leads upstairs`,
+        story_choices: [
+            {
+                choice_text: "Go up stairs",
+                next_branch: "Chapel Upstairs"
+            },
+            {
+                choice_text: "Go to chapel door",
+                next_branch: "Chapel Door Unlocked"///////////
+            }
+        ]
+    },
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "28",
+        branch_title:"Chapel Door Unlocked",
+        branch_content:
+         `You move a large plank from it's resting place across the door
+         and drop it on the ground.
+         
+         *You feel uneasy leaving so quickly*`,
+        story_choices: [
+            {
+                choice_text: "Go up stairs",
+                next_branch: "Chapel Upstairs"
+            },
+            {
+                choice_text: "Go to altar",
+                next_branch: "Chapel Altar"///////////
+            }
+        ]
+    },
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "29",
+        branch_title:"Chapel Upstairs",
+        branch_content:
+         `The stairs seem like they are 100 years old.
+         Upon arriving at the top you notice an elevator
+         and a closet.`,
+        story_choices: [
+            {
+                choice_text: "Go up stairs",
+                next_branch: "Chapel Upstairs"
+            },
+            {
+                choice_text: "Go to altar",
+                next_branch: "Chapel Altar"///////////
+            }
+        ]
+    },
 ]
 
 
