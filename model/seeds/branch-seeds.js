@@ -7,12 +7,14 @@ const branchData = [
     {   
         story_reference_id: "andrew's story",
         start_here: true,
-        reference_id: "Start",
+        reference_id: "1",
         branch_title:"Awakening",
         branch_content:
-         `You awake in a panic! You look around and realize you are in a hospital and while everything seems vaguely 
-        familiar but then you realize you have no memory. You stand but almost collapse over your own weight.
-         You Must find a purpose`,
+         `You awake in a panic! You look around and realize
+          you are in a hospital and while everything seems vaguely 
+          familiar but then you realize you have no memory.
+          You stand but almost collapse over your own weight.
+          You Must find a purpose`,
         story_choices: [
             {
                 choice_text: "Look around",
@@ -41,7 +43,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "3",
         branch_title: "Flashlight description",
-        recieved_item: "flashlight",
+        received_item: "flashlight",
         branch_content: "You notice the flashlight does not have batteries but you take it anyway",
         story_choices: [
             {   
@@ -199,7 +201,7 @@ const branchData = [
             },
             {
                 choice_text: "Go to main lobby",
-                next_branch: "Main Lobby"
+                next_branch: "Main Lobby Init"
             }
         ]
     },
@@ -261,14 +263,7 @@ const branchData = [
         branch_content:
          ` ══════════════▒████████████████████
          ════════════▓█████████▓███▓▓██▓███▓█████
-         ══════════██▓████████▓██▓███▓██▒▒▒███▓██
          ═══════▒██████▓████▓██▓██▓▒▒▒▓▓▓▓▓▒█████
-         ═══════██████▓████▓██▓▓██▒▒▓▓▒▓▓▒▒▒▒████
-         ═════▓██████████▓███▓▓████▓▓▓▒▓█████▓▓██
-         ═════█████▓████▓▓███▓█████═█▓▒██▓████▓▓█
-         ════█████▓████▓▓███▓▓████░═▒█████▓████▓█
-         ════████▓█████▓███▓▓▓████════░████▓████▓
-         ═══▒████▓████▓████▓▓████══════▒████▓████
          ═══████▓████▓████▓▓█▓██════════░████████
          ═══████▓███▓▓███▓▓█▒▒█════████▒══███▓███
          ═══▓██▓████████▓██▓═█════██═══▒▓══██████
@@ -283,10 +278,6 @@ const branchData = [
          ══▓███▓████▓══░███════════════▒════██▓██
          ══███▓▓█████════▓══════════════════██▓▓█
          ═▓███▓███▓██══════════════════════░███▓█
-         ═▓███▓▓█████░════════════════════▒██████
-         ══████▓▓████▒═══════════════════███▓███▓
-         ══░████▓▓███▓══════════════════════▒███▓
-         ═══▒████▓▓███═════════════════════▓████▓
          ════▒████▓███▒═══════════════════██████▓
          ═════████▓████═════░███▓════════██████▓█
          ═════▒█████▓███════▓▒══░█══════██████▓▓█
@@ -353,7 +344,7 @@ const branchData = [
             },
             {
                 choice_text: "Investigate hallway with flashlight",
-                next_branch: "1st Floor Hall"
+                next_branch: "1st Floor Hall Init"
             },
         ]
     },
@@ -367,7 +358,7 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Go Into Hospital Room",
-                next_branch: "Hospital Room Scripted"////////
+                next_branch: "Hospital Room Scripted"
             },
             {
                 choice_text: "Go back",
@@ -375,7 +366,7 @@ const branchData = [
             },
             {
                 choice_text: "Keep going through hallway",
-                next_branch: "Hospital Chapel"///////////
+                next_branch: "Chapel Door Locked"
             }
         ]
     },
@@ -385,11 +376,11 @@ const branchData = [
         reference_id: "20",
         branch_title:"1st Floor Hall Fail",
         branch_content:
-         `its too dark. I need to find a way to make it through.`,
+         `It's too dark. I need to find a way to make it through.`,
         story_choices: [
             {
                 choice_text: "Go Back",
-                next_branch: "Main Lobby"
+                next_branch: "Main Lobby 2"
             },
 
         ]
@@ -400,15 +391,12 @@ const branchData = [
         reference_id: "21",
         branch_title:"1st Floor Hall",
         branch_content:
-         `Back in that main hall. Don't want to go back into that creepy room`,
+         `Now that power is back this dark and creepy hall isn't so dark and creepy.
+          Don't want to go back into that creepy room.`,
         story_choices: [
             {
-                choice_text: "Go Into Hospital Room",
-                next_branch: "Hospital Room Scripted"
-            },
-            {
                 choice_text: "Go back",
-                next_branch: "Main Lobby"
+                next_branch: "Main Lobby 2"
             },
             {
                 choice_text: "Keep going through hallway",
@@ -419,25 +407,122 @@ const branchData = [
     {   
         story_reference_id: "andrew's story",
         reference_id: "22",
-        branch_title:"1st Floor Hall",
+        branch_title:"Chapel Door Locked",
         branch_content:
-         `With your flashlight in hand you can conquer the darkness.
-          You notice a open hospital room with a faint light.`,
+         `A large wooden door appears through the darkness.
+         Candelight can be seen through the bottom of the
+         door but it won't budge.`,
         story_choices: [
-            {
-                choice_text: "Go Into Hospital Room",
-                next_branch: "Hospital Room Scripted"
-            },
             {
                 choice_text: "Go back",
                 next_branch: "Main Lobby"
             },
             {
-                choice_text: "Keep going through hallway",
-                next_branch: "Hospital Chapel"
+                choice_text: "Enter Room",
+                next_branch: "Hospital Room Scripted"///////////
             }
         ]
     },
+    
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "23",
+        branch_title:"Hospital Room Scripted",
+        branch_content:
+         `The door creaks open
+
+          Your head throbs as you feel a sense of regret and unease
+          Anxiety fills your chest as figues appear around the room
+          the world grows narrow and.... you faint`,
+        story_choices: [
+            {
+                choice_text: "Continue",
+                next_branch: "Hospital Chapel Init"
+            }
+        ]
+    },
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "24",
+        branch_title:"Hospital Chapel Init",
+        branch_content:
+         `*You awake in what seems to be the chapel in the hospital*.
+           As creepy as it is, you feel at peace.`,
+        story_choices: [
+            {
+                choice_text: "Approach Altar",
+                next_branch: "Altar"
+            },
+            {
+                choice_text: "Unlock Door",
+                next_branch: "Chapel Door Unlocked"
+            }
+        ]
+    },
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "25",
+        branch_title:"Altar",
+        branch_content:
+         `Candles and offerings surround the altar.
+         
+         The photos of people the memorial is dedicated to 
+         stare into your eyes as if they knew who approached
+         them.
+         
+         The feeling of anxiety is back crushing your ribs
+         under the weight of guilt.
+         
+         "Did I kill these people?"
+          ...
+          Did you?`,
+        story_choices: [
+            {
+                choice_text: "Look around",
+                next_branch: "Chapel Look"
+            },
+            {
+                choice_text: "Unlock Door",
+                next_branch: "Chapel Door Unlocked"///////////
+            }
+        ]
+    },
+    {   
+        story_reference_id: "andrew's story",
+        reference_id: "26",
+        branch_title:"Main lobby 2",
+        branch_content:
+         `Now that power is back this dark and creepy hall isn't so dark and creepy.
+          Don't want to go back into that creepy room.`,
+        story_choices: [
+            {
+                choice_text: "Go back to stairwell",
+                next_branch: "Down Stairs"
+            },
+            {
+                choice_text: "Keep going through hallway",
+                next_branch: "1st Floor Hall"///////////
+            }
+        ]
+    },
+    // TODO ADD CHAPEL UPSTAIRS AND ELEVATOR
+    // {   
+    //     story_reference_id: "andrew's story",
+    //     reference_id: "27",
+    //     branch_title:"Chapel Look",
+    //     branch_content:
+    //      `You see `,
+    //     story_choices: [
+    //         {
+    //             choice_text: "Go back",
+    //             next_branch: "Main Lobby"
+    //         },
+    //         {
+    //             choice_text: "Keep going through hallway",
+    //             next_branch: "Chapel Door locked"///////////
+    //         }
+    //     ]
+    // },
 ]
 
 
