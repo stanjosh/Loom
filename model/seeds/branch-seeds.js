@@ -29,7 +29,7 @@ const branchData = [
         reference_id: "2",
         branch_title: "East of the starting point",
         branch_content: "You go east. Your dad is not here",
-        recieved_item: "Coconut",
+        received_item: "Coconut",
         story_choices: [
 
         ]

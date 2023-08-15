@@ -1,15 +1,16 @@
 
 
 <div>
-    <a href="
-        {{#if next_branch}}
-            /branch/{{next_branch}}/
-        {{else}}
-            /branch/create/{{id}}/
-        {{/if}}
-    ">
+    <a href="/branch/{{next_branch}}/">
         <div>
             {{choice_text}}
         </div>
     </a>
+    {{#unless session.branchData.start_here}}
+    <a href="/branch/{{branch_id}}/">
+        <div>
+            make another choice on the previous branch
+        </div>
+    </a>
+    {{/unless}}
 </div>
