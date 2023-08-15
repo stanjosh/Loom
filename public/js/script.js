@@ -1,3 +1,34 @@
+
+
+  $(document).ready(() => {
+    $('.passage').each(function() {
+        let text = $(this).data('type-text')
+        let element = $(this)
+        let i = 0;
+
+        let timer = setInterval(() => {
+            
+            if (i < text.length) {
+
+                setTimeout(() => {
+                    element.append(text.charAt(i))
+                    i++
+                }, Math.floor(Math.random() * 70) + 20);
+            } else {
+                clearInterval(timer)
+                element.text(text)
+                $('.choice').removeClass('hidden')
+            }
+        }, 50);
+        $(document).on('click', () => {
+            clearInterval(timer)
+            element.text(text)
+            $('.choice').removeClass('hidden')
+        })
+    });    
+  })
+
+
 const handleNewChoice = async () => {
     let choiceText = $('#choice_text').val();
     let requiredItem = $('#required_item').val()
@@ -35,6 +66,29 @@ const handleNewChoice = async () => {
 }
 
 
+const handleSignup = async () => {
+    let authorName = $("#signupAuthorName").val();
+    let email = $("#signupEmail").val();
+    let password = $("#signupPassword").val();
+    await fetch(`/user/`, {
+        method: "POST",
+        body: JSON.stringify({
+            author_name: authorName,
+            email: email,
+            password: password
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+        })
+        .then((_res) => {
+            location.reload()
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
 const newChoiceDialog = (inventoryItems) => {
     if (inventoryItems.length > 0) {
         inventoryOptions = inventoryItems.map((item) => {
@@ -56,7 +110,7 @@ const newChoiceDialog = (inventoryItems) => {
         <label for "remove_item">remove/destroy item?</label>
         `
     }
-    let signupDialog = $(`
+    let newChoiceDialog = $(`
     <div class="modal fade" id="newChoiceDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -88,14 +142,45 @@ const newChoiceDialog = (inventoryItems) => {
     </div>
     `)
 
-    signupDialog.find(".confirmButton").on("click", function () {
+    newChoiceDialog.find(".confirmButton").on("click", function () {
         handleNewChoice()
+        newChoiceDialog.modal("hide");
+    })
+
+    newChoiceDialog.modal("show");
+}
+
+const signupDialog = () => {
+    let signupDialog = $(`
+    <div class="modal fade" id="editPostDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog crt">
+            <div class="modal-content">
+                <div class="modal-body">
+                <input type="text" class="form-control" id="signupAuthorName" placeholder="author name" autocomplete="off">
+                <input type="text" class="form-control" id="signupEmail" placeholder="email" autocomplete="off">
+                <input type="password" class="form-control" id="signupPassword" placeholder="password" autocomplete="off">
+                <div class="modal-footer">
+                    <button type="button" 
+                        class="btn btn-secondary cancelButton" 
+                        data-bs-dismiss="modal"
+                    >Cancel</button>
+                    <button 
+                        type="button" 
+                        class="btn btn-primary confirmButton"
+                    >Sign up!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `)
+
+    signupDialog.find(".confirmButton").on("click", function () {
+        handleSignup()
         signupDialog.modal("hide");
     })
 
     signupDialog.modal("show");
 }
-
 
 $('#newChoiceButton').on('click', () => {
     let inventoryItems = $('.inventoryItem').map(function() {
@@ -103,4 +188,9 @@ $('#newChoiceButton').on('click', () => {
     }).get();
     console.log(inventoryItems)
     newChoiceDialog(inventoryItems ? inventoryItems : null)
+})
+
+$('#signupButton').on('click', () => {
+    console.log('signup')
+    signupDialog()
 })

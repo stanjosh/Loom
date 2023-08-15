@@ -583,7 +583,8 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
     //assign the UUIDs to the local data
     let branchUUIDs = {};
     branches.forEach((branch) => {
-        branchUUIDs[branch.reference_id] = branch.id;
+        branchUUIDs[branch.branch_title] = branch.id;
+        console.log(branchUUIDs)
     });
 
     //assign branch and story UUIDs or null to story choice objects 
@@ -593,7 +594,7 @@ const branchSeeds = async (storyRefUUIDs, userUUIDs) => {
     console.log(branchData)
     branchData.forEach((branchStoryChoices) => {
         
-        let branch_id = branchUUIDs[branchStoryChoices.reference_id]
+        let branch_id = branchUUIDs[branchStoryChoices.branch_title]
         let story_id = storyRefUUIDs[branchStoryChoices.story_reference_id]
         
         branchStoryChoices = branchStoryChoices.story_choices 
