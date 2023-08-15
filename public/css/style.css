@@ -1,8 +1,96 @@
-div {
-    border: 1px dashed red;
-    padding: 1cqh;
-    margin: 1cqh;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css?family=VT323&display=swap");
+
+@font-face {
+	/* Font source: http://sensi.org/~svo/glasstty/ */
+	font-family: Glass;
+	src: url("Glass_TTY_VT220.eot");
+	src: url("Glass_TTY_VT220.eot?#iefix") format("embedded-opentype"),
+		 url("Glass_TTY_VT220.woff2") format("woff2"),
+		 url("Glass_TTY_VT220.woff") format("woff"),
+		 url("Glass_TTY_VT220.svg#Glass_TTY_VT220") format("svg"),
+		 url("Glass_TTY_VT220.ttf") format("truetype"),
+		 url("/font/Glass_TTY_VT220.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
+.passage {
+  	color: #a3ff99;
+
+	font-family: Glass, VT323, monospace;
+	font-size: 20px;
+	line-height: 22px;
+    animation-duration: 0.01s;
+    animation-name: textflicker;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.passage a, .passage a:hover, .passage a:active {
+  	color: #a3ff99;
+
+	text-decoration: underline;
+    animation-duration: 0.01s;
+    animation-name: textflicker;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+
+
+body {
+    background: #111;
+    font-family: 'Press Start 2P', cursive;
+    padding: 1em;
+    color: #eee;
+    font-size: 1em;
+    line-height: 1;
+    text-shadow: 0.06rem 0 0.06rem #ea36af, -0.125rem 0 0.06rem #75fa69;
+    letter-spacing: 0.125em;
+    animation-duration: 0.01s;
+    animation-name: textflicker;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+h1 { 
+    font-size: 5em; 
+    text-align: center;
+}
+
+.crt {
+    background: #163100;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+  @media screen and (min-width: 1200px) {
+
+  }
+
+  @media screen and (min-width: 600px) {
+      body {
+          margin-left: 5em;
+          margin-right: 5em;
+      }
+  }
+  
+  @keyframes textflicker {
+    from {
+      text-shadow: 
+        1px 0px 1px #ea36af, 
+        -1px 0px 1px #00f7ff;
+    }
+    to {
+      text-shadow: 
+        1.5px 0.5px 2px #ea36af, 
+        -1px -0.5px 2px #69faf3;
+    }
+  }
+
+
+
 
 .hidden {
     display: none;
