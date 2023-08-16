@@ -193,3 +193,41 @@ body {
         background-color: black;
     }
   }
+
+  .inventory-box {
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    color: #404140;
+    background-color: rgba(4, 146, 11, 0.9);
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    filter: drop-shadow(0 0 0.70rem #66ff00);
+    z-index: 1;
+    pointer-events: none;
+    animation: flicker 7s infinite;
+    border-radius: 15px;
+}
+
+.scrollable-content {
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: lightgreen;
+    border-radius: 1rem;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background-color: darkgreen;
+}
