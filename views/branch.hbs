@@ -17,6 +17,7 @@
             <ul>
                 {{#each session.storyInventory}}
                     <li>{{this}}</li>
+                    <input type="hidden" class="inventoryItem" value="{{this}}">
                 {{/each}}
             </ul>
         </div>
