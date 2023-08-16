@@ -1,4 +1,4 @@
-<input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
+    <input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
 
         {{#each session.branchData.choices}}
             {{#if this.required_item}}
@@ -12,43 +12,25 @@
             {{/if}}
         {{/each}}
 
-
-        {{#if session.storyInventory}}
-    <div style="float: right">
-        Inventory
-        <div>
-            <ul>
-            {{#each session.storyInventory}}
-                <li>{{this}}</li>
-                <input type="hidden" class="inventoryItem" value="{{this}}"/>
-            {{/each}}
-            </ul>
-        </div>
-    </div>
-    {{/if}}
-
-<div >
-    <div class="passage title">{{session.branchData.branch_title}}</div>
-    <div class="passage" data-type-text="{{session.branchData.branch_content}}" style="overflow-y: auto;"></div>
-    <input type="hidden" class="storyID" id="storyTitle" value="{{session.branchData.story_id}}"/>
     {{#if session.storyInventory}}
-    
-    
-    <div style="float: right">
-        Inventory
-        <div>
+        <div class="inventory-box">
             <ul>
                 {{#each session.storyInventory}}
-                <li>{{this}}</li>
-                <input type="hidden" class="inventoryItem" value="{{this}}"/>
+                    <li>{{this}}</li>
                 {{/each}}
             </ul>
         </div>
-    </div>
     {{/if}}
 
-    <div>
+    <div style="overflow-y: auto">
 
+        <div class="title">{{session.branchData.branch_title}}</div>
+        <div class="passage" data-type-text="{{session.branchData.branch_content}}"></div>
+        <input type="hidden" class="storyID" id="storyTitle" value="{{session.branchData.story_id}}"/>
+
+    </div>
+
+    <div>
         {{#each session.branchData.choices}}
         {{#if this.required_item}}
         {{#if session.storyInventory}}
@@ -61,7 +43,7 @@
         {{/if}}
         {{/each}}
 
-        {{#if session.branchData.end_here }}
+        {{#if (compare session.branchData.end_here true)}}
         <div class="passage" style="text-align: center;">Game Over</div>
         {{else}}
         {{#unless (compare session.branchData.choices.length 3)}}
@@ -72,5 +54,3 @@
         {{/if}}
     </div>
 
-</div>
-        
