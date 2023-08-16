@@ -2,11 +2,10 @@
 
   $(document).ready(() => {
     $('.passage').each(function() {
-        let text = $(this).data('type-text')
+        let text = $(this).attr('data-type-text')
         console.log(text)
         let element = $(this)
         let i = 0;
-
         let timer = setInterval(() => {
             
             if (i < text.length) {

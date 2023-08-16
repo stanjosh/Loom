@@ -175,6 +175,39 @@ body {
     }
   }
   
+  .passage::after {
+    position: absolute;
+    content: "\2588";
+    animation: cursor-blink 1.5s steps(2) infinite;
+  }
+
+  .cursorbox {
+    padding: 0 50px 0 10px;
+    border: 2px solid #656464;
+    border-radius: 10px;
+  }
+  
+  .cursorbox h2 {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  @keyframes cursor-blink {
+    0% {
+      opacity: 0;
+    }
+  }
+  
+  .cursorbox h2::after {
+    content: "";
+    width: 5px;
+    height: 20px;
+    background: #ec7fff;
+    display: inline-block;
+    animation: cursor-blink 1.5s steps(2) infinite;
+  }
+
 
   @media screen and (max-width: 960px) {
     .crt {
@@ -199,15 +232,13 @@ body {
     top: 150px;
     right: 10px;
     color: #404140;
-    background-color: rgba(4, 146, 11, 0.9);
+    background-color: #66ff00;
     padding: 10px;
     max-height: 200px;
     overflow-y: auto;
-    filter: drop-shadow(0 0 0.70rem #66ff00);
+    filter: drop-shadow(0 0 0.30rem #66ff00);
     z-index: 1;
     pointer-events: none;
-    animation: flicker 7s infinite;
-    border-radius: 15px;
 }
 
 .scrollable-content {
