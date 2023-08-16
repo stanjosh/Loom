@@ -2,10 +2,10 @@
 
   $(document).ready(() => {
     $('.passage').each(function() {
-        let text = $(this).data('type-text')
+        let text = $(this).attr('data-type-text')
+        console.log(text)
         let element = $(this)
         let i = 0;
-
         let timer = setInterval(() => {
             
             if (i < text.length) {
@@ -36,7 +36,7 @@ const handleNewChoice = async () => {
     let nextBranchContent = $('#next_branch_content').val()
     let receivedItem = $('#received_item').val()
     let removeItem = $('#remove_item').val() === 'on' ? true : false
-    let endHere = $('#end_here').val() === 'on' ? true : false
+    let endHere = $('#end_here').is('checked')
 
     await fetch(`/branch/`, {
         method: "POST",
@@ -64,6 +64,42 @@ const handleNewChoice = async () => {
             console.log(err)
         })
 }
+
+const handleNewStory = async () => {
+    let branchTitle = $('#branch_title').val();
+    let branchContent = $('#branch_content').val()
+    let receivedItem = $('#received_item').val()
+    let storyTitle = $('#story_title').val()
+    let storyContent = $('#story_content').val()
+
+
+    await fetch(`/story/`, {
+        method: "POST",
+        body: JSON.stringify({
+            branchData : {
+                branch_title : branchTitle,
+                branch_content : branchContent,
+                received_item : receivedItem ? receivedItem : null,
+                end_here : false,
+                start_here : true   
+            },
+            storyData : {
+                story_title : storyTitle,
+                story_content : storyContent
+            }
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+        })
+        .then((_res) => {
+            location.reload()
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
 
 
 const handleSignup = async () => {
@@ -150,6 +186,49 @@ const newChoiceDialog = (inventoryItems) => {
     newChoiceDialog.modal("show");
 }
 
+const newStoryDialog = (inventoryItems) => {
+    let newStoryDialog = $(`
+    <div class="modal fade" id="newStoryDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <input type="text" class="form-control" name="story_title" id="story_title" placeholder="Story title" required autocomplete="off"/>
+                    <input type="text" class="form-control" name="story_content" id="story_content" placeholder="Story preface" required autocomplete="off"/>
+                    
+                    
+                    
+                    <input type="text" class="form-control" name="branch_title" id="branch_title" placeholder="Starting Branch Title" required autocomplete="off"/>
+                    <textarea class="form-control" name="branch_content" id="branch_content" placeholder="Starting branch content" rows="5" required autocomplete="off"/></textarea>
+                    <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
+                    
+
+
+                <div class="modal-footer">
+                    <button type="button" 
+                        class="btn btn-secondary cancelButton" 
+                        data-bs-dismiss="modal"
+                    >Cancel</button>
+                    <button 
+                        type="button" 
+                        class="btn btn-primary confirmButton"
+                    >Create Branch!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `)
+
+    newStoryDialog.find(".confirmButton").on("click", function () {
+        handleNewStory()
+        newStoryDialog.modal("hide");
+    })
+
+    newStoryDialog.modal("show");
+}
+
+
+
 const signupDialog = () => {
     let signupDialog = $(`
     <div class="modal fade" id="editPostDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -193,4 +272,8 @@ $('#newChoiceButton').on('click', () => {
 $('#signupButton').on('click', () => {
     console.log('signup')
     signupDialog()
+})
+
+$('#newStoryButton').on('click', () => {
+    newStoryDialog()
 })
