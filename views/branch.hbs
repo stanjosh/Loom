@@ -12,13 +12,25 @@
             {{/if}}
         {{/each}}
 
+<div class="inventory-box">
+    <ul>
+        {{#each session.storyInventory}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+</div>
 
 
+<div class="scrollable-content">
 
-<div >
     <div class="passage title">{{session.branchData.branch_title}}</div>
     <div class="passage" data-type-text="{{session.branchData.branch_content}}" style="overflow-y: auto;"></div>
     <input type="hidden" class="storyID" id="storyTitle" value="{{session.branchData.story_id}}"/>
+
+
+    <div>
+
+
     {{#if session.storyInventory}}
 
 
@@ -35,6 +47,7 @@
             </div>
         </div>
         {{/if}}
+
         {{#each session.branchData.choices}}
         {{#if this.required_item}}
         {{#if session.storyInventory}}
@@ -59,4 +72,4 @@
     </div>
 
 </div>
-        
+</div>
