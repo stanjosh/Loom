@@ -32,7 +32,7 @@ router.get('/story/:id', async (req, res) => {
         ? req.session.save(() => res.redirect('/branch'))
         : res.render('error', { 
             error: `There doesn't seem to be a start branch there. <br>
-            Do you want to <a href="/branch">start the story</a>?` 
+            <a href="/branch">start the story</a>` 
         })
 });
 
@@ -46,8 +46,7 @@ router.get('/branch/:id', async (req, res) => {
     req.session.branchData 
         ? req.session.save(() => res.redirect('/branch')) 
         : res.render('error', { 
-            error: `There doesn't seem to be a branch there. <br>
-            Do you want to <a href="/branch">make a branch</a>?` 
+            error: `No branch found there, pal.` 
         })
 });
 
@@ -66,6 +65,21 @@ router.get('/branch', async (req, res) => {
     } else {
         res.redirect('/')
     }
+})
+
+router.post('/story/', async (req, res) => {
+    console.log(req.body)
+    let newBranchData = req.body.branchData
+    let newStoryData = req.body.storyData
+    newStoryData['user_id'] = req.session.user_id
+    
+    let newStory = await db.createStory(newStoryData)
+
+    newBranchData['user_id'] = req.session.user_id
+    newBranchData['story_id'] = newStory.id
+    await db.createBranch(newBranchData)
+
+    req.session.save(() => res.redirect('/'))
 })
 
 

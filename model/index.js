@@ -50,7 +50,7 @@ module.exports = {
 const db = {
 
   createStory: async (story) => {
-    return await Story.create(story)
+    return await Story.create(story, {returning: true})
     .catch((err) => {
       console.log(err)
       return err

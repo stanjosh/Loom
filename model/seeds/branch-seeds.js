@@ -41,7 +41,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "3",
         branch_title: "Flashlight description",
-        recieved_item: "flashlight",
+        received_item: "flashlight",
         branch_content: "You notice the flashlight does not have batteries but you take it anyway",
         story_choices: [
             {   
