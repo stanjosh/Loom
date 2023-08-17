@@ -21,11 +21,14 @@ var hbs = engine.create({
     formatTime: function (date, format) {
       return dayjs(date).format(format);
     },
-    compare: function (val1, val2) {
-      return val1 === val2 ? true : false
+    compare: function (val1, val2, options) {
+      return val1 == val2 ? options.fn(this) : options.inverse(this)
     },
-    contains: function (val1, val2) {
-      return val1.includes(val2) ? true : false
+    contains: function (val1, val2, options) {
+      return val1.includes(val2) ? options.fn(this) : options.inverse(this)
+    },
+    maximum: function (val1, val2, options) {
+      return val1.length < val2 ? options.fn(this) : options.inverse(this)
     },
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,

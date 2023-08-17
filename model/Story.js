@@ -14,7 +14,7 @@ Story.init(
     user_id:{
       type: DataTypes.UUID,
       references: {
-        model: User,
+        model: 'user',
         key: 'id'
       },
       allowNull: false

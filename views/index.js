@@ -97,6 +97,7 @@ router.post('/branch/', async (req, res) => {
     newChoiceData['branch_id'] = currentBranch.id
     newChoiceData['story_id'] = currentBranch.story_id
     newChoiceData['next_branch'] = newBranch.id
+    console.log(newChoiceData)
     await db.createChoice(newChoiceData)
 
     req.session.branchData = await db.getBranch(newBranch.id)

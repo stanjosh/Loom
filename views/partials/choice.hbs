@@ -1,8 +1,22 @@
 
 
-
+{{#if required_item}}
+    {{#if session.storyInventory}}
+    {{#contains session.storyInventory required_item}}
+        <a href="/branch/{{fail_branch}}/" class="choice hidden">
+            <div>
+                {{choice_text}}
+            </div>
+        </a>
+    {{/contains}}
+    {{/if}}
+{{else}}
     <a href="/branch/{{next_branch}}/" class="choice hidden">
         <div>
             {{choice_text}}
         </div>
     </a>
+{{/if}}
+
+
+

@@ -1,22 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
 
+:root {
+  --crt-main: #66ff00;
+  --crt-shadow: #89bb68b6;
+  --crt-text: #66ff00;
+  --crt-background: #404140;
+  --panel-color: #c6ccab;
+  --crt-border-radius: 20px;
+  --crt-padding: 1.5rem;
+}
+
 body {
     font-family: 'Press Start 2P', cursive;
-    background-color: rgb(119, 118, 99);
+    background-color: var(--panel-color);
+    letter-spacing: 1px;
+}
+
+.modal-content {
+  background-color: var(--crt-background);
+  color: var(--crt-text);
+  font: 1rem 'VT323', monospace;
 }
 
 .passage, .passage .title {
     font-family: 'VT323', monospace;
     font-size: 1.5rem;
     position: relative;
-    background-color: #404140;
-    color: #66ff00;
+    background-color: var(--crt-background);
+    color: var(--crt-text);
     border-radius: 15px;
     padding: 1.5rem;
 }
 
 .passage .title {
-    filter: drop-shadow(0 0 0.45rem #66ff00);    
+    filter: drop-shadow(0 0 0.45rem var(--crt-shadow));    
 }
 
 .crt  {
@@ -28,10 +45,10 @@ body {
     position: absolute;
     left: 50%;
     bottom: 50%;
-    padding: 0.5rem 1rem;
-    background-color: #404140;
-    color: #66ff00;
-    border-radius: 15px;
+    padding: var(--crt-padding);
+    background-color: var(--crt-background);
+    color: var(--crt-text);
+    border-radius: var(--crt-border-radius);
     min-width: 960px;
     max-width: 960px;
     min-height: 720px;
@@ -44,24 +61,22 @@ body {
 .crt a {
     font-family: 'Press Start 2P', cursive;
     font-size: 1rem;
-    
     text-decoration: none;
-    color: #404140;
-    border-radius: 15px;
+    color: var(--crt-background);
 }
 
 .crt a div, .crt a div:visited, .crt a div:active {
-    background-color: #66ff00;
-    color: #404140;
-    filter: drop-shadow(0 0 0.75rem #66ff00);
+    background-color: var(--crt-main);
+    color: var(--crt-background);
+    filter: drop-shadow(0 0 0.75rem var(--crt-shadow));
     padding: 0.5rem 1rem;
     margin: 1.5rem 0;
 }
 
 .crt a div:hover {
-    color: #404140;
-    background-color: #66ff00;
-    filter: drop-shadow(0 0 0.75rem #66ff00);
+    color: var(--crt-background);
+    background-color: var(--crt-main);
+    filter: drop-shadow(0 0 0.75rem var(--crt-shadow));
 }
 
 
@@ -80,7 +95,7 @@ body {
     z-index: 2;
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
-    border-radius: 15px;
+    border-radius: var(--crt-border-radius);
   }
 
 
@@ -98,7 +113,7 @@ body {
     z-index: 2;
     pointer-events: none;
     animation: flicker 0.15s infinite;
-    border-radius: 15px;
+    border-radius: var(--crt-border-radius);
   }
 
 
@@ -177,37 +192,63 @@ body {
   
   .passage::after {
     position: absolute;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
     content: "\2588";
     animation: cursor-blink 1.5s steps(2) infinite;
   }
 
-  .cursorbox {
-    padding: 0 50px 0 10px;
-    border: 2px solid #656464;
-    border-radius: 10px;
-  }
-  
-  .cursorbox h2 {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-  }
-  
   @keyframes cursor-blink {
     0% {
       opacity: 0;
     }
   }
   
-  .cursorbox h2::after {
-    content: "";
-    width: 5px;
-    height: 20px;
-    background: #ec7fff;
-    display: inline-block;
-    animation: cursor-blink 1.5s steps(2) infinite;
-  }
+.inventory-box {
+    font-family: 'Press Start 2P', cursive;
+    font-size: medium;
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    color: #404140;
+    background-color: var(--crt-main);
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    filter: drop-shadow(0 0 0.30rem var(--crt-shadow));
+    z-index: 1;
+    pointer-events: none;
+    
+}
 
+.inventory-box ul {
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0;
+  padding: 0;
+}
+
+.scrollable-content {
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background-color: var(--crt-background);
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: var(--crt-main);
+    border-radius: 1rem;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background-color: var(--crt-shadow);
+}
 
   @media screen and (max-width: 960px) {
     .crt {
@@ -227,38 +268,4 @@ body {
     }
   }
 
-  .inventory-box {
-    position: fixed;
-    top: 150px;
-    right: 10px;
-    color: #404140;
-    background-color: #66ff00;
-    padding: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    filter: drop-shadow(0 0 0.30rem #66ff00);
-    z-index: 1;
-    pointer-events: none;
-}
 
-.scrollable-content {
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-}
-
-.scrollable-content::-webkit-scrollbar {
-    width: 0.5rem;
-}
-
-.scrollable-content::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-.scrollable-content::-webkit-scrollbar-thumb {
-    background-color: lightgreen;
-    border-radius: 1rem;
-}
-
-.scrollable-content::-webkit-scrollbar-thumb:hover {
-    background-color: darkgreen;
-}
