@@ -144,7 +144,7 @@ const branchData = [
         reference_id: "8",
         branch_title:"Drawer Success",
         received_item: "Working Flashlight",
-        removed_item: "Flashlight",
+        removed_item: "flashlight",
         branch_content:
          `*click*
          The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,

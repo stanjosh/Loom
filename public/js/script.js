@@ -169,3 +169,8 @@ $('#use_old_branch').change(() => {
         $('#writeNewBranchOption').hide()
     }
 })
+
+$('#notepad').on('click', () => {
+    console.log('clicked')
+    $('#notepad').toggleClass('notepad-show')
+})
