@@ -1,3 +1,7 @@
+
+  <div class="crt">
+    {{> header}}
+
     <input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
 
         {{#each session.branchData.choices}}
@@ -17,13 +21,13 @@
             <ul>
                 {{#each session.storyInventory}}
                     <li>{{this}}</li>
-                    <input type="hidden" class="inventoryItem" value="{{this}}">
+                    
                 {{/each}}
             </ul>
         </div>
     {{/if}}
 
-    <div style="overflow-y: auto">
+    <div class="scrollable-content">
 
         <div class="title">{{session.branchData.branch_title}}</div>
         <div class="passage" data-type-text="{{session.branchData.branch_content}}"></div>
@@ -32,26 +36,73 @@
     </div>
 
     <div>
+
         {{#each session.branchData.choices}}
-        {{#if this.required_item}}
-        {{#if session.storyInventory}}
-        {{#if (contains session.storyInventory this.requiredItem)}}
-        {{> choice this}}
-        {{/if}}
-        {{/if}}
-        {{else}}
-        {{> choice this}}
-        {{/if}}
+            {{> choice this}}
         {{/each}}
 
-        {{#if (compare session.branchData.end_here true)}}
-        <div class="passage" style="text-align: center;">Game Over</div>
+        {{#if session.branchData.end_here}}
+        <div style="text-align: center;" class="choice hidden">Game Over</div>
+        <a href="/" class="choice hidden"><div style="text-align: center;">Try Again</div></a>
         {{else}}
-        {{#unless (compare session.branchData.choices.length 3)}}
-        <a href="#" id="newChoiceButton" class="choice hidden">
+        {{#maximum session.branchData.choices 3}}
+        <a href="#" id="newChoiceButton" class="choice hidden" data-bs-toggle="modal" data-bs-target="#newBranchModal">
             <div>Create Choice</div>
         </a>
-        {{/unless}}
+        {{/maximum}}
         {{/if}}
+
     </div>
 
+    {{> footer}}
+  </div>
+
+  <div class="modal fade" id="newBranchModal" tabindex="-1" role="dialog" aria-labelledby="newBranchModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newBranchModalCenterTitle">New Story Branch</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <input type="text" class="form-control" name="choice_text" id="choice_text" placeholder="choice text" required autocomplete="off"/>
+
+
+
+        {{#if session.storyInventory}}
+        <label for="required_item">uses item:</label>
+        <select 
+            class="form-control" 
+            name="required_item" 
+            id="required_item" 
+            placeholder="required item"
+            autocomplete="off"
+            > 
+        <option value="null">no</option> 
+        {{#each session.storyInventory}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+        </select>
+        <div class="hidden" id="removeItemOption">
+        <input type="checkbox" name="remove_item" id="remove_item" />
+        <label for="remove_item">remove/destroy item?</label>
+        </div>
+        {{/if}}
+
+        
+        <input type="text" class="form-control" name="next_branch_title" id="next_branch_title" placeholder="next branch title" required autocomplete="off"/>
+        <textarea class="form-control" name="next_branch_content" id="next_branch_content" placeholder="next branch content" rows="5" required autocomplete="off"/></textarea>
+        <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
+        <input type="checkbox" name="end_here" id="end_here" />
+        <label for="end_here">Game over?</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveNewBranch">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

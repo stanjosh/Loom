@@ -15,7 +15,7 @@ Branch.init(
     user_id:{
         type: DataTypes.UUID,
         references: {
-            model: User,
+            model: 'user',
             key: 'id'
         },
         allowNull: false
@@ -23,7 +23,7 @@ Branch.init(
     story_id: {
         type: DataTypes.UUID,
         references: {
-            model: Story,
+            model: 'story',
             key: 'id'
         },
         allowNull: false
