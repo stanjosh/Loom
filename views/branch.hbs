@@ -4,15 +4,7 @@
 
     <input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
 
-    {{#if session.storyInventory}}
-        <div class="inventory-box">
-            <ul>
-                {{#each session.storyInventory}}
-                    <li>{{this}}</li>
-                {{/each}}
-            </ul>
-        </div>
-    {{/if}}
+
 
     <div class="scrollable-content">
         
@@ -42,6 +34,7 @@
 
     {{> footer}}
   </div>
-
-  {{> newBranchModal}}
+    
+    {{>inventoryDisplay}}
+    {{> newBranchModal}}
   

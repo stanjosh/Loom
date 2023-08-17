@@ -1,0 +1,24 @@
+    
+    
+    {{!-- {{#if session.storyInventory}}
+        <div class="inventory-box">
+            <ul>
+                {{#each session.storyInventory}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}} --}}
+
+    {{#if session.storyInventory}}
+        <div id="notepad" >
+            <div style="text-align: center; padding-bottom: 0">Inventory</div>
+            <div style = "padding: 15%">
+            <ul>
+                {{#each session.storyInventory}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+            </div>
+        </div>
+    {{/if}}
