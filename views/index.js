@@ -23,32 +23,43 @@ router.get('/branch/create/', async (req, res) => {
 router.get('/story/:id', async (req, res) => {
     req.session.storyInventory=[]
     let branchData = await db.getBranch(branchID=null, storyID=req.params.id)
-
     req.session.branchData = branchData 
         ? branchData.get({plain:true}) 
         : null
     
-    req.session.branchData 
-        ? req.session.save(() => res.redirect('/branch'))
-        : res.render('error', { 
-            error: `There doesn't seem to be a start branch there. <br>
-            <a href="/branch">start the story</a>` 
-        })
-});
-
-router.get('/branch/:id', async (req, res) => {
-    let branchData = await db.getBranch(branchID=req.params.id, storyID=null)
-
-    req.session.branchData = branchData 
-        ? branchData.get({plain:true}) 
-        : null
+    let historyEntry = {}
+    historyEntry[branchData.id] = branchData.branch_title
     
+    req.session.branchHistory.push(historyEntry)
+
     req.session.branchData 
         ? req.session.save(() => res.redirect('/branch')) 
         : res.render('error', { 
             error: `No branch found there, pal.` 
         })
+
 });
+
+router.get('/branch/:id', async (req, res) => {
+    let branchData = await db.getBranch(branchID=req.params.id, storyID=null)
+    req.session.branchData = branchData 
+        ? branchData.get({plain:true}) 
+        : null
+    
+    let historyEntry = {}
+    historyEntry[branchData.id] = branchData.branch_title
+    
+    req.session.branchHistory.push(historyEntry)
+
+    req.session.branchData 
+        ? req.session.save(() => res.redirect('/branch')) 
+        : res.render('error', { 
+            error: `No branch found there, pal.` 
+        })
+
+});
+
+
 
 router.get('/branch', async (req, res) => {
     if (req.session.loggedIn) {
@@ -88,19 +99,21 @@ router.post('/branch/', async (req, res) => {
     let currentBranch = req.session.branchData
     let newBranchData = req.body.branchData
     let newChoiceData = req.body.choiceData
-    
+    console.log(newChoiceData)
+    if (newChoiceData.next_branch === 'null') {
     newBranchData['user_id'] = req.session.user_id
     newBranchData['story_id'] = currentBranch.story_id
     let newBranch = await db.createBranch(newBranchData)
-
+    console.log(newBranch)
+    newChoiceData['next_branch'] = newBranch.id
+    }
     newChoiceData['user_id'] = req.session.user_id
     newChoiceData['branch_id'] = currentBranch.id
     newChoiceData['story_id'] = currentBranch.story_id
-    newChoiceData['next_branch'] = newBranch.id
     console.log(newChoiceData)
     await db.createChoice(newChoiceData)
-
-    req.session.branchData = await db.getBranch(newBranch.id)
+    
+    req.session.branchData = await db.getBranch(branchID=newChoiceData.next_branch)
     req.session.save(() => res.redirect('/branch'))
 })
 

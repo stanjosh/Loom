@@ -92,12 +92,31 @@
         </div>
         {{/if}}
 
-        
-        <input type="text" class="form-control" name="next_branch_title" id="next_branch_title" placeholder="next branch title" required autocomplete="off"/>
-        <textarea class="form-control" name="next_branch_content" id="next_branch_content" placeholder="next branch content" rows="5" required autocomplete="off"/></textarea>
-        <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
-        <input type="checkbox" name="end_here" id="end_here" />
-        <label for="end_here">Game over?</label>
+        {{#if session.branchHistory}}
+        <label for="use_old_branch">go to branch:</label>
+        <select 
+            class="form-control" 
+            name="use_old_branch" 
+            id="use_old_branch" 
+            placeholder="use existing branch"
+            autocomplete="off"
+            > 
+        <option value="null">no</option> 
+        {{#session.branchHistory}}
+        {{#each this}}
+        <option value="{{@key}}">{{this}}</option>
+        {{/each}}
+        {{/session.branchHistory}}
+        </select>
+        {{/if}}
+
+        <div id="writeNewBranchOption">
+          <input type="text" class="form-control" name="next_branch_title" id="next_branch_title" placeholder="next branch title" required autocomplete="off"/>
+          <textarea class="form-control" name="next_branch_content" id="next_branch_content" placeholder="next branch content" rows="5" required autocomplete="off"/></textarea>
+          <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
+          <input type="checkbox" name="end_here" id="end_here" />
+          <label for="end_here">Game over?</label>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
