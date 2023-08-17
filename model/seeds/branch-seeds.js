@@ -36,8 +36,6 @@ const branchData = [
         branch_content: "You find a flashlight.",
         story_choices: [
             {
-                id: uuidv4(),
-                choice_text: "Pick up flashlight",
                 choice_text: "Pick up the flashlight",
                 next_branch: "Flashlight description"
             }
