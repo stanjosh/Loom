@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { db } = require('../model') 
 
 const displayBranch = (req, res, branchData) => {
+    try {
     req.session.branchData = branchData 
         ? branchData.get({plain:true}) 
         : null
@@ -19,6 +20,11 @@ const displayBranch = (req, res, branchData) => {
         : res.render('error', { 
             error: `No branch found there, pal.` 
         })
+    } catch(err) {
+        res.render('error', { 
+            error: `No branch found there, pal. ${err}`
+        })
+    }
 }
 
 router.use(async (req, res, next) => {
@@ -48,19 +54,25 @@ router.get('/branch/:id', async (req, res) => {
 });
 
 router.get('/branch', async (req, res) => {
-    if (req.session.loggedIn) {
-        let inventory = req.session.storyInventory
-        let receivedItem = req.session.branchData.received_item ? req.session.branchData.received_item : null
-        let removedItem = req.session.branchData.removed_item ? req.session.branchData.removed_item : null
-        if (receivedItem && !inventory.includes(receivedItem)) {
-            req.session.storyInventory.push(receivedItem)
+    try {
+        if (req.session.loggedIn) {
+            let inventory = req.session.storyInventory
+            let receivedItem = req.session.branchData.received_item ? req.session.branchData.received_item : null
+            let removedItem = req.session.branchData.removed_item ? req.session.branchData.removed_item : null
+            if (receivedItem && !inventory.includes(receivedItem)) {
+                req.session.storyInventory.push(receivedItem)
+            }
+            if (removedItem && inventory.includes(removedItem)) {
+                req.session.storyInventory = inventory.filter(item => item !== removedItem)
+            }
+            req.session.save(() => res.render('branch'))
+        } else {
+            res.redirect('/')
         }
-        if (removedItem && inventory.includes(removedItem)) {
-            req.session.storyInventory = inventory.filter(item => item !== removedItem)
-        }
-        req.session.save(() => res.render('branch'))
-    } else {
-        res.redirect('/')
+    } catch(err) {
+        res.render('error', { 
+            error: `No branch found there, pal. ${err}`
+        })
     }
 })
 
