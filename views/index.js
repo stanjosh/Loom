@@ -79,7 +79,7 @@ router.get('/branch', async (req, res) => {
 })
 
 router.post('/story/', async (req, res) => {
-    console.log(req.body)
+
     let newBranchData = req.body.branchData
     let newStoryData = req.body.storyData
     newStoryData['user_id'] = req.session.user_id
@@ -95,22 +95,21 @@ router.post('/story/', async (req, res) => {
 
 
 router.post('/branch/', async (req, res) => {
-    console.log(req.body)
+
     let currentBranch = req.session.branchData
     let newBranchData = req.body.branchData
     let newChoiceData = req.body.choiceData
-    console.log(newChoiceData)
+
     if (newChoiceData.next_branch === 'null') {
-    newBranchData['user_id'] = req.session.user_id
-    newBranchData['story_id'] = currentBranch.story_id
-    let newBranch = await db.createBranch(newBranchData)
-    console.log(newBranch)
-    newChoiceData['next_branch'] = newBranch.id
+        newBranchData['user_id'] = req.session.user_id
+        newBranchData['story_id'] = currentBranch.story_id
+        let newBranch = await db.createBranch(newBranchData)
+        newChoiceData['next_branch'] = newBranch.id
     }
     newChoiceData['user_id'] = req.session.user_id
     newChoiceData['branch_id'] = currentBranch.id
     newChoiceData['story_id'] = currentBranch.story_id
-    console.log(newChoiceData)
+
     await db.createChoice(newChoiceData)
     
     req.session.branchData = await db.getBranch(branchID=newChoiceData.next_branch)

@@ -47,7 +47,6 @@ function hashPassword(user) {
   let salt = bcrypt.genSaltSync(10);
   let hash = bcrypt.hashSync(password, salt);
   user.password = hash;
-  console.log('ran hashPassword')
 }
 
 User.prototype.authenticate = function (password) {

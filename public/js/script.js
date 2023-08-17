@@ -17,7 +17,7 @@ const playKeySound = () => {
     $('.passage').each(function() {
         let text = $(this).attr('data-type-text')
         text = text.replace(/\s+/g,' ').trim();
-        console.log(text)
+
         let element = $(this)
         let i = 0;
         let timer = setInterval( async () => {
@@ -66,10 +66,7 @@ const handleNewBranch = async () => {
         next_branch : $('#use_old_branch').val()
     }
 
-    console.log({
-            branchData : useOldBranch ? null : branchData,
-            choiceData : choiceData
-        })
+
     await fetch(`/branch/`, {
         method: "POST",
         body: JSON.stringify({

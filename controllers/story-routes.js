@@ -39,7 +39,6 @@ router.get('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     await db.deleteStory(req.session.user_id, req.params.id)
     .then((story) => {
-      console.log(story)
       return res.status(200).send("Successfuly deleted story")
     })
     .catch((err) => {
