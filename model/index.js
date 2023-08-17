@@ -105,7 +105,6 @@ const db = {
     .catch((err) => {
       return err
     });
-    console.log(stories)
     return stories
   },
 
@@ -207,7 +206,6 @@ const db = {
 
 
   createChoices: async (data) => {
-    console.log(data)
     return await Choice.bulkCreate(data, {returning: true})
     .catch((err) => {
       console.log(err)

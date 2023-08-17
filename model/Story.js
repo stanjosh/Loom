@@ -25,7 +25,7 @@ Story.init(
       unique: true
     },
     story_title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(24),
         allowNull: false
     },
     story_content: {

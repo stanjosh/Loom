@@ -17,7 +17,7 @@ const playKeySound = () => {
     $('.passage').each(function() {
         let text = $(this).attr('data-type-text')
         text = text.replace(/\s+/g,' ').trim();
-        console.log(text)
+
         let element = $(this)
         let i = 0;
         let timer = setInterval( async () => {
@@ -48,24 +48,30 @@ const handleNewBranch = async () => {
     let nextBranchTitle = $('#next_branch_title').val()
     let nextBranchContent = $('#next_branch_content').val()
     let receivedItem = $('#received_item').val()
-    let removeItem = $('#remove_item').val() === 'on' ? true : false
+    let removeItem = $('#remove_item').is(':checked')
     let endHere = $('#end_here').is(':checked')
+    let useOldBranch = $('#use_old_branch').val() === 'null' ? null : $('#use_old_branch').val()
+    
+    let branchData = {
+        branch_title : nextBranchTitle,
+        branch_content : nextBranchContent,
+        received_item : receivedItem ? receivedItem : null,
+        removed_item : removeItem ? requiredItem : null,
+        end_here : endHere
+    }
 
-    console.log(endHere)
+    let choiceData = {
+        choice_text : choiceText,
+        required_item : requiredItem !== 'null' ? requiredItem : null,
+        next_branch : $('#use_old_branch').val()
+    }
+
+
     await fetch(`/branch/`, {
         method: "POST",
         body: JSON.stringify({
-            branchData : {
-                branch_title : nextBranchTitle,
-                branch_content : nextBranchContent,
-                received_item : receivedItem ? receivedItem : null,
-                removed_item : removeItem ? requiredItem : null,
-                end_here : endHere
-            },
-            choiceData : {
-                choice_text : choiceText,
-                required_item : requiredItem ? requiredItem : null
-            }
+            branchData : useOldBranch ? null : branchData,
+            choiceData : choiceData
         }),
         headers: {
             "Content-Type": "application/json"
@@ -152,7 +158,14 @@ $('#saveNewBranch').on('click', () => {
     handleNewBranch()
 })
 
-$('#required_item').on('change', () => {
-    console.log($(this).text())
-    $(this).text() === 'no' ? $('#removeItemOption').addClass('hidden') : $('#removeItemOption').removeClass('hidden')
+$('#required_item').change(() => {
+    $('option:selected').text() == 'no' ? $('#removeItemOption').hide() : $('#removeItemOption').show()
+})
+
+$('#use_old_branch').change(() => {
+    if ($('option:selected').text() == 'no') {
+        $('#writeNewBranchOption').show()
+    } else {
+        $('#writeNewBranchOption').hide()
+    }
 })
