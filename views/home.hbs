@@ -7,12 +7,21 @@
 
     {{#if session.loggedIn}}
 
+    <div class="">
+      Continue from
+      {{#each session.branchHistory}}
+
+          {{branch_title}}
+
+      {{/each}}
+    </div>
     
     <div style="scrollable-content">
     {{#each stories}}
         <a href="/story/{{id}}">
             <div>
-            {{story_title}} {{story_content}}
+            {{story_title}}
+              <div>{{story_content}}</div>
             </div>
         </a>
     {{/each}}

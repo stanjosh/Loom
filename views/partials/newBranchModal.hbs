@@ -52,9 +52,9 @@
         {{/if}}
 
         <div id="writeNewBranchOption">
-          <input type="text" class="form-control" name="next_branch_title" id="next_branch_title" placeholder="next branch title" required autocomplete="off"/>
+          <input type="text" class="form-control" name="next_branch_title" id="next_branch_title" placeholder="next branch title" maxlength="24" required autocomplete="off"/>
           <textarea class="form-control" name="next_branch_content" id="next_branch_content" placeholder="next branch content" rows="5" required autocomplete="off"/></textarea>
-          <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
+          <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" maxlength="16" autocomplete="off"/>
           <input type="checkbox" name="end_here" id="end_here" />
           <label for="end_here">Game over?</label>
         </div>

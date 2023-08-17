@@ -1,6 +1,26 @@
 const router = require('express').Router();
 const { db } = require('../model') 
 
+const displayBranch = (req, res, branchData) => {
+    req.session.branchData = branchData 
+        ? branchData.get({plain:true}) 
+        : null
+
+    let historyEntry = {}
+    historyEntry[branchData.id] = branchData.branch_title
+
+    req.session.branchHistory.length < 6 
+        ? req.session.branchHistory.push(historyEntry)
+        : req.session.branchHistory.shift(historyEntry)
+        
+
+    req.session.branchData 
+        ? req.session.save(() => res.redirect('/branch')) 
+        : res.render('error', { 
+            error: `No branch found there, pal.` 
+        })
+}
+
 router.use(async (req, res, next) => {
     res.locals.session = req.session;
     next();
@@ -11,55 +31,21 @@ router.get('/', async (req, res) => {
     res.render('home', { stories: storyData });
 });
 
-router.get('/branch/create/:choice_id', async (req, res) => {
-    req.session.createBranchChoice_id = req.params.choice_id
-    req.session.save(() => res.redirect('/branch/create'));
-});
-
 router.get('/branch/create/', async (req, res) => {
     res.render('create', { choice_id : req.params.choice_id })    
 });
 
 router.get('/story/:id', async (req, res) => {
+    //reset story inventory on starting new story
     req.session.storyInventory=[]
     let branchData = await db.getBranch(branchID=null, storyID=req.params.id)
-    req.session.branchData = branchData 
-        ? branchData.get({plain:true}) 
-        : null
-    
-    let historyEntry = {}
-    historyEntry[branchData.id] = branchData.branch_title
-    
-    req.session.branchHistory.push(historyEntry)
-
-    req.session.branchData 
-        ? req.session.save(() => res.redirect('/branch')) 
-        : res.render('error', { 
-            error: `No branch found there, pal.` 
-        })
-
+    displayBranch(req, res, branchData)
 });
 
 router.get('/branch/:id', async (req, res) => {
     let branchData = await db.getBranch(branchID=req.params.id, storyID=null)
-    req.session.branchData = branchData 
-        ? branchData.get({plain:true}) 
-        : null
-    
-    let historyEntry = {}
-    historyEntry[branchData.id] = branchData.branch_title
-    
-    req.session.branchHistory.push(historyEntry)
-
-    req.session.branchData 
-        ? req.session.save(() => res.redirect('/branch')) 
-        : res.render('error', { 
-            error: `No branch found there, pal.` 
-        })
-
+    displayBranch(req, res, branchData)
 });
-
-
 
 router.get('/branch', async (req, res) => {
     if (req.session.loggedIn) {
@@ -123,7 +109,7 @@ router.get('/story/new', async (req, res) => {
 
 
 router.use((req, res) => {
-    res.render('error', { error: "One of us made a wrong turn somewhere."})
+    res.render('error', { error: "404 - one of us made a wrong turn somewhere."})
 })
 
 

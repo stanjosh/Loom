@@ -34,8 +34,9 @@ Branch.init(
         unique: true,
     },
     branch_title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(24),
         allowNull: false
+        
     },
     branch_content: {
         type: DataTypes.TEXT,

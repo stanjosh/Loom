@@ -4,32 +4,18 @@
 
     <input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
 
-        {{#each session.branchData.choices}}
-            {{#if this.required_item}}
-                {{#if session.storyInventory}}
-                    {{#if (contains session.storyInventory this.requiredItem)}}
-                    <input type="hidden" class="choiceData" value="{{this.choice_text}}">
-                {{/if}}
-            {{/if}}
-        {{else}}
-                <input type="hidden" class="choiceData" value="{{this.choice_text}}">
-            {{/if}}
-        {{/each}}
-
     {{#if session.storyInventory}}
         <div class="inventory-box">
             <ul>
                 {{#each session.storyInventory}}
                     <li>{{this}}</li>
-                    
                 {{/each}}
             </ul>
         </div>
     {{/if}}
 
     <div class="scrollable-content">
-
-        <div class="title">{{session.branchData.branch_title}}</div>
+        
         <div class="passage" data-type-text="{{session.branchData.branch_content}}"></div>
         <input type="hidden" class="storyID" id="storyTitle" value="{{session.branchData.story_id}}"/>
 

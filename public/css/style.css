@@ -3,11 +3,13 @@
 :root {
   --crt-main: #66ff00;
   --crt-shadow: #89bb68b6;
-  --crt-text: #66ff00;
-  --crt-background: #404140;
+  --crt-text: #44ee00;
+  --crt-background: #272717;
   --panel-color: #c6ccab;
   --crt-border-radius: 20px;
   --crt-padding: 1.5rem;
+  --green-pixels: linear-gradient(90deg, rgba(0, 255, 0, 0.25), rgba(0, 255, 0, 0.25), rgba(0, 255, 0, 0.25));
+  --cga-pixels: linear-gradient(90deg, rgba(255, 85, 85, 0.15), rgba(85, 255, 85, 0.15), rgba(85, 255, 255, 0.15));
 }
 
 body {
@@ -22,7 +24,8 @@ body {
   font: 1rem 'VT323', monospace;
 }
 
-.passage, .passage .title {
+.passage {
+    display: inline-block;
     font-family: 'VT323', monospace;
     font-size: 1.5rem;
     position: relative;
@@ -30,11 +33,9 @@ body {
     color: var(--crt-text);
     border-radius: 15px;
     padding: 1.5rem;
+    min-height: max-content;
 }
 
-.passage .title {
-    filter: drop-shadow(0 0 0.45rem var(--crt-shadow));    
-}
 
 .crt  {
     display: flex;
@@ -68,7 +69,7 @@ body {
 .crt a div, .crt a div:visited, .crt a div:active {
     background-color: var(--crt-main);
     color: var(--crt-background);
-    filter: drop-shadow(0 0 0.75rem var(--crt-shadow));
+    filter: drop-shadow(0 0 0.65rem var(--crt-shadow));
     padding: 0.5rem 1rem;
     margin: 1.5rem 0;
 }
@@ -76,10 +77,18 @@ body {
 .crt a div:hover {
     color: var(--crt-background);
     background-color: var(--crt-main);
-    filter: drop-shadow(0 0 0.75rem var(--crt-shadow));
+    filter: drop-shadow(0 0 1.05rem var(--crt-shadow));
 }
 
+.crt a div div {
+  background-color: var(--crt-background);
+  color: var(--crt-text);
+}
 
+.crt a div div:hover {
+  background-color: var(--crt-background);
+  color: var(--crt-text);
+}
 
 .crt::before {
     content: " ";
@@ -90,8 +99,8 @@ body {
     bottom: 0;
     right: 0;
     background: 
-        linear-gradient(rgba(4, 34, 7, 0) 50%, rgba(0, 0, 0, 0.404) 50%), 
-        linear-gradient(90deg, rgba(179, 255, 0, 0.151), rgba(0, 255, 0, 0.02), rgba(0, 255, 34, 0.06));
+        linear-gradient(rgba(5, 5, 5, .1) 50%, rgba(5, 5, 5, 0.4) 50%), 
+        var(--green-pixels);
     z-index: 2;
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
@@ -108,7 +117,7 @@ body {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(18, 16, 16, 0.1);
+    background: rgba(16, 16, 16, 0.1);
     opacity: 0;
     z-index: 2;
     pointer-events: none;
@@ -250,7 +259,7 @@ body {
     background-color: var(--crt-shadow);
 }
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 960px), (display-mode: fullscreen) {
     .crt {
         position: absolute;
         left: 0;
@@ -258,9 +267,7 @@ body {
         right: 0;
         top: 0;
         transform: none;
-        
         min-width: 100%;
-        
         min-height: 100%;
     }
     body {

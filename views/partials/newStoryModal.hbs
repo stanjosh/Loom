@@ -8,11 +8,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" class="form-control" name="story_title" id="story_title" placeholder="Story title" required autocomplete="off"/>
-        <input type="text" class="form-control" name="story_content" id="story_content" placeholder="Story preface" required autocomplete="off"/>
-        <input type="text" class="form-control" name="branch_title" id="branch_title" placeholder="Starting Branch Title" required autocomplete="off"/>
+        <input type="text" class="form-control" name="story_title" id="story_title" placeholder="Story title" maxlength="24" required autocomplete="off"/>
+        <input type="text" class="form-control" name="story_content" id="story_content" placeholder="Story preface" maxlength="128" autocomplete="off"/>
+        <input type="text" class="form-control" name="branch_title" id="branch_title" placeholder="Starting Branch Title" maxlength="24" required autocomplete="off"/>
         <textarea class="form-control" name="branch_content" id="branch_content" placeholder="Starting branch content" rows="5" required autocomplete="off"/></textarea>
-        <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
+        <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" maxlength="16" autocomplete="off"/>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
