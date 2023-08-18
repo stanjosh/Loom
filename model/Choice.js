@@ -9,7 +9,7 @@ Choice.init(
   {
     id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       primaryKey: true
     },
     user_id:{
@@ -36,7 +36,6 @@ Choice.init(
       },
       allowNull: false
     },
-
     choice_text: {
       type: DataTypes.TEXT,
       allowNull: false

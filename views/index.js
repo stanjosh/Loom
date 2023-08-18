@@ -37,19 +37,8 @@ router.get('/', async (req, res) => {
     res.render('home', { stories: storyData });
 });
 
-router.get('/branch/create/', async (req, res) => {
-    res.render('create', { choice_id : req.params.choice_id })    
-});
-
-router.get('/story/:id', async (req, res) => {
-    //reset story inventory on starting new story
-    req.session.storyInventory=[]
-    let branchData = await db.getBranch(branchID=null, storyID=req.params.id)
-    displayBranch(req, res, branchData)
-});
-
 router.get('/branch/:id', async (req, res) => {
-    let branchData = await db.getBranch(branchID=req.params.id, storyID=null)
+    let branchData = await db.getBranch(req.params.id)
     displayBranch(req, res, branchData)
 });
 

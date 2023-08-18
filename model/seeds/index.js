@@ -2,7 +2,7 @@ const branchSeeds = require('./branch-seeds');
 const userSeeds = require('./user-seeds');
 const storySeeds = require('./story-seeds');
 const sequelize = require('../../config/connection');
-const { User, Branch, Story } = require('../');
+const { User, Story } = require('../');
 
 const seedAll = async () => {
 
