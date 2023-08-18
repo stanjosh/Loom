@@ -83,7 +83,7 @@ const db = {
           attributes: ["id", "author_name"], 
           as: "user" },
         { model: Branch,
-          include: [ { model: Choice } ] }
+          include: Choice }
       ]
     })
     .catch((err) => {
@@ -96,11 +96,7 @@ const db = {
     let stories = await Story.findAll({
       raw: true,
       nest: true,
-      include: [
-        { model: User, 
-          attributes: ["id", "author_name"], 
-          as: "user" },
-      ],
+      include: User.scope('withoutPassword')
     })
     .catch((err) => {
       return err
@@ -110,12 +106,27 @@ const db = {
 
 
   createBranch: async (data) => {
-    let branchData = await Branch.create(data, {returning: true})
+    let branchData = []
+    if (!data.newChoiceData.next_branch && data.newBranchData) {
+      branchData = await Branch.create(data.newBranchData, {returning: true})
+      .catch((err) => {
+        console.log(err)
+        return err
+      })
+    } else {
+      return new Error(`Branch data is missing ${branchData} ${data.newBranchData}`)
+    }
+    data.newChoiceData.next_branch = branchData 
+      ? branchData.id 
+      : data.newChoiceData.next_branch
+
+    await Choice.create(data.newChoiceData, {returning: true})
     .catch((err) => {
       console.log(err)
       return err
     })
     
+    console.log(branchData)
     return branchData
   },
 

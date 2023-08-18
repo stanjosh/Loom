@@ -1,1 +1,25 @@
 {{{body}}}
+
+
+    <div id="branchHistory" style="display: none">
+    {{#session.branchHistory}}
+    {{#each this}}
+        <input type="hidden" data-branch-branch-id="{{@key}}" data-title="{{this}}">
+    {{/each}}
+    {{/session.branchHistory}}
+    </div>
+
+    <div id="storyInventory" style="display: none">
+    {{#each session.storyInventory}}
+        <input type="hidden" data-item-name="{{this}}">
+    {{/each}}
+    </div>
+
+<script>
+
+$(document).ready(() => {
+    loadedNewContent()
+    console.log('loaded new content')   
+})
+
+</script>

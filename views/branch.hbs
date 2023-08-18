@@ -23,11 +23,15 @@
         <a href="/" class="choice hidden"><div style="text-align: center;">Try Again</div></a>
         {{else}}
         {{#maximum session.branchData.choices 3}}
-        <a href="#" id="newChoiceButton" class="choice hidden" data-bs-toggle="modal" data-bs-target="#newBranchModal">
+        <a href="#" id="newChoiceButton" class="options hidden" data-bs-toggle="modal" data-bs-target="#newBranchModal">
             <div>Create Choice</div>
         </a>
         {{/maximum}}
         {{/if}}
+
+        {{#each session.storyInventory}}
+            <input class="inventoryItem" type="hidden" value="{{this}}">
+        {{/each}}
 
     </div>
 

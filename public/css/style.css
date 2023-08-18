@@ -19,7 +19,7 @@ body {
     overflow: hidden;
 }
 
-#notepad {
+#notepad, .notepad {
   font-family: 'Annie Use Your Telescope', cursive;
   font-size: 3.5rem;
   position: absolute;
@@ -31,7 +31,7 @@ body {
   min-width: 546px;
   min-height: 807px;
   padding: 1.5rem;
-  transform: scale(0.5) rotate(-10deg) translatey(-80vh);
+  transform: scale(0.5) rotate(-10deg) translatey(-90vh);
   transition: all 0.5s ease-in-out;
 }
 
@@ -41,7 +41,13 @@ body {
  
 .notepad-show {
   transition: all 0.5s ease-in-out;
-  transform: scale(0.8) translate(-60vw, -100vh)!important;
+  transform: scale(0.8) translate(-60vw, -110vh)!important;
+}
+
+.notepad-gone {
+  transition: all 0.5s ease-in-out;
+  transform: scale(1.5) translatey(200vh)!important;
+  
 }
 
 .modal-content {
@@ -157,6 +163,7 @@ body {
 .hidden {
     display: none;
 }
+
 
 
 @keyframes flicker {
