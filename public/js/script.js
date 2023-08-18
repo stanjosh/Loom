@@ -86,9 +86,9 @@ const handleNewBranch = async () => {
 }
 
 const handleNewStory = async () => {
-    let branchTitle = $('#branch_title').val();
-    let branchContent = $('#branch_content').val()
-    let receivedItem = $('#received_item').val()
+    let branchTitle = $('#story_branch_title').val();
+    let branchContent = $('#story_branch_content').val()
+    let receivedItem = $('#story_received_item').val()
     let storyTitle = $('#story_title').val()
     let storyContent = $('#story_content').val()
 

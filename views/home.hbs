@@ -2,14 +2,13 @@
 
 
 
-  <div class="crt">
+
     {{> header}}
 
     {{#if session.loggedIn}}
 
     <div style="scrollable-content">
     {{#each stories}}
-      {{log this}}
         <a href="/branch/{{start_branch}}">
             <div>
             {{story_title}}
@@ -26,9 +25,6 @@
     
     {{/if}}
     {{> footer}}
-  </div>
 
 
-{{> newStoryModal}}
 
-{{> newUserModal}}
