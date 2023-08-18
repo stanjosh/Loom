@@ -52,27 +52,16 @@ router.get('/branch', async (req, res) => {
         let inventory = req.session.storyInventory
         let receivedItem = req.session.branchData.received_item ? req.session.branchData.received_item : null
         let removedItem = req.session.branchData.removed_item ? req.session.branchData.removed_item : null
-       
-        let requiredItem = req.session.branchData.required_item ? req.session.branchData.required_item : null;
-        let canAccessBranch = !requiredItem || inventory.includes(requiredItem);
-
-      if (canAccessBranch){
         if (receivedItem && !inventory.includes(receivedItem)) {
             req.session.storyInventory.push(receivedItem)
         }
         if (removedItem && inventory.includes(removedItem)) {
             req.session.storyInventory = inventory.filter(item => item !== removedItem)
-        }}
-
+        }
         req.session.save(() => res.render('branch'))
-    } else{
-            let failBranch = req.session.branchData.fail_branch ? req.session.branchData.fail_branch : null;
-            if (failBranch) {
-                res.redirect(`/branch/${failBranch}`);
-            } else {
-                res.render('branchAccessDenied');
-            }
-}
+    } else {
+        res.redirect('/')
+    }
 })
 
 router.post('/story/', async (req, res) => {

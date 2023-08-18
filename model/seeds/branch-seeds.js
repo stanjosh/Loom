@@ -1,3 +1,4 @@
+
 const { Choice, Story, Branch } = require("..");
 
 
@@ -11,18 +12,14 @@ const branchData = [
         branch_title:"Awakening",
         branch_content:
          `You awake in a panic! You look around and realize
-          you are in a hospital and while everything seems vaguely 
-          familiar but then you realize you have no memory.
-          You stand but almost collapse over your own weight.
-          You Must find a purpose`,
+          you are in a hospital. While everything seems vaguely 
+          familiar, you have no memory.
+          You stand but almost collapse under your own weight.
+          You must find a purpose.`,
         story_choices: [
             {
                 choice_text: "Look around",
                 next_branch: "Initial Items"
-            },
-            {
-                choice_text: "Exit the room",
-                next_branch: "Hospital Halls"
             }
         ]
     },
@@ -30,10 +27,10 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "2",
         branch_title: "Initial Items",
-        branch_content: "You see a flashlight",
+        branch_content: "You find a flashlight.",
         story_choices: [
             {
-                choice_text: "Pick up flashlight",
+                choice_text: "Pick up the flashlight",
                 next_branch: "Flashlight description"
             }
         ]
@@ -44,7 +41,7 @@ const branchData = [
         reference_id: "3",
         branch_title: "Flashlight description",
         received_item: "Dead Flashlight",
-        branch_content: "You notice the flashlight does not have batteries but you take it anyway",
+        branch_content: "You notice the flashlight does not have batteries, but you take it anyway",
         story_choices: [
             {   
                 
@@ -58,13 +55,16 @@ const branchData = [
         reference_id: "4",
         branch_title:"Hospital Halls",
         branch_content:
-         `You exit the room and notice no staff or life of any kind in the building.\n
-          You see a receptionist desk that looks abandoned and tattered.
-          "I shoul probably check that desk for something useful"`,
+         `You exit the room and notice no staff, or life of any kind, in the building.
+          You see a receptionist desk that looks abandoned and tattered.`,
         story_choices: [
             {
                 choice_text: "Go to reception desk",
                 next_branch: "Reception Desk"
+            },
+            {
+                choice_text: "Go down the hall",
+                next_branch: "Stairwell Hallway Init"
             }
         ]
     },
@@ -73,7 +73,7 @@ const branchData = [
         reference_id: "5",
         branch_title:"Reception Desk",
         branch_content:
-         `A messy desk with a with a locked drawer`,
+         `You're standing at a messy desk with a with a locked drawer.`,
         story_choices: [
             {
                 choice_text: "Unlock Drawer",
@@ -91,7 +91,7 @@ const branchData = [
         branch_title:"Locked Drawer",
         branch_content:
          `The drawer is locked with a 3 digit keypad combination.
-         You see a sticky note that says. The meaning of the universe`,
+         You see a sticky note that says, "The meaning of the universe?"`,
         story_choices: [
             {
                 type: "input",
@@ -140,7 +140,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "8",
         branch_title:"Drawer Success",
-        received_item: "Working Flashlight",
+        received_item: "Flashlight",
         removed_item: "Dead Flashlight",
         branch_content:
          `*click*
@@ -157,8 +157,8 @@ const branchData = [
         reference_id: "9",
         branch_title:"Stairwell Hallway Init",
         branch_content:
-         `The one unlocked door is to the stairwell.
-          There is nothing blocking from going up or down`,
+         `The unlocked door goes to the stairwell.
+          There is nothing stopping you from going up or down.`,
         story_choices: [
             {
                 choice_text: "Go Down",
@@ -179,7 +179,7 @@ const branchData = [
         reference_id: "10",
         branch_title:"Stairwell Hallway",
         branch_content:
-         `Which way to go?`,
+         `"Which way to go? Am I talking to myself?"`,
         story_choices: [
             {
                 choice_text: "Go Down",
@@ -200,11 +200,11 @@ const branchData = [
         reference_id: "11",
         branch_title:"Down Stairs Init",//////
         branch_content:
-         `!Ah! An exit door. Finally I can get out of here.\n
-         *Jiggle Jiggle*\n
-         Of course it's locked! Why wouldn't it be locked?!\n
-         *You feel dread as you wollow in your mind*\n
-         I have to find another way.`,
+         `"Ah! An exit door. Finally I can get out of here."
+          You jiggle the handle a few times.
+         "Of course it's locked! Why wouldn't it be locked?!"
+         You feel dread as you wallow in your mind.
+         "I have to find another way."`,
         story_choices: [
             {
                 choice_text: "Go up",
@@ -219,9 +219,9 @@ const branchData = [
     {   
         story_reference_id: "andrew's story",
         reference_id: "12",
-        branch_title:"Down Stairs",
+        branch_title:"Down Stairs",//////
         branch_content:
-         `Back at the bottom of the stairs`,
+         `You're at the bottom of the stairs.`,
         story_choices: [
             {
                 choice_text: "Go up",
@@ -236,9 +236,9 @@ const branchData = [
     {   
         story_reference_id: "andrew's story",
         reference_id: "13",
-        branch_title:"Up Stairs Init",///////////////////
+        branch_title:"Up Stairs",
         branch_content:
-         `You notice another locked door labeled roof access`,
+         `You notice another locked door labeled "Roof Access."`,
         story_choices: [
             {
                 choice_text: "Try door",
@@ -255,7 +255,7 @@ const branchData = [
         reference_id: "14",
         branch_title:"Main Lobby Init",
         branch_content:
-         `A Dormant room with cobwebs and.....Is that a person? A real person?!`,
+         `A dormant room with cobwebs and... Is that a person? A real person?!`,
         story_choices: [
             {
                 choice_text: "Approach Person",
@@ -301,7 +301,7 @@ const branchData = [
          ═░███▓██████▓███▓████████═══════████▓███
 
          
-         "Oh! You are awake"`,
+         "Oh! You're awake"`,
         story_choices: [
             {
                 choice_text: "Where am I?",
@@ -318,7 +318,7 @@ const branchData = [
         reference_id: "16",
         branch_title:"Where",
         branch_content:
-         `"You are where you are meant to be......"`,
+         `"You are where you are meant to be..."`,
         story_choices: [
             {
                 choice_text: "Who am I?",
@@ -331,10 +331,10 @@ const branchData = [
         reference_id: "17",
         branch_title:"Who",
         branch_content:
-         `"You are the man that killed them....Don't you remember?"\n
-         \n
+         `"You're the man that killed them... Don't you remember?"
+         
          You almost collapse to the sound of screeching metal.
-        When you regain your sanity the figure dissapeared.`,
+        By the time you regain your sanity, the figure has disappeared.`,
         story_choices: [
             {
                 choice_text: "Go back to Main Lobby",
@@ -347,8 +347,7 @@ const branchData = [
         reference_id: "18",
         branch_title:"Main Lobby",
         branch_content:
-         `You notice a pitch black hallway where sound is defened by the darkness?
-         *No point in going if I don't have a flashlight*`,
+         `You notice a pitch black hallway where the darkness is deafening.`,
         story_choices: [
             {
                 choice_text: "Go back to stairwell",
@@ -356,7 +355,7 @@ const branchData = [
             },
             {
                 choice_text: "Investigate hallway with flashlight",
-                next_branch: "1st Floor Hall Init",
+                next_branch: "1st Floor Hall Init"
             },
         ]
     },
@@ -364,11 +363,10 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "19",
         branch_title:"1st Floor Hall Init",
-        required_item:"Working Flashlight",
-        fail_branch:"1st Floor Hall Fail",
+        required_item: "Flashlight",
         branch_content:
-         `With your flashlight in hand you can conquer the darkness.
-          You notice a open hospital room with a faint light.`,
+         `With your flashlight in hand, you can conquer the darkness.
+          You notice an open hospital room with a faint light.`,
         story_choices: [
             {
                 choice_text: "Go Into Hospital Room",
@@ -390,7 +388,7 @@ const branchData = [
         reference_id: "20",
         branch_title:"1st Floor Hall Fail",
         branch_content:
-         `It's too dark. I need to find a way to make it through.`,
+         `"It's too dark. I need to find a way to make it through," you say to yourself.`,
         story_choices: [
             {
                 choice_text: "Go Back",
@@ -405,8 +403,8 @@ const branchData = [
         reference_id: "21",
         branch_title:"1st Floor Hall",
         branch_content:
-         `Now that power is back this dark and creepy hall isn't so dark and creepy.
-          Don't want to go back into that creepy room.`,
+         `"Now that power is back this dark and creepy hall isn't so dark and creepy.
+          Don't want to go back into that creepy room."`,
         story_choices: [
             {
                 choice_text: "Go back",
@@ -414,7 +412,7 @@ const branchData = [
             },
             {
                 choice_text: "Keep going through hallway",
-                next_branch: "Hospital Chapel"
+                next_branch: "Hospital Chapel"///////////
             }
         ]
     },
@@ -433,7 +431,7 @@ const branchData = [
             },
             {
                 choice_text: "Enter Room",
-                next_branch: "Hospital Room Scripted"
+                next_branch: "Hospital Room Scripted"///////////
             }
         ]
     },
@@ -443,11 +441,11 @@ const branchData = [
         reference_id: "23",
         branch_title:"Hospital Room Scripted",
         branch_content:
-         `The door creaks open\n
+         `The door creaks open.
 
-          Your head throbs as you feel a sense of regret and unease
-          Anxiety fills your chest as figues appear around the room
-          the world grows narrow and.... you faint`,
+          Your head throbs as you feel a sense of regret and unease. 
+          Anxiety fills your chest as figures appear around the room.
+          The world narrows around you, and... you faint.`,
         story_choices: [
             {
                 choice_text: "Continue",
@@ -460,7 +458,7 @@ const branchData = [
         reference_id: "24",
         branch_title:"Hospital Chapel Init",
         branch_content:
-         `*You awake in what seems to be the chapel in the hospital*.
+         `You awake in what seems to be the chapel in the hospital.
            As creepy as it is, you feel at peace.`,
         story_choices: [
             {
@@ -482,14 +480,14 @@ const branchData = [
          
          The photos of people the memorial is dedicated to 
          stare into your eyes as if they knew who approached
-         them.\n
-         
-         The feeling of anxiety is back crushing your ribs
-         under the weight of guilt.\n
-         
+         them.
+         \n\n
+         The feeling of anxiety is back, crushing your ribs
+         under the weight of guilt.
+         \n\n
          "Did I kill these people?"
-          ...\n
-          Did you?`,
+          \n...
+          \nDid you?`,
         story_choices: [
             {
                 choice_text: "Look around",
@@ -506,7 +504,7 @@ const branchData = [
         reference_id: "26",
         branch_title:"Main lobby 2",
         branch_content:
-         `Back at that main lobby, glad that woman isn't there.`,
+         `"Back at the main lobby, glad that woman isn't here."`,
         story_choices: [
             {
                 choice_text: "Go back to stairwell",
@@ -524,7 +522,7 @@ const branchData = [
         reference_id: "27",
         branch_title:"Chapel Look",
         branch_content:
-         `You see a path that leads upstairs`,
+         `You see a path that leads upstairs.`,
         story_choices: [
             {
                 choice_text: "Go up stairs",
@@ -532,24 +530,23 @@ const branchData = [
             },
             {
                 choice_text: "Go to chapel door",
-                next_branch: "Chapel Door Unlocked"
+                next_branch: "Chapel Door Unlocked"///////////
             }
         ]
     },
     {   
-        // 1
         story_reference_id: "andrew's story",
         reference_id: "28",
         branch_title:"Chapel Door Unlocked",
         branch_content:
-         `You move a large plank from it's resting place across the door
-         and drop it on the ground.\n
+         `You move a large plank from its resting place across the door
+         and drop it on the ground.
          
-         *You feel uneasy leaving so quickly*`,
+         You feel uneasy, leaving so quickly.`,
         story_choices: [
             {
                 choice_text: "Go to altar",
-                next_branch: "Altar 2"
+                next_branch: "Chapel Altar"///////////
             }
         ]
     },
@@ -558,8 +555,8 @@ const branchData = [
         reference_id: "29",
         branch_title:"Chapel Upstairs",
         branch_content:
-         `The stairs seem like they are 100 years old.
-         Upon arriving at the top you notice an elevator
+         `The stairs seem like they are at least a century old.
+         Upon arriving at the top, you notice an elevator
          and a closet.`,
         story_choices: [
             {
@@ -568,7 +565,7 @@ const branchData = [
             },
             {
                 choice_text: "Go to elevator",
-                next_branch: "Elevator Init"
+                next_branch: "Elevator Init"///////////
             }
         ]
     },
@@ -577,8 +574,8 @@ const branchData = [
         reference_id: "30",
         branch_title:"Hospital Chapel",
         branch_content:
-         `Back in the chapel.\n
-         You try not to look at the photos`,
+         `"Back in the chapel."
+        You try not to look at the photos.`,
         story_choices: [
             {
                 choice_text: "Go up stairs",
@@ -586,7 +583,7 @@ const branchData = [
             },
             {
                 choice_text: "Go through the unlocked door",
-                next_branch: "1st Floor Hallway"
+                next_branch: "1st Floor Hallway"///////////
             }
         ]
     },
@@ -595,13 +592,13 @@ const branchData = [
         reference_id: "31",
         branch_title:"Chapel Closet init",
         branch_content:
-         `You see a breaker box with cut wires.\n
-         
-         "I am no electrician"`,
+         `You see a breaker box with cut wires.
+         \n\n
+         "I'm no electrician..."`,
         story_choices: [
             {
                 choice_text: "Go to elevator",
-                next_branch: "Elevator Init"
+                next_branch: "Elevator Init"///////////
             }
         ]
     },
@@ -610,11 +607,11 @@ const branchData = [
         reference_id: "32",
         branch_title:"Elevator Init",
         branch_content:
-         `"WOW a creepy elevator. No surprise there."\n
+         `"Wow, a creepy elevator. No surprise there."
          
-         *You try the elevator but it has no power*\n
+         You try the elevator, but it has no power.
          
-         "Guess its time to become an electrician"`,
+         "Guess it's time to become an electrician."`,
         story_choices: [
             {
                 choice_text: "Go into closet",
@@ -622,7 +619,7 @@ const branchData = [
             },
             {
                 choice_text: "Go to elevator",
-                next_branch: "Elevator"
+                next_branch: "Elevator"///////////
             }
         ]
     },
@@ -639,7 +636,7 @@ const branchData = [
             },
             {
                 choice_text: "Connect blue to blue and red to red",
-                next_branch: "Power Success"
+                next_branch: "Power Success"///////////
             }
         ]
     },
@@ -648,9 +645,9 @@ const branchData = [
         reference_id: "34",
         branch_title:"Power Fail",
         branch_content:
-         `*⚡⚡⚡⚡⚡*\n
-         
-        "OW! I HATE THIS PLACE"`,
+         `You're shocked that this is going so well, then you're just shocked.
+         \n\n
+        "Ow! I hate this place!"`,
         story_choices: [
             {
                 choice_text: "Try again",
@@ -663,9 +660,9 @@ const branchData = [
         reference_id: "35",
         branch_title:"Power Success",
         branch_content:
-         `*Lights illuminate the room as power fills the hospital*\n
+         `Lights illuminate the room as power fills the hospital.
          
-         "Maybe I found my new career"`,
+         "Maybe I found my new career."`,
         story_choices: [
             {
                 choice_text: "Go back to elevator",
@@ -678,7 +675,7 @@ const branchData = [
         reference_id: "36",
         branch_title:"Elevator",
         branch_content:
-         `*With the power back on you can take the elevator*`,
+         `With the power back on, you can take the elevator.`,
         story_choices: [
             {
                 choice_text: "Take the elevator",
@@ -686,7 +683,7 @@ const branchData = [
             },
             {
                 choice_text: "Wait",
-                next_branch: "Chapel Upstairs"
+                next_branch: "Chapel Upstairs"///////////
             }
         ]
     },
@@ -695,9 +692,9 @@ const branchData = [
         reference_id: "37",
         branch_title:"Basement",
         branch_content:
-         `*You arrive in a dark and dreary basement*\n
-         *You see a dark pit. Whispers fill your mind, begging you to come closer*\n
-         "Please....I beg you"`,
+         `You arrive in a dark and dreary basement.
+          You see a dark pit. Whispers fill your mind, begging you to come closer.
+          Whispers seep from the darkness, "Please....I beg you."`,
         story_choices: [
             {
                 choice_text: "Go to the pit",
@@ -710,6 +707,19 @@ const branchData = [
         reference_id: "38",
         branch_title:"Pit",
         branch_content:
+         `The pit is a pool of endless darkness. Maybe some light will help.`,
+        story_choices: [
+            {
+                choice_text: "Shine flashlight in pit",
+                next_branch: "Pit"
+            }
+        ]
+    },
+        {   
+        story_reference_id: "andrew's story",
+        reference_id: "39",
+        branch_title:"Pit",
+        branch_content:
          `The pit seems endless from what you can see. Maybe some light will help.`,
         story_choices: [
             {
@@ -720,7 +730,7 @@ const branchData = [
     },
     {   
         story_reference_id: "andrew's story",
-        reference_id: "39",
+        reference_id: "40",
         branch_title:"Skeleton",
         branch_content:
          `*SCREeEeeEeEeEEeCH*\n
@@ -758,7 +768,7 @@ const branchData = [
 
 Skeletons in Usison: "WHY DID YOU DO THIS TO US?" \n
 
-Skeleton in Unison: "JOIN US, FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
+Skeleton in Unison: "JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
 
 `,
         story_choices: [
@@ -789,7 +799,7 @@ Skeleton in Unison: "JOIN US, FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
     {   
         //1
         story_reference_id: "andrew's story",
-        reference_id: "40",
+        reference_id: "42",
         branch_title:"Altar 2",
         branch_content:
          `"Ugh these creepy photos are staring at me again. I have to push further"`,
@@ -800,6 +810,7 @@ Skeleton in Unison: "JOIN US, FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
             }
         ]
     },
+    
     
     
 ]

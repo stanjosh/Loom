@@ -50,10 +50,6 @@ Branch.init(
         type: DataTypes.STRING,
         allowNull: true
     },
-    required_item: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
     start_here: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
