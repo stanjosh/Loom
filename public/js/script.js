@@ -170,6 +170,10 @@ $('#use_old_branch').change(() => {
     }
 })
 
+$('.choice').click((e) => {
+    e.preventDefault();
+})
+
 $('#notepad').on('click', () => {
     console.log('clicked')
     $('#notepad').toggleClass('notepad-show')
