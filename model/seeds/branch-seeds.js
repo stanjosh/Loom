@@ -59,15 +59,12 @@ const branchData = [
         branch_title:"Hospital Halls",
         branch_content:
          `You exit the room and notice no staff or life of any kind in the building.\n
-          You see a receptionist desk that looks abandoned and tattered.`,
+          You see a receptionist desk that looks abandoned and tattered.
+          "I shoul probably check that desk for something useful"`,
         story_choices: [
             {
                 choice_text: "Go to reception desk",
                 next_branch: "Reception Desk"
-            },
-            {
-                choice_text: "Go down the hall",
-                next_branch: "Stairwell Hallway Init"
             }
         ]
     },
@@ -350,7 +347,8 @@ const branchData = [
         reference_id: "18",
         branch_title:"Main Lobby",
         branch_content:
-         `You notice a pitch black hallway where sound is defened by the darkness?`,
+         `You notice a pitch black hallway where sound is defened by the darkness?
+         *No point in going if I don't have a flashlight*`,
         story_choices: [
             {
                 choice_text: "Go back to stairwell",
@@ -358,7 +356,7 @@ const branchData = [
             },
             {
                 choice_text: "Investigate hallway with flashlight",
-                next_branch: "1st Floor Hall Init"
+                next_branch: "1st Floor Hall Init",
             },
         ]
     },
@@ -366,7 +364,8 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "19",
         branch_title:"1st Floor Hall Init",
-        required_item: "Working Flashlight",
+        required_item:"Working Flashlight",
+        fail_branch:"1st Floor Hall Fail",
         branch_content:
          `With your flashlight in hand you can conquer the darkness.
           You notice a open hospital room with a faint light.`,
