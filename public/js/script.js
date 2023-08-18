@@ -178,3 +178,7 @@ $('#notepad').on('click', () => {
     console.log('clicked')
     $('#notepad').toggleClass('notepad-show')
 })
+
+$('.choice').click((e) => {
+    e.preventDefault();
+})
