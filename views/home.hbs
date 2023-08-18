@@ -9,7 +9,8 @@
 
     <div style="scrollable-content">
     {{#each stories}}
-        <a href="/story/{{id}}">
+      {{log this}}
+        <a href="/branch/{{start_branch}}">
             <div>
             {{story_title}}
               <div>{{story_content}}</div>

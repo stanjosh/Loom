@@ -119,13 +119,8 @@ const db = {
     return branchData
   },
 
-  getBranch: async (branchID=null, storyID=null) => {
-    let branchTerms = branchID 
-      ? { id : branchID }
-      : { start_here : true, story_id : storyID }
-       
-    let branchData = await Branch.findOne({
-      where: branchTerms,
+  getBranch: async (branchID) => {
+     let branchData = await Branch.findByPk(branchID, {
       plain: true,
       nest: true,
       include: [
