@@ -13,9 +13,18 @@
     </div>
 
     <div>
-
+        {{log session.storyInventory}}
         {{#each session.branchData.choices}}
-            {{> choice this}}
+            
+            {{#if this.required_item}}
+                {{#contains ../session.storyInventory this.required_item}}
+                    {{> choice this}}
+                {{else}}
+                    {{> failChoice this}}
+                {{/contains}}
+            {{else}}
+                {{> choice this}}
+            {{/if}}
         {{/each}}
 
         {{#if session.branchData.end_here}}

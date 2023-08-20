@@ -9,12 +9,14 @@
 
     <div class="scrollable-content">
     {{#each stories}}
-        <a href="/branch/main/{{start_branch}}">
-            <div>
-            {{story_title}}
-              <div>{{story_content}}</div>
-            </div>
-        </a>
+        {{#if this.start_branch}}
+            <a href="/start/main/{{start_branch}}/">
+                <div>
+                {{story_title}}
+                <div>{{story_content}}</div>
+                </div>
+            </a>
+        {{/if}}
     {{/each}}
     </div>
 

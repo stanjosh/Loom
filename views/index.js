@@ -67,12 +67,19 @@ router.post('/branch/:view/', async (req, res) => {
     }
 
     let branchData = await db.createBranch(data)
-    console.log("!!!" + req.params.view + "!!!" + branchData)
     req.session.save(() => res.redirect(`/branch/${req.params.view}/${branchData.id}`))
 })
 
-router.get('/branch/:view/:id', async (req, res) => {
+router.get('/start/:view/:id', async(req, res) => {
+    req.session.storyInventory = []
+    req.session.branchHistory = []
+    req.session.save(() => res.redirect(`/branch/${req.params.view}/${req.params.id}`))
+})
+
+router.get('/branch/:view/:id/', async (req, res) => {
+    
     if (req.session.loggedIn) {
+
         // let layout = `${req.params.view}.hbs`
         let newBranchData = await db.getBranch(req.params.id);
 

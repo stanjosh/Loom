@@ -1,27 +1,9 @@
+<a href="/branch/{{next_branch}}/" data-next-branch="{{next_branch}}" class="choice options hidden">
+    <div data-next-branch="{{next_branch}}">
+        {{choice_text}}
+    </div>
+</a>
 
-{{#if session.storyInventory}}
-    {{#if required_item}}
-        {{#contains session.storyInventory required_item}}
-            <a href="/branch/{{next_branch}}/" data-next-branch="{{next_branch}}" class="choice options hidden">
-                <div data-next-branch="{{next_branch}}">
-                    {{choice_text}} REQUIRED ITEM FOUND
-                </div>
-            </a>
-        {{else}}
-            <a href="/branch/{{fail_branch}}/" data-next-branch="{{fail_branch}}" class="choice options hidden">
-                <div data-next-branch="{{fail_branch}}">
-                    {{choice_text}} REQUIRED ITEM NOT FOUND
-                </div>
-            </a>
-        {{/contains}}
-    {{/if}}
-{{else}}
-    <a href="/branch/{{next_branch}}/" data-next-branch="{{next_branch}}" class="choice options hidden">
-        <div data-next-branch="{{next_branch}}">
-            {{choice_text}}
-        </div>
-    </a>
-{{/if}}
 
 
 

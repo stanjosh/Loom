@@ -4,7 +4,7 @@
     <div id="branchHistory" style="display: none">
     {{#each session.branchHistory}}
         
-        <input type="hidden" data-branch-id="{{id}}" data-title="{{title}}">
+        <input type="hidden" data-branch-id="{{this.id}}" data-title="{{this.title}}">
         
     {{/each}}
     </div>

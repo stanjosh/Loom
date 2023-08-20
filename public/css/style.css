@@ -272,6 +272,7 @@ body {
 .scrollable-content {
   max-height: calc(100vh - 40px);
   overflow-y: auto;
+  overflow-x: visible;
   padding: 0px 5px;
   z-index: 1;
 }

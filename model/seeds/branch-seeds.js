@@ -34,7 +34,6 @@ const branchData = [
         reference_id: "2",
         branch_title: "Initial Items",
         branch_content: "You find a flashlight.",
-        branch_content: "You find a flashlight.",
         story_choices: [
             {
                 id: uuidv4(),
@@ -49,9 +48,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "3",
         branch_title: "Flashlight description",
-        received_item: "Dead Flashlight",
-        branch_content: "You notice the flashlight does not have batteries, but you take it anyway",
-        received_item: "Dead Flashlight",
+        received_item: "dead flashlight",
         branch_content: "You notice the flashlight does not have batteries, but you take it anyway",
         story_choices: [
             {   
@@ -166,8 +163,8 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "8",
         branch_title:"Drawer Success",
-        received_item: "Flashlight",
-        removed_item: "Dead Flashlight",
+        received_item: "flashlight",
+        removed_item: "dead flashlight",
         branch_content:
          `*click*
          The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
@@ -249,7 +246,7 @@ const branchData = [
             },
             {
                 id: uuidv4(),
-                choice_text: "Go to main lobby",
+                choice_text: "Go to main Lobby",
                 next_branch: "Main Lobby Init"
             }
         ]
@@ -269,7 +266,7 @@ const branchData = [
             },
             {
                 id: uuidv4(),
-                choice_text: "Go to main lobby",
+                choice_text: "Go to main Lobby",
                 next_branch: "Main Lobby"
             }
         ]
@@ -411,8 +408,10 @@ const branchData = [
             },
             {
                 id: uuidv4(),
-                choice_text: "Investigate hallway with flashlight",
-                next_branch: "1st Floor Hall Init"
+                required_item: "flashlight",
+                choice_text: "Investigate hallway",
+                next_branch: "1st Floor Hall Init",
+                fail_branch: "1st Floor Hall Fail"
             },
         ]
     },
@@ -421,7 +420,6 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "19",
         branch_title:"1st Floor Hall Init",
-        required_item: "Working Flashlight",
         branch_content:
          `With your flashlight in hand you can conquer the darkness.
           You notice a open hospital room with a faint light.`,
@@ -580,9 +578,9 @@ const branchData = [
         id: uuidv4(),
         story_reference_id: "andrew's story",
         reference_id: "26",
-        branch_title:"Main lobby 2",
+        branch_title:"Main Lobby 2",
         branch_content:
-         `Back at that main lobby, glad that woman isn't there.`,
+         `Back at that main Lobby, glad that woman isn't there.`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -592,7 +590,9 @@ const branchData = [
             {
                 id: uuidv4(),
                 choice_text: "Keep going through hallway",
-                next_branch: "1st Floor Hall"
+                required_item: "flashlight",
+                next_branch: "1st Floor Hall",
+                fail_branch: "1st Floor Hall Fail"
             }
         ]
     },

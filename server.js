@@ -25,7 +25,11 @@ var hbs = engine.create({
       return val1 == val2 ? options.fn(this) : options.inverse(this)
     },
     contains: function (val1, val2, options) {
-      return val1.includes(val2) ? options.fn(this) : options.inverse(this)
+      if (val1 && val2 && val1.includes(val2)) {
+        return options.fn(this) 
+      } else {
+        return options.inverse(this)
+      }
     },
     maximum: function (val1, val2, options) {
       return val1.length < val2 ? options.fn(this) : options.inverse(this)
