@@ -104,29 +104,56 @@ const db = {
     return stories
   },
 
-
   createBranch: async (data) => {
+    console.log(data)
+    let storyData = []
     let branchData = []
-    if (!data.newChoiceData.next_branch && data.newBranchData) {
+
+    if (data.newBranchData && data.newStoryData) {
+      data.newStoryData.user_id = data.user_id
+
+      storyData = await Story.create(data.newStoryData, {returning: true})
+      .catch((err) => {
+        console.log(err)
+        return err
+      })
+      storyData = storyData.get({plain: true})
+    }
+
+    if (data.newBranchData && data.newChoiceData || data.newStoryData) {
+      data.newBranchData.user_id = data.user_id
+      data.newBranchData.story_id = storyData.id ? storyData.id : data.story_id 
       branchData = await Branch.create(data.newBranchData, {returning: true})
       .catch((err) => {
         console.log(err)
         return err
       })
-    } else {
-      return new Error(`Branch data is missing ${branchData} ${data.newBranchData}`)
+      if (data.newStoryData) {
+        await Story.update({ start_branch : branchData.id }, {
+          where: {
+            id: storyData.id,
+          }    
+        });
+      }
+      branchData = branchData.get({plain:true})
     }
-    data.newChoiceData.next_branch = branchData 
-      ? branchData.id 
-      : data.newChoiceData.next_branch
 
-    await Choice.create(data.newChoiceData, {returning: true})
-    .catch((err) => {
-      console.log(err)
-      return err
-    })
-    
-    console.log(branchData)
+    if (branchData && data.newChoiceData) {
+      data.newChoiceData.user_id = data.user_id
+      data.newChoiceData.story_id = storyData.id ? storyData.id : data.story_id 
+      data.newChoiceData.branch_id = data.branch_id
+      data.newChoiceData.next_branch = data.newChoiceData.next_branch
+        ? data.newChoiceData.next_branch 
+        : branchData.id
+
+      await Choice.create(data.newChoiceData, {returning: true})
+      .catch((err) => {
+        console.log(err)
+        return err
+      })
+    }
+
+    console.log("created" + branchData)
     return branchData
   },
 
@@ -143,6 +170,7 @@ const db = {
     .catch((err) => {
       return err
     });
+    console.log(branchData)
     return branchData
   },
 

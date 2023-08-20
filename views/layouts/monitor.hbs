@@ -2,11 +2,11 @@
 
 
     <div id="branchHistory" style="display: none">
-    {{#session.branchHistory}}
-    {{#each this}}
-        <input type="hidden" data-branch-branch-id="{{@key}}" data-title="{{this}}">
+    {{#each session.branchHistory}}
+        
+        <input type="hidden" data-branch-id="{{id}}" data-title="{{title}}">
+        
     {{/each}}
-    {{/session.branchHistory}}
     </div>
 
     <div id="storyInventory" style="display: none">
