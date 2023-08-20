@@ -19,7 +19,7 @@ body {
     overflow: hidden;
 }
 
-#notepad {
+#notepad, .notepad {
   font-family: 'Annie Use Your Telescope', cursive;
   font-size: 3.5rem;
   position: absolute;
@@ -31,7 +31,7 @@ body {
   min-width: 546px;
   min-height: 807px;
   padding: 1.5rem;
-  transform: scale(0.5) rotate(-10deg) translatey(-80vh);
+  transform: scale(0.5) rotate(-10deg) translatey(-90vh);
   transition: all 0.5s ease-in-out;
 }
 
@@ -41,7 +41,13 @@ body {
  
 .notepad-show {
   transition: all 0.5s ease-in-out;
-  transform: scale(0.8) translate(-60vw, -100vh)!important;
+  transform: scale(0.8) translate(-60vw, -110vh)!important;
+}
+
+.notepad-gone {
+  transition: all 0.5s ease-in-out;
+  transform: scale(1.5) translatey(200vh)!important;
+  
 }
 
 .modal-content {
@@ -61,7 +67,6 @@ body {
     padding: 1.5rem;
     min-height: max-content;
 }
-
 
 .crt  {
     display: flex;
@@ -157,6 +162,7 @@ body {
 .hidden {
     display: none;
 }
+
 
 
 @keyframes flicker {
@@ -264,25 +270,29 @@ body {
 }
 
 .scrollable-content {
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overflow-x: visible;
+  padding: 0px 5px;
+  z-index: 1;
 }
 
 .scrollable-content::-webkit-scrollbar {
-    width: 0.5rem;
+  background: var(--crt-background);
+  width: 0.75rem;
 }
 
 .scrollable-content::-webkit-scrollbar-track {
-    background-color: var(--crt-background);
+  background: var(--crt-background);
+
 }
 
 .scrollable-content::-webkit-scrollbar-thumb {
-    background-color: var(--crt-main);
-    border-radius: 1rem;
+  background-color: var(--crt-main);
 }
 
 .scrollable-content::-webkit-scrollbar-thumb:hover {
-    background-color: var(--crt-shadow);
+  background-color: var(--crt-shadow);
 }
 
   @media screen and (max-width: 960px), (display-mode: fullscreen) {

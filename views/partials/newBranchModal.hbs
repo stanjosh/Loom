@@ -13,7 +13,7 @@
 
 
 
-        {{#if session.storyInventory}}
+
         <label for="required_item">uses item:</label>
         <select 
             class="form-control" 
@@ -23,17 +23,15 @@
             autocomplete="off"
             > 
         <option value="null">no</option> 
-        {{#each session.storyInventory}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
+
+        <!-- options filled by javascript -->
+        
         </select>
         <div class="hidden" id="removeItemOption">
         <input type="checkbox" name="remove_item" id="remove_item" />
         <label for="remove_item">remove/destroy item?</label>
         </div>
-        {{/if}}
-
-        {{#if session.branchHistory}}
+       
         <label for="use_old_branch">go to branch:</label>
         <select 
             class="form-control" 
@@ -43,13 +41,10 @@
             autocomplete="off"
             > 
         <option value="null">no</option> 
-        {{#session.branchHistory}}
-        {{#each this}}
-        <option value="{{@key}}">{{this}}</option>
-        {{/each}}
-        {{/session.branchHistory}}
+        
+        <!-- options filled by javascript -->
+        
         </select>
-        {{/if}}
 
         <div id="writeNewBranchOption">
           <input type="text" class="form-control" name="next_branch_title" id="next_branch_title" placeholder="next branch title" maxlength="24" required autocomplete="off"/>
@@ -66,3 +61,4 @@
     </div>
   </div>
 </div>
+
