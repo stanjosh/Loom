@@ -2,18 +2,27 @@
 
 
     <div id="branchHistory" style="display: none">
-    {{#each session.branchHistory}}
-        {{log this}}
-        <input type="hidden" data-branch-id="{{id}}" data-branch-title="{{title}}">
-        
-    {{/each}}
+        {{#each session.branchHistory}}
+            {{log this}}
+            <input type="hidden" data-branch-id="{{id}}" data-branch-title="{{title}}">
+            
+        {{/each}}
     </div>
 
     <div id="storyInventory" style="display: none">
-    {{#each session.storyInventory}}
-        <input type="hidden" data-item-name="{{this}}">
-    {{/each}}
+        {{#each session.storyInventory}}
+            <input type="hidden" data-item-name="{{this}}">
+        {{/each}}
     </div>
+    
+    {{#if session.currentBranch.ambient_track}}
+        <input type="hidden" id="ambient_track" value="{{session.currentBranch.ambient_track}}">
+    {{/if}}
+    
+    {{#if session.currentBranch.sound_effect}}
+        <input type="hidden" id="sound_effect" value="{{session.currentBranch.sound_effect}}">
+    {{/if}}
+    
 
 <script>
 

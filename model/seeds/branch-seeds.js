@@ -282,7 +282,7 @@ const branchData = [
             {
                 id: uuidv4(),
                 choice_text: "Try door",
-                next_branch: "Final Door"///////////////////////////////////////////////////////////////////////////
+                next_branch: "Final Door"
             },
             {
                 id: uuidv4(),
@@ -316,6 +316,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "15",
         branch_title:"Figure Dialog",
+        ambient_track: "drone",
         branch_content:
          ` ══════════════▒████████████████████
          ════════════▓█████████▓███▓▓██▓███▓█████
@@ -380,6 +381,8 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "17",
         branch_title:"Who",
+        sound_effect: "hit",
+        visual_effect: "glitch",
         branch_content:
          `"You are the man that killed them....Don't you remember?"
          

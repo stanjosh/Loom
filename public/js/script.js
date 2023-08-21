@@ -1,4 +1,11 @@
-
+const sounds = {
+    drone: '../sound/ambient/drone.ogg',
+    hum: '../sound/ambient/medhum.ogg',
+    footsteps: '../sound/ambient/footsteps.ogg',
+    loudhum: '../sound/ambient/loudominous.ogg',
+    ticks: '../sound/ambient/terriblecpu.ogg',
+    hit: '../sound/ambient/harshfanhit.ogg',
+}
 
 
 const playKeySound = () => {
@@ -38,6 +45,25 @@ const typeItOut = async () => {
     });    
 }
 
+const ambiance = new Howl({
+    src: [sounds.hum],
+    loop: true,
+    volume: 0.5,
+    autoplay: true
+})
+
+function playJumpScare(sound) {
+    let jumpScareSound = new Howl({
+        src: [sounds[sound]],
+        loop: true,
+        volume: 0.3,
+        autoplay: false
+    })
+
+    setTimeout(() => {
+        jumpScareSound.play()
+    }, Math.floor(Math.random() * 2500));
+}
 
 const handleNewBranch = async () => {
     let newBranchData = 
@@ -204,7 +230,23 @@ const loadedNewContent = async () => {
         $('#use_old_branch').append(`<option value="{{${branchID}}}">${branchTitle}</option>`)    
     })
     console.log($('#use_old_branch').html())
-    await typeItOut()
+
+    if ($('#ambient_track').val()) {
+        ambiance.fade(0.3, 0, 1000)
+        ambiance = new Howl({
+            src: [sounds[$('#ambient_track').val()]],
+            loop: true,
+            volume: 0.5,
+            autoplay: true
+        })
+        ambiance.fade(0, 0.5, 1000)
+    }
+
+
+    if ($('#sound_effect').val()) {
+        playJumpScare($('#sound_effect').val())
+    }
+
 }
 
 $(document).ready(() => {

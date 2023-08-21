@@ -50,6 +50,19 @@ Branch.init(
         type: DataTypes.BOOLEAN,
         defaultValue: false,
     },
+    ambient_track: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    sound_effect: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: 'hum'
+    },
+    visual_effect: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     create_time: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
