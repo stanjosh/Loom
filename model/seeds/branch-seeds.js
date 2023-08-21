@@ -9,6 +9,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         start_here: true,
         reference_id: "1",
+        removed_item: "Working Flashlight",
         branch_title:"Awakening",
         branch_content:
          `You awake in a panic! You look around and realize
@@ -60,17 +61,13 @@ const branchData = [
         branch_title:"Hospital Halls",
         branch_content:
          `You exit the room and notice no staff, or life of any kind, in the building.
-          You see a receptionist desk that looks abandoned and tattered.`,
+          You see a receptionist desk that looks abandoned and tattered.
+          "I should check for something useful"`,
         story_choices: [
             {
                 id: uuidv4(),
                 choice_text: "Go to reception desk",
                 next_branch: "Reception Desk"
-            },
-            {
-                id: uuidv4(),
-                choice_text: "Go down the hall",
-                next_branch: "Stairwell Hallway Init"
             }
         ]
     },
@@ -86,11 +83,6 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Unlock Drawer",
                 next_branch: "Locked Drawer"
-            },
-            {
-                id: uuidv4(),
-                choice_text: "Go back",
-                next_branch: "Hospital Halls"
             }
         ]
     },
@@ -166,8 +158,8 @@ const branchData = [
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Go back",
-                next_branch: "Hospital Halls"
+                choice_text: "Continue down the hall",
+                next_branch: "Stairwell Hallway Init"
             },
         ]
     },
@@ -189,12 +181,7 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Go Up",
                 next_branch: "Up Stairs"
-            },
-            {
-                id: uuidv4(),
-                choice_text: "Go back",
-                next_branch: "Hospital Halls"
-            },
+            }
         ]
     },
     {   
@@ -214,12 +201,7 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Go Up",
                 next_branch: "Up Stairs"
-            },
-            {
-                id: uuidv4(),
-                choice_text: "Check reception desk",
-                next_branch: "Reception Desk"
-            },
+            }
         ]
     },
     {   
@@ -275,9 +257,10 @@ const branchData = [
          `You notice another locked door labeled "Roof Access."`,
         story_choices: [
             {
+                //2
                 id: uuidv4(),
                 choice_text: "Try door",
-                next_branch: "Final Door"///////////////////////////////////////////////////////////////////////////
+                next_branch: "Final Door Locked"///////////////////////////////////////////////////////////////////////////
             },
             {
                 id: uuidv4(),
@@ -406,7 +389,6 @@ const branchData = [
                 required_item: "flashlight",
                 choice_text: "Investigate hallway",
                 next_branch: "1st Floor Hall Init",
-                fail_branch: "1st Floor Hall Fail"
             },
         ]
     },
@@ -415,7 +397,6 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "19",
         branch_title:"1st Floor Hall Init",
-        required_item: "Working Flashlight",
         branch_content:
          `With your flashlight in hand, you can conquer the darkness.
           You notice an open hospital room with a faint light.`,
@@ -438,23 +419,7 @@ const branchData = [
         ]
     },
 
-    {   
-        id: uuidv4(),
-        story_reference_id: "andrew's story",
-        reference_id: "20",
-        branch_title:"1st Floor Hall Fail",
-        branch_content:
-         `"It's too dark. I need to find a way to make it through," you say to yourself.`,
-        story_choices: [
-            {
-                id: uuidv4(),
-                choice_text: "Go Back",
-                next_branch: "Main Lobby 2"
-            },
 
-        ]
-    },
-    //TODO: Write Scripted Hospital visit
     {   
         id: uuidv4(),
         story_reference_id: "andrew's story",
@@ -1000,6 +965,7 @@ Skeleton in Unison: "JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
         story_reference_id: "andrew's story",
         reference_id: "47",
         branch_title:"Search Employee Pockets",
+        received_item: "Keycard",
         branch_content:
          `Checking every pocket you find a keycard.
          
@@ -1018,17 +984,268 @@ Skeleton in Unison: "JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
         reference_id: "48",
         branch_title:"Laundry Elevator",
         branch_content:
-         `Checking every pocket you find a keycard.
-         
-         "This must be my ticket to the roof"`,
+         `A new elevator button is lit up to take you to the upper floor
+         "Lets do this" "I am doing it again aren't I?"`,
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Take the elevator",
-                next_branch: "Laundry Elevator"
+                choice_text: "Go up",
+                next_branch: "Hospital Halls Final"
             }
         ]
     },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "50",
+        branch_title:"Hospital Halls Final",
+        branch_content:
+         `You find yourself back where it all started. You see the reception desk in front of you`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Go back to stairwell",
+                next_branch: "Stairwell Final"
+            },
+            
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "51",
+        branch_title:"Stairwell Final",
+        branch_content:
+         `"One last palce to go"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Go up",
+                next_branch: "Up Stairs Final"
+            }
+            
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "52",
+        branch_title:"Up Stairs Final",
+        branch_content:
+         `The door labeled "roof access" lies in front of you
+         "Time to put an end to this"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Discover your fate",
+                next_branch: "Roof Access"
+            },
+            
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "53",
+        branch_title:"Roof Access",
+        removed_item: "Keycard",
+        branch_content:
+         `Fire consumes the roof. You manage to see a structure through the smoke\n\n
+         "Is that a wheel....OF CATS????"
+
+         The names of your victims are arranged on the wheel
+         
+         Demon: "You finally arrive. Faced with the names of those you killed"
+         "You live with the guilt of your students blood on your hands."
+         "You will always be killer. So why not kill again?"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Spin The Wheel",
+                next_branch: "Spin"
+            },
+            
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "54",
+        branch_title:"Spin",
+        branch_content:
+         `You approach the wheel and take hold of the lever. It feels natural in your hands.
+         
+         Demon:"Do what you were born to do, FILTH!"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Reluctantly spin the wheel",
+                next_branch: "Light Spin"
+            },
+            {
+                id: uuidv4(),
+                choice_text: "Spin from muscle memory",
+                next_branch: "Normal Spin"
+            },
+            {
+                id: uuidv4(),
+                choice_text: "Give it all you got",
+                next_branch: "Hard Spin"
+            },
+            
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "55",
+        branch_title:"Light Spin",
+        end_here: true,
+        branch_content:
+         `You hesitantly spin the wheel. It spins infinitly as the fire spreads, engulfing the roof slowly making it's way to your feet.
+         DEMON: "You have chosen wrong my friend"
+         The fire clings to your presence and engulfs you. While it does not burn, you are constricted as you watch the wheel spin......FOREVER
+
+         
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░██░░░█░███░░██░░░█████░░░█░░░█░░░░░░░░░
+░█░█░░█░█░█░█░░█░░█░█░█░░█░█░░█░░░░░░░░░
+░█░░█░█░█░█░███░░░█░█░█░█░░░█░█░░░░░░░░░
+░█░░░██░█░█░█░░█░░█░█░█░█████░█░░░░░░░░░
+░█░░░░█░███░█░░█░░█░█░█░█░░░█░░████░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░████░░██░░░█░████░░████░██░░░█░░█████░░
+░█░░░░░█░█░░█░█░░░█░░██░░█░█░░█░█░░░░░░░
+░████░░█░░█░█░█░░░█░░██░░█░█░░█░█░░░███░
+░█░░░░░█░░█░█░█░░░█░░██░░█░░█░█░█░░░░░█░
+░████░░█░░░█░░████░░████░█░░██░░░█████░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+         
+         
+         `,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Restart?",
+                next_branch: "Awakening"
+            },
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "56",
+        branch_title:"Normal Spin",
+        branch_content:
+         `DEMON: "Interesting.....You have spun the wheel like you always have."
+         Suddenly your memories return to you!
+         DEMON: "I have restored your memories since you are so stuck in your old ways"       
+         `,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Continue",
+                next_branch: "Normal Spin Final"
+            },
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "57",
+        branch_title:"Normal Spin Final",
+        end_here: true,
+        branch_content:
+         `Everything comes back to you. You can remember your childhood, your loves, and your sins.....
+         
+         The haunting memories of what you did to them, the horrors you bestowed on the ones who trusted you.
+         It tears you apart.....
+
+         "I can't take it anymore!"
+
+         Unable to find a safe place within your own mind you see a ledge that was not engulfed by flames.....you jump.
+
+         Thus a poetic demise for someone such as yourself PLAYER.
+
+         
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░███░░░░███░░░░████░░░░░░░░░░░░░░░░░
+░░░░░█░░█░░█░░░█░░░█░░░█░░░░░░░░░░░░░░░░
+░░░░░███░░░█████░░░█░░░█░░░░░░░░░░░░░░░░
+░░░░░█░░█░█░░░░░█░░█░░░█░░░░░░░░░░░░░░░░
+░░░░░███░░█░░░░░█░░████░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░████░░██░░░█░████░░████░██░░░█░░█████░░
+░█░░░░░█░█░░█░█░░░█░░██░░█░█░░█░█░░░░░░░
+░████░░█░░█░█░█░░░█░░██░░█░█░░█░█░░░███░
+░█░░░░░█░░█░█░█░░░█░░██░░█░░█░█░█░░░░░█░
+░████░░█░░░█░░████░░████░█░░██░░░█████░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+         `,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Restart?",
+                next_branch: "Awakening"
+            },
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "58",
+        branch_title:"Hard Spin",
+        branch_content:
+         `DEMON: "What are you doing?!
+         
+         You take the wheel and you throw the lever with as much might as you can muster.
+         The wheel spins violently as sparks fly.\n
+         The wheel shatters as pegs and debris fly every direction.
+         
+         DEMON: "NOOOOO"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Continue",
+                next_branch: "Hard Spin Final"
+            },
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "58",
+        branch_title:"Hard Spin Final",
+        end_here: true,
+        branch_content:
+         `The sky erupts into a maginficent light, you feel the world crumbling around you.
+         Suddenly you are awoken by a familiar voice that says, "Eli.....you fell asleep during class again"
+
+
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░█████░░░░███░░░░███░░░████░░░░░░░░
+░░░░░█░░░░░░░░█░░░█░░█░░░█░░█░░░█░░░░░░░
+░░░░░█░░░███░░█░░░█░░█░░░█░░█░░░█░░░░░░░
+░░░░░█░░░░░█░░█░░░█░░█░░░█░░█░░░█░░░░░░░
+░░░░░░█████░░░░███░░░░███░░░████░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░████░░██░░░█░████░░████░██░░░█░░█████░░
+░█░░░░░█░█░░█░█░░░█░░██░░█░█░░█░█░░░░░░░
+░████░░█░░█░█░█░░░█░░██░░█░█░░█░█░░░███░
+░█░░░░░█░░█░█░█░░░█░░██░░█░░█░█░█░░░░░█░
+░████░░█░░░█░░████░░████░█░░██░░░█████░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Restart?",
+                next_branch: "Awakening"
+            },
+        ]
+    },
+    
+    
 
     {   
         //1
@@ -1043,6 +1260,22 @@ Skeleton in Unison: "JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
                 id: uuidv4(),
                 choice_text: "Look around",
                 next_branch: "Chapel Look"
+            }
+        ]
+    },
+    {   
+        //2
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "49",
+        branch_title:"Final Door Locked",
+        branch_content:
+         `You try the door but it is locked by kaycard access`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Go back",
+                next_branch: "Stairwell Hallway Init"
             }
         ]
     },
