@@ -1,6 +1,6 @@
 {{{body}}}
 
-
+    {{log session.currentBranch}}
     <div id="branchHistory" style="display: none">
         {{#each session.branchHistory}}
             {{log this}}
@@ -15,14 +15,7 @@
         {{/each}}
     </div>
     
-    {{#if session.currentBranch.ambient_track}}
-        <input type="hidden" id="ambient_track" value="{{session.currentBranch.ambient_track}}">
-    {{/if}}
-    
-    {{#if session.currentBranch.sound_effect}}
-        <input type="hidden" id="sound_effect" value="{{session.currentBranch.sound_effect}}">
-    {{/if}}
-    
+ 
 
 <script>
 

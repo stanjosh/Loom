@@ -13,7 +13,7 @@
         <li class="nav-item">
         {{#if session.loggedIn}}
         {{#if session.branchData}}
-          <a class="nav-link active" href="/branch/{{id}}"><div>{{session.branchData.branch_title}}</div></a>
+          <a class="nav-link active" href="/branch/main/{{session.branchData.id}}"><div>{{session.branchData.branch_title}}</div></a>
         {{else}}
           <a class="nav-link active" href="/"><div>{{session.author_name}}</div></a>
         {{/if}}

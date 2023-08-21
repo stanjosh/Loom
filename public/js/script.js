@@ -1,11 +1,13 @@
+
 const sounds = {
     drone: '../sound/ambient/drone.ogg',
-    hum: '../sound/ambient/medhum.ogg',
+    hum: '../sound/ambient/hum.ogg',
     footsteps: '../sound/ambient/footsteps.ogg',
-    loudhum: '../sound/ambient/loudominous.ogg',
-    ticks: '../sound/ambient/terriblecpu.ogg',
-    hit: '../sound/ambient/harshfanhit.ogg',
+    loudhum: '../sound/ambient/loudhum.ogg',
+    ticks: '../sound/ambient/ticks.ogg',
+    hit: '../sound/ambient/cpufanhit.ogg',
 }
+const soundsArray = Object.values(sounds)
 
 
 const playKeySound = () => {
@@ -45,25 +47,7 @@ const typeItOut = async () => {
     });    
 }
 
-const ambiance = new Howl({
-    src: [sounds.hum],
-    loop: true,
-    volume: 0.5,
-    autoplay: true
-})
 
-function playJumpScare(sound) {
-    let jumpScareSound = new Howl({
-        src: [sounds[sound]],
-        loop: true,
-        volume: 0.3,
-        autoplay: false
-    })
-
-    setTimeout(() => {
-        jumpScareSound.play()
-    }, Math.floor(Math.random() * 2500));
-}
 
 const handleNewBranch = async () => {
     let newBranchData = 
@@ -211,7 +195,46 @@ const displayNextBranch = async (page) => {
 
 }
 
+const playJumpScare = async (sound) => {
+    let jumpScareSound = new Howl({
+        src: [sounds[sound]],
+        loop: false,
+        volume: 0.3,
+        autoplay: false
+    })
+
+    setTimeout(() => {
+        jumpScareSound.play()
+    }, Math.floor(Math.random() * 2500));
+}
+
+
+const ambience = (track) => {
+    return new Howl({
+    src: [track],
+    loop: true,
+    volume: 0.0,
+    autoplay: false
+    })
+}
+
+let audio, ambienceTrack;
+ambienceTrack = ambience(sounds[$('#ambient_track').val()])
+audio = ambienceTrack.play()
+
+
 const loadedNewContent = async () => {
+    let track = sounds[$('#ambient_track').val()]
+
+    console.log(ambienceTrack.playing(track) + ' ' + track + ' ' + ambienceTrack._src)
+    if (!ambienceTrack._src !== track) {
+        ambienceTrack.fade(0.3, 0.0, 2300, audio)
+        ambienceTrack = ambience(track)
+        audio = ambienceTrack.play()
+        ambienceTrack.fade(0.0, 0.3, 2300, audio)
+    }
+
+
     $('#inventoryList').empty()
     $('#required_item').empty()
     $('#required_item').append('<option value="null">no</option>')
@@ -229,27 +252,19 @@ const loadedNewContent = async () => {
         let branchID = $(element).data('branch-id')
         $('#use_old_branch').append(`<option value="{{${branchID}}}">${branchTitle}</option>`)    
     })
-    console.log($('#use_old_branch').html())
 
-    if ($('#ambient_track').val()) {
-        ambiance.fade(0.3, 0, 1000)
-        ambiance = new Howl({
-            src: [sounds[$('#ambient_track').val()]],
-            loop: true,
-            volume: 0.5,
-            autoplay: true
-        })
-        ambiance.fade(0, 0.5, 1000)
-    }
-
+  
 
     if ($('#sound_effect').val()) {
         playJumpScare($('#sound_effect').val())
+        console.log($('#sound_effect').val())
     }
-
+    
+    await typeItOut()
 }
 
 $(document).ready(() => {
     loadedNewContent()
     console.log('loaded new content')   
 })
+

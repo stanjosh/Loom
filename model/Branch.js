@@ -52,12 +52,12 @@ Branch.init(
     },
     ambient_track: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'hum'
     },
     sound_effect: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: 'hum'
     },
     visual_effect: {
         type: DataTypes.STRING,

@@ -38,6 +38,14 @@
         {{/maximum}}
         {{/if}}
 
+        {{#if session.branchData.ambient_track}}
+            <input type="hidden" id="ambient_track" value="{{session.branchData.ambient_track}}">
+        {{/if}}
+        
+        {{#if session.branchData.sound_effect}}
+            <input type="hidden" id="sound_effect" value="{{session.branchData.sound_effect}}">
+        {{/if}}
+
         {{#each session.storyInventory}}
             <input class="inventoryItem" type="hidden" value="{{this}}">
         {{/each}}
