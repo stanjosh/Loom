@@ -1,7 +1,8 @@
 # Loom
 
 ## **Description**
-Loom is a create your own adventure game in which players choose their fate through a series of answered questions and prompts. It utilizes a variety of packages and technologies such as Bootstrap, Handlebars.js, MySQL and Sequelize.  
+Loom is a create your own adventure game in which players choose their fate through a series of answered questions and prompts. Users can further personalize their journey with custom paths and the ability to collect and store any item the along the way. Various packages and technologies such as Bootstrap, Handlebars.js, MySQL, Sequelize, Bad-words and Howler.js provide CSS framework, JavaScript, and audio to opimize user experience.  
+
 
 - - - -
 ## **Table of Contents**
@@ -10,13 +11,17 @@ Loom is a create your own adventure game in which players choose their fate thro
 - [Credits](#credits)
     - [Collaborators](#collaborators)
     - [CSS Framework](#css-framework)
+    - [JavaScript](#javascript)
+    - [Audio](#audio)
+    - [Additional](#additional)
 - [License](#license)
 - [How to Contribute](#how-to-contribute)
 - - - -
 ## **Usage**
 To access and use our project, click the "Loom" link shown in the [Website Preview](#website-preview)<a name="website_preview"></a> section below. 
 
-Click on the "sign up" button at the top right to enter your email and password. After login, choose from one of the three storyline prompts to begin the game. With each choice, a new set of prompts will display and lead to your character's hopeful escape. 
+Click on the "sign up" button at the top right to enter your name, email and password. After login, select a storyline and continue to follow the prompts as they appear. Each decision alters the escape journey, as players are able to create custom paths and items to collect, store and use along the way. 
+ 
 
 - - - -
 ## **Website Preview**
@@ -40,6 +45,20 @@ Click on the "sign up" button at the top right to enter your email and password.
 
 ### **CSS Framework**
 [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/ "Bootstrap")
+
+### **JavaScript**
+[Bad-words](https://www.npmjs.com/package/bad-words "Bad-words")
+
+[Handlebars.js](https://handlebarsjs.com/guide/#installation "Handlebars.js")
+
+### **Audio**
+[Howler.js](https://github.com/goldfire/howler.js#documentation "Howler.js")
+
+### **Additional**
+[Sequelize](https://sequelize.org/docs/v6/getting-started/ "Sequelize")
+
+[MySQL](https://www.mysql.com/ "MySQL")
+
 
 - - - - 
 ## **License**
