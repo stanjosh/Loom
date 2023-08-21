@@ -198,7 +198,7 @@ const branchData = [
     {   
         story_reference_id: "andrew's story",
         reference_id: "11",
-        branch_title:"Down Stairs Init",//////
+        branch_title:"Down Stairs Init",
         branch_content:
          `"Ah! An exit door. Finally I can get out of here."
           You jiggle the handle a few times.
@@ -219,7 +219,7 @@ const branchData = [
     {   
         story_reference_id: "andrew's story",
         reference_id: "12",
-        branch_title:"Down Stairs",//////
+        branch_title:"Down Stairs",
         branch_content:
          `You're at the bottom of the stairs.`,
         story_choices: [
@@ -412,7 +412,7 @@ const branchData = [
             },
             {
                 choice_text: "Keep going through hallway",
-                next_branch: "Hospital Chapel"///////////
+                next_branch: "Hospital Chapel"
             }
         ]
     },
@@ -431,7 +431,7 @@ const branchData = [
             },
             {
                 choice_text: "Enter Room",
-                next_branch: "Hospital Room Scripted"///////////
+                next_branch: "Hospital Room Scripted"
             }
         ]
     },
@@ -516,7 +516,7 @@ const branchData = [
             }
         ]
     },
-    // TODO ADD CHAPEL UPSTAIRS AND ELEVATOR
+
     {   
         story_reference_id: "andrew's story",
         reference_id: "27",
@@ -530,7 +530,7 @@ const branchData = [
             },
             {
                 choice_text: "Go to chapel door",
-                next_branch: "Chapel Door Unlocked"///////////
+                next_branch: "Chapel Door Unlocked"
             }
         ]
     },
@@ -546,7 +546,7 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Go to altar",
-                next_branch: "Chapel Altar"///////////
+                next_branch: "Chapel Altar"
             }
         ]
     },
@@ -565,7 +565,7 @@ const branchData = [
             },
             {
                 choice_text: "Go to elevator",
-                next_branch: "Elevator Init"///////////
+                next_branch: "Elevator Init"
             }
         ]
     },
@@ -583,7 +583,7 @@ const branchData = [
             },
             {
                 choice_text: "Go through the unlocked door",
-                next_branch: "1st Floor Hallway"///////////
+                next_branch: "1st Floor Hallway"
             }
         ]
     },
@@ -598,7 +598,7 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Go to elevator",
-                next_branch: "Elevator Init"///////////
+                next_branch: "Elevator Init"
             }
         ]
     },
@@ -619,7 +619,7 @@ const branchData = [
             },
             {
                 choice_text: "Go to elevator",
-                next_branch: "Elevator"///////////
+                next_branch: "Elevator"
             }
         ]
     },
@@ -636,7 +636,7 @@ const branchData = [
             },
             {
                 choice_text: "Connect blue to blue and red to red",
-                next_branch: "Power Success"///////////
+                next_branch: "Power Success"
             }
         ]
     },
@@ -683,7 +683,7 @@ const branchData = [
             },
             {
                 choice_text: "Wait",
-                next_branch: "Chapel Upstairs"///////////
+                next_branch: "Chapel Upstairs"
             }
         ]
     },
@@ -792,7 +792,7 @@ Skeleton in Unison: "JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
             },
             {
                 choice_text: "Wait",
-                next_branch: "Chapel Upstairs"///////////
+                next_branch: "Chapel Upstairs"
             }
         ]
     },
