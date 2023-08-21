@@ -1,5 +1,4 @@
 
-  <div class="crt">
     {{> header}}
 
     <input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
@@ -14,9 +13,18 @@
     </div>
 
     <div>
-
+        {{log session.storyInventory}}
         {{#each session.branchData.choices}}
-            {{> choice this}}
+            
+            {{#if this.required_item}}
+                {{#contains ../session.storyInventory this.required_item}}
+                    {{> choice this}}
+                {{else}}
+                    {{> failChoice this}}
+                {{/contains}}
+            {{else}}
+                {{> choice this}}
+            {{/if}}
         {{/each}}
 
         {{#if session.branchData.end_here}}
@@ -24,17 +32,20 @@
         <a href="/" class="choice hidden"><div style="text-align: center;">Try Again</div></a>
         {{else}}
         {{#maximum session.branchData.choices 3}}
-        <a href="#" id="newChoiceButton" class="choice hidden" data-bs-toggle="modal" data-bs-target="#newBranchModal">
+        <a href="#" id="newChoiceButton" class="options hidden" data-bs-toggle="modal" data-bs-target="#newBranchModal">
             <div>Create Choice</div>
         </a>
         {{/maximum}}
         {{/if}}
 
+        {{#each session.storyInventory}}
+            <input class="inventoryItem" type="hidden" value="{{this}}">
+        {{/each}}
+
     </div>
 
     {{> footer}}
-  </div>
-    
-    {{>inventoryDisplay}}
-    {{> newBranchModal}}
+
+
+
   

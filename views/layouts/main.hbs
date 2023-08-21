@@ -3,6 +3,8 @@
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="favicon" href="favicon.ico">
   <meta charset="utf-8">
@@ -11,17 +13,28 @@
 <body>
 
 
-        {{{body}}}
+  <div id="monitor" class="crt">
+    {{{body}}}
+  </div>
 
 
+  {{> newBranchModal}}
 
+  {{> newStoryModal}}
 
+  {{> newUserModal}}
 
+  {{> inventoryDisplay}}
 
-
+  <div class="alert alert-warning alert-dismissible fade" role="alert" style="z-index: 10">
+    <span id="errMessage">All required fields must be filled. Please try again.</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"></script>
+  
   <script src="/js/script.js"></script>
 </body>
 </html>

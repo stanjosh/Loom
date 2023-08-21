@@ -1,35 +1,53 @@
 const router = require('express').Router();
 const { db } = require('../model') 
 
-const displayBranch = (req, res, branchData) => {
+
+
+
+const parseInventory = (inventory, branchData) => {
     try {
-    req.session.branchData = branchData 
-        ? branchData.get({plain:true}) 
-        : null
-
-    let historyEntry = {}
-    historyEntry[branchData.id] = branchData.branch_title
-
-    req.session.branchHistory.length < 6 
-        ? req.session.branchHistory.push(historyEntry)
-        : req.session.branchHistory.shift(historyEntry)
-        
-
-    req.session.branchData 
-        ? req.session.save(() => res.redirect('/branch')) 
-        : res.render('error', { 
-            error: `No branch found there, pal.` 
-        })
+        if (branchData.received_item || branchData.removed_item) {
+        let receivedItem = branchData.received_item ? branchData.received_item : null
+        let removedItem = branchData.removed_item ? branchData.removed_item : null
+            if (receivedItem && !inventory.includes(receivedItem)) {
+                inventory.push(receivedItem)
+            }
+            if (removedItem && inventory.includes(removedItem)) {
+                inventory = inventory.filter(item => item !== removedItem)
+            }
+        }
     } catch(err) {
-        res.render('error', { 
-            error: `No branch found there, pal. ${err}`
-        })
+        console.log(err)
     }
+    return inventory
 }
+
+const storeHistory = (branchHistory, branchData) => {
+    try {
+        if (branchData) {
+            let branchHistoryEntry = {
+                id : branchData.id,
+                title: branchData.branch_title
+            }
+
+            branchHistory.length < 6 
+            ? branchHistory.push(branchHistoryEntry)
+            : branchHistory.shift(branchHistoryEntry)
+        } else {
+            console.log('no branch data for history')
+            return new Error('No branch data for history')
+        }
+    } catch(err) {
+        console.log(err)
+    }
+    return branchHistory
+}
+
 
 router.use(async (req, res, next) => {
     res.locals.session = req.session;
-    next();
+    
+    next()
 })
 
 router.get('/', async (req, res) => {
@@ -37,80 +55,73 @@ router.get('/', async (req, res) => {
     res.render('home', { stories: storyData });
 });
 
-router.get('/branch/:id', async (req, res) => {
-    let branchData = await db.getBranch(req.params.id)
-    displayBranch(req, res, branchData)
+router.post('/branch/:view/', async (req, res) => {
+    let data = {
+        
+        user_id : req.session.user_id,
+        branch_id : req.session.branchData ? req.session.branchData.id : null,
+        newBranchData : req.body.newBranchData,
+        story_id : req.body.newStoryData ? null : req.session.branchData.story_id,
+        newStoryData : req.body.newStoryData ? req.body.newStoryData : null,
+        newChoiceData : req.body.newChoiceData ? req.body.newChoiceData : null,
+    }
+
+    let branchData = await db.createBranch(data)
+    req.session.save(() => res.redirect(`/branch/${req.params.view}/${branchData.id}`))
+})
+
+router.get('/start/:view/:id', async(req, res) => {
+    req.session.storyInventory = []
+    req.session.branchHistory = []
+    req.session.save(() => res.redirect(`/branch/${req.params.view}/${req.params.id}`))
+})
+
+router.get('/branch/:view/:id/', async (req, res) => {
+    
+    if (req.session.loggedIn) {
+
+        // let layout = `${req.params.view}.hbs`
+        let newBranchData = await db.getBranch(req.params.id);
+
+        req.session.branchData = newBranchData 
+            ? newBranchData.get({plain:true}) 
+            : null;
+
+        branchHistory = storeHistory(req.session.branchHistory, newBranchData);
+        storyInventory = parseInventory(req.session.storyInventory, newBranchData);
+        req.session.branchHistory = branchHistory;
+        req.session.storyInventory = storyInventory;
+
+        req.session.save(() => {
+
+            res.redirect(`/branch/${req.params.view}`)
+        });
+        
+    } else {
+        res.redirect('/')
+    }
 });
 
-router.get('/branch', async (req, res) => {
-    try {
-        if (req.session.loggedIn) {
-            let inventory = req.session.storyInventory
-            let receivedItem = req.session.branchData.received_item ? req.session.branchData.received_item : null
-            let removedItem = req.session.branchData.removed_item ? req.session.branchData.removed_item : null
-            if (receivedItem && !inventory.includes(receivedItem)) {
-                req.session.storyInventory.push(receivedItem)
-            }
-            if (removedItem && inventory.includes(removedItem)) {
-                req.session.storyInventory = inventory.filter(item => item !== removedItem)
-            }
-            req.session.save(() => res.render('branch'))
-        } else {
-            res.redirect('/')
-        }
-    } catch(err) {
-        res.render('error', { 
-            error: `No branch found there, pal. ${err}`
+
+router.get('/branch/:view', async (req, res) => {
+    let layout = `${req.params.view}.hbs`
+    
+    req.session.branchData 
+        ? res.render('branch', { layout: layout })
+        : res.render('error', { 
+            layout: layout, 
+            error: `No branch found there, pal.` 
         })
-    }
-})
-
-router.post('/story/', async (req, res) => {
-
-    let newBranchData = req.body.branchData
-    let newStoryData = req.body.storyData
-    newStoryData['user_id'] = req.session.user_id
-    
-    let newStory = await db.createStory(newStoryData)
-
-    newBranchData['user_id'] = req.session.user_id
-    newBranchData['story_id'] = newStory.id
-    await db.createBranch(newBranchData)
-
-    req.session.save(() => res.redirect('/'))
 })
 
 
-router.post('/branch/', async (req, res) => {
 
-    let currentBranch = req.session.branchData
-    let newBranchData = req.body.branchData
-    let newChoiceData = req.body.choiceData
-
-    if (newChoiceData.next_branch === 'null') {
-        newBranchData['user_id'] = req.session.user_id
-        newBranchData['story_id'] = currentBranch.story_id
-        let newBranch = await db.createBranch(newBranchData)
-        newChoiceData['next_branch'] = newBranch.id
-    }
-    newChoiceData['user_id'] = req.session.user_id
-    newChoiceData['branch_id'] = currentBranch.id
-    newChoiceData['story_id'] = currentBranch.story_id
-
-    await db.createChoice(newChoiceData)
-    
-    req.session.branchData = await db.getBranch(branchID=newChoiceData.next_branch)
-    req.session.save(() => res.redirect('/branch'))
-})
-
-
-router.get('/story/new', async (req, res) => {  
-    res.render('create', { stories: storyData });
-});
 
 
 router.use((req, res) => {
-    res.render('error', { error: "404 - one of us made a wrong turn somewhere."})
+    res.render('error', { 
+        layout: 'monitor.hbs', 
+        error: "404 - one of us made a wrong turn somewhere."})
 })
 
 
