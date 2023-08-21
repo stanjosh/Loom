@@ -21,10 +21,6 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Look around",
                 next_branch: "Initial Items"
-            },
-            {
-                choice_text: "Exit the room",
-                next_branch: "Hospital Halls"
             }
         ]
     },
@@ -47,7 +43,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "3",
         branch_title: "Flashlight description",
-        received_item: "flashlight",
+        received_item: "Flashlight",
         branch_content: "You notice the flashlight does not have batteries but you take it anyway",
         story_choices: [
             {   
@@ -779,7 +775,8 @@ const branchData = [
         reference_id: "36",
         branch_title:"Elevator",
         branch_content:
-         `With the power back on, you can take the elevator.`,
+         `With the power back on, you can take the elevator.
+         **WARNING If you take this path you can no longer return to previous choice encounters**`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -826,6 +823,7 @@ const branchData = [
         ]
     },
     {   
+        id: uuidv4(),
         story_reference_id: "andrew's story",
         reference_id: "39",
         branch_title:"Pit",
@@ -833,12 +831,14 @@ const branchData = [
          `The pit seems endless from what you can see. Maybe some light will help.`,
         story_choices: [
             {
+                id: uuidv4(),
                 choice_text: "Shine flashlight in pit",
                 next_branch: "Skeleton"
             }
         ]
     },
     {   
+        id: uuidv4(),
         story_reference_id: "andrew's story",
         reference_id: "40",
         branch_title:"Skeleton",
@@ -883,12 +883,169 @@ Skeleton in Unison: "JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!"
 `,
         story_choices: [
             {
-                choice_text: "Go to the pit",
-                next_branch: "Pit init"
+                id: uuidv4(),
+                choice_text: "RUN!",
+                next_branch: "Run"
             }
         ]
     },
-    
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "41",
+        branch_title:"Run",
+        branch_content:
+         `"Screw this"
+         *You run the other direction but a skeleton grabs you by the ankle and drags you into the pit
+         
+         Darkness consumes you*`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Continue",
+                next_branch: "Dream"
+            }
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "43",
+        branch_title:"Dream",
+        branch_content:
+         `Horrors and shadows dance around you.\n
+         "There is no hope for you down here\n
+         Take a spin to decide your fate \n
+         Meet us on the roof for answers."`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Continue",
+                next_branch: "Laundry Room"
+            }
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "43",
+        branch_title:"Dream",
+        branch_content:
+         `Horrors and shadows dance around you.\n
+         "There is no hope for you down here\n
+         Take a spin to decide your fate \n
+         Meet us on the roof for answers."`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Continue",
+                next_branch: "Laundry Room"
+            }
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "44",
+        branch_title:"Laundry Room",
+        branch_content:
+         `You awake on a pile of uniforms. Shaking with fear you look up only to come to the realization that the "pit" was a laundry chute.\n
+         
+         "I can't take it anymore! I have to make it to the roof"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Look Around",
+                next_branch: "Laundry Look"
+            }
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "45",
+        branch_title:"Laundry Look",
+        branch_content:
+         `You see a rack of employee uniforms and an elevator shaft`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Search Employee Pockets",
+                next_branch: "Search Employee Pockets"
+            },
+            {
+                id: uuidv4(),
+                choice_text: "Go to elevator",
+                next_branch: "Laundry Elevator Init"
+            }
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "46",
+        branch_title:"Laundry Elevator Init",
+        branch_content:
+         `"The elevator still works! I guess almost shocking myself to death paid off."`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Search Employee Pockets",
+                next_branch: "Search Employee Pockets"
+            },
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "47",
+        branch_title:"Search Employee Pockets",
+        branch_content:
+         `Checking every pocket you find a keycard.
+         
+         "This must be my ticket to the roof"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Take the elevator",
+                next_branch: "Laundry Elevator"
+            }
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "48",
+        branch_title:"Laundry Elevator",
+        branch_content:
+         `Checking every pocket you find a keycard.
+         
+         "This must be my ticket to the roof"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Take the elevator",
+                next_branch: "Laundry Elevator"
+            }
+        ]
+    },
+
+    {   
+        //1
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "42",
+        branch_title:"Altar 2",
+        branch_content:
+         `"Ugh these creepy photos are staring at me again. I have to push further"`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Look around",
+                next_branch: "Chapel Look"
+            }
+        ]
+    },
     
     
 ]
