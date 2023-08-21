@@ -20,11 +20,13 @@ Click on the "sign up" button at the top right to enter your email and password.
 
 - - - -
 ## **Website Preview**
-[Loom](#) 
+[Loom](https://loom-story-633054131188.herokuapp.com/) 
 
-![Preview of website](./images/Home%202.png)
+![Preview of website](./images/Login.png)
 
-![Website Screenshot](./images/HomeScreen.png)
+![Homepage Screenshot](./images/Home.png)
+
+![First prompt](./images/FirstPrompt.png)
 
 
 - - - - 
