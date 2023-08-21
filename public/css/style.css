@@ -87,6 +87,9 @@ body {
     max-height: 720px;
     filter: contrast(1.6) brightness(1.1) saturate(1.2) drop-shadow(0 0 1.75rem #66ff0052);
     transform: translate(-50%, 50%);
+    border-color: black rgb(85, 85, 85)  rgb(112, 112, 112) rgb(85, 85, 85);
+    border-width: 25px;
+    border-style: solid;
     
 }
 

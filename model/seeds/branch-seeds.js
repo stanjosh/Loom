@@ -35,6 +35,11 @@ const branchData = [
             {
                 choice_text: "Pick up flashlight",
                 next_branch: "Flashlight description"
+            },
+            {
+                id: uuidv4(),
+                choice_text: "Go back",
+                next_branch: "Awakening"
             }
         ]
     },
@@ -99,8 +104,9 @@ const branchData = [
                 id: uuidv4(),
                 type: "input",
                 choice_text: "042?",
+                required_item: "flashlight", 
                 next_branch: "Drawer Success",
-                fail_branch: "Drawer Fail"
+                fail_branch: "Drawer flashlight Fail"
             },
             {
                 id: uuidv4(),
@@ -142,6 +148,22 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Go back",
                 next_branch: "Reception Desk"
+            },
+        ]
+    },
+    {   
+        id: uuidv4(),
+        story_reference_id: "andrew's story",
+        reference_id: "7",
+        branch_title:"Drawer flashlight Fail",
+        received_item: "batteries",
+        branch_content:
+         `Huh. What are these for?`,
+        story_choices: [
+            {
+                id: uuidv4(),
+                choice_text: "Go back",
+                next_branch: "Hospital Halls"
             },
         ]
     },
@@ -260,7 +282,7 @@ const branchData = [
                 //2
                 id: uuidv4(),
                 choice_text: "Try door",
-                next_branch: "Final Door Locked"///////////////////////////////////////////////////////////////////////////
+                next_branch: "Final Door"
             },
             {
                 id: uuidv4(),
@@ -295,7 +317,8 @@ const branchData = [
         reference_id: "15",
         branch_title:"Figure Dialog",
         branch_content:
-         ` ══════════════▒████████████████████
+         `
+         ══════════════▒████████████████████═════
          ════════════▓█████████▓███▓▓██▓███▓█████
          ═══════▒██████▓████▓██▓██▓▒▒▒▓▓▓▓▓▒█████
          ═══████▓████▓████▓▓█▓██════════░████████
@@ -324,7 +347,8 @@ const branchData = [
          ═░███▓██████▓███▓████████═══════████▓███
 
          
-         "Oh! You're awake"`,
+         "Oh! You are awake"`,
+        ambient_track: "drone",
         story_choices: [
             {
                 id: uuidv4(),
@@ -358,6 +382,7 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "17",
         branch_title:"Who",
+        sound_effect: "ticks",
         branch_content:
          `"You're the man that killed them... Don't you remember?"
          
