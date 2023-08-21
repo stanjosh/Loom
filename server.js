@@ -38,7 +38,7 @@ var hbs = engine.create({
       if (string) {
         return new Handlebars.SafeString(filter.clean(string));
        } else {
-        return string
+        return null
        }
     },
     maximum: function (val1, val2, options) {
