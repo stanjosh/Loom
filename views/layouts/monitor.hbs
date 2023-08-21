@@ -3,8 +3,8 @@
 
     <div id="branchHistory" style="display: none">
     {{#each session.branchHistory}}
-        
-        <input type="hidden" data-branch-id="{{this.id}}" data-title="{{this.title}}">
+        {{log this}}
+        <input type="hidden" data-branch-id="{{id}}" data-branch-title="{{title}}">
         
     {{/each}}
     </div>
