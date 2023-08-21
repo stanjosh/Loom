@@ -35,7 +35,7 @@ var hbs = engine.create({
       }
     },
     censor: function (string) {
-      return new Handlebars.SafeString(filter.clean(string))
+      return new Handlebars.SafeString(filter.clean(string) ? filter.clean(string) : string)
     },
     maximum: function (val1, val2, options) {
       return val1.length < val2 ? options.fn(this) : options.inverse(this)
