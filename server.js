@@ -10,6 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const Filter = require('bad-words')
+const Handlebars = require('handlebars/runtime')
+const filter = new Filter({ placeHolder: '&#9619;'})
 
 
 var hbs = engine.create({
@@ -30,6 +33,9 @@ var hbs = engine.create({
       } else {
         return options.inverse(this)
       }
+    },
+    censor: function (string) {
+      return new Handlebars.SafeString(filter.clean(string))
     },
     maximum: function (val1, val2, options) {
       return val1.length < val2 ? options.fn(this) : options.inverse(this)
