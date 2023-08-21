@@ -11,6 +11,7 @@ Branch.init(
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
     },
     user_id:{
         type: DataTypes.UUID,
@@ -28,11 +29,6 @@ Branch.init(
         },
         allowNull: false
     },
-    reference_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        unique: true,
-    },
     branch_title: {
         type: DataTypes.STRING(24),
         allowNull: false
@@ -49,10 +45,6 @@ Branch.init(
     removed_item: {
         type: DataTypes.STRING,
         allowNull: true
-    },
-    start_here: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
     },
     end_here: {
         type: DataTypes.BOOLEAN,

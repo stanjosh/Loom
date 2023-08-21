@@ -28,6 +28,14 @@ Story.init(
         type: DataTypes.STRING(24),
         allowNull: false
     },
+    start_branch: {
+        type: DataTypes.UUID,
+        allowNull: true,
+        // references: {
+        //   model: 'branch',
+        //   key: 'id'
+        // }  
+    },
     story_content: {
         type: DataTypes.TEXT,
         allowNull: true
