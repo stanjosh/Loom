@@ -1,12 +1,10 @@
 {{{body}}}
 
-    {{log session.currentBranch}}
     <div id="branchHistory" style="display: none">
-
+    {{log session.branchData}}
     {{#each session.branchHistory}}
         {{log this}}
         <input type="hidden" data-branch-id="{{id}}" data-branch-title="{{censor title}}">
-        
     {{/each}}
     </div>
 

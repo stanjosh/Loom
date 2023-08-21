@@ -113,7 +113,7 @@ const handleNewBranch = async () => {
         $(".form-control").val('')
         displayNextBranch(branch)
     } else {
-        console.log (newBranchData + newStoryData + newChoiceData)
+
         alert('This is not enough information to create!')
     }
 }
@@ -122,7 +122,7 @@ const handleSignup = async () => {
     let authorName = $("#signupAuthorName").val();
     let email = $("#signupEmail").val();
     let password = $("#signupPassword").val();
-    console.log(authorName + email + password)
+
     await fetch(`/user/`, {
         method: "POST",
         body: JSON.stringify({
@@ -169,7 +169,6 @@ $('#use_old_branch').change(() => {
 })
 
 $('#notepad').on('click', () => {
-    console.log('clicked')
     $('#notepad').toggleClass('notepad-show')
 })
 
@@ -196,16 +195,12 @@ const displayNextBranch = async (page) => {
 }
 
 const playJumpScare = async (sound) => {
-    let jumpScareSound = new Howl({
+    return new Howl({
         src: [sounds[sound]],
         loop: false,
-        volume: 0.3,
-        autoplay: false
+        volume: 0.7,
+        autoplay: true
     })
-
-    setTimeout(() => {
-        jumpScareSound.play()
-    }, Math.floor(Math.random() * 2500));
 }
 
 
@@ -257,7 +252,7 @@ const loadedNewContent = async () => {
 
     if ($('#sound_effect').val()) {
         playJumpScare($('#sound_effect').val())
-        console.log($('#sound_effect').val())
+
     }
     
     await typeItOut()
@@ -265,6 +260,6 @@ const loadedNewContent = async () => {
 
 $(document).ready(() => {
     loadedNewContent()
-    console.log('loaded new content')   
+
 })
 

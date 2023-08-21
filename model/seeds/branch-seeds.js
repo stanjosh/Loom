@@ -117,7 +117,7 @@ const branchData = [
                 id: uuidv4(),
                 type: "input",
                 choice_text: "042?",
-                required_item: "flashlight", 
+                required_item: "dead flashlight", 
                 next_branch: "Drawer Success",
                 fail_branch: "Drawer flashlight Fail"
             },
@@ -189,7 +189,7 @@ const branchData = [
         removed_item: "dead flashlight",
         branch_content:
          `*click*
-         The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
+          The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -253,13 +253,9 @@ const branchData = [
         id: uuidv4(),
         story_reference_id: "andrew's story",
         reference_id: "11",
-        branch_title:"Down Stairs Init",//////
+        branch_title:"Down Stairs Init",
         branch_content:
-         `"Ah! An exit door. Finally I can get out of here."
-          You jiggle the handle a few times.
-         "Of course it's locked! Why wouldn't it be locked?!"
-         You feel dread as you wallow in your mind.
-         "I have to find another way."`,
+         `It's locked.`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -277,7 +273,7 @@ const branchData = [
         id: uuidv4(),
         story_reference_id: "andrew's story",
         reference_id: "12",
-        branch_title:"Down Stairs",//////
+        branch_title:"Down Stairs",
         branch_content:
          `You're at the bottom of the stairs.`,
         story_choices: [
@@ -406,10 +402,10 @@ const branchData = [
         branch_title:"Who",
         sound_effect: "ticks",
         branch_content:
-         `"You are the man that killed them....Don't you remember?"
-         
-         You almost collapse to the sound of screeching metal.
-        When you regain your sanity the figure dissapeared.`,
+         `&quot;You are the man that killed them....Do you not remember?&quot;
+            \n
+            You almost collapse to the sound of screeching metal.
+            When you regain your sanity the figure has disappeared.`,
         story_choices: [
             {
                 id: uuidv4(),
