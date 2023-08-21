@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
   let authUser = await db.createUser(req.body)
   .catch((err) => {
     return res.status(500).render('error', { error: "There was an error creating the user."})
-  });;
+  });
   if ( authUser ) {  
     req.session.user_id=authUser.id;
     req.session.author_name=authUser.author_name;

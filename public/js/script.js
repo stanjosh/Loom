@@ -112,6 +112,7 @@ const handleSignup = async () => {
     let authorName = $("#signupAuthorName").val();
     let email = $("#signupEmail").val();
     let password = $("#signupPassword").val();
+    console.log(authorName + email + password)
     await fetch(`/user/`, {
         method: "POST",
         body: JSON.stringify({
@@ -129,6 +130,7 @@ const handleSignup = async () => {
         .catch((err) => {
             console.log(err)
         })
+        $('#newUserModal').modal('hide')
 }
 
 $('#saveNewStory').on('click', ()=> {
