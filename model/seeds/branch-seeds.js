@@ -390,7 +390,6 @@ const branchData = [
             },
             {
                 id: uuidv4(),
-                required_item: "flashlight",
                 choice_text: "Investigate hallway",
                 next_branch: "1st Floor Hall Init",
             },
