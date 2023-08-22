@@ -152,7 +152,7 @@ const branchData = [
         removed_item: "flashlight",
         branch_content:
          `*click*
-          The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
+         The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -216,7 +216,7 @@ const branchData = [
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Go up",
+                choice_text: "Go back up",
                 next_branch: "Stairwell Hallway"
             },
             {
@@ -236,7 +236,7 @@ const branchData = [
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Go up",
+                choice_text: "Go back up",
                 next_branch: "Stairwell Hallway"
             },
             {
@@ -252,13 +252,13 @@ const branchData = [
         reference_id: "13",
         branch_title:"Up Stairs",
         branch_content:
-         `You notice another locked door labeled "Roof Access."`,
+         `You notice another locked door labeled &quotRoof Access.&quot`,
         story_choices: [
             {
                 //2
                 id: uuidv4(),
                 choice_text: "Try door",
-                next_branch: "Final Door"
+                next_branch: "Final Door Locked"
             },
             {
                 id: uuidv4(),
@@ -360,10 +360,10 @@ const branchData = [
         branch_title:"Who",
         sound_effect: "ticks",
         branch_content:
-         `&quot;You are the man that killed them....Do you not remember?&quot;
-            \n
-            You almost collapse to the sound of screeching metal.
-            When you regain your sanity the figure has disappeared.`,
+         `&quot;You're the man that killed them... Don't you remember?&quot;
+         
+         You almost collapse to the sound of screeching metal.
+        By the time you regain your sanity, the figure has disappeared.`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -387,7 +387,6 @@ const branchData = [
             },
             {
                 id: uuidv4(),
-                required_item: "flashlight",
                 choice_text: "Investigate hallway",
                 next_branch: "1st Floor Hall Init",
             },
@@ -592,8 +591,8 @@ const branchData = [
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Go to altar",
-                next_branch: "Chapel Altar"
+                choice_text: "Go back to altar",
+                next_branch: "Altar 2"
             }
         ]
     },
@@ -698,7 +697,6 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Connect blue to blue and red to red",
                 next_branch: "Power Success"
-
             }
         ]
     },
@@ -1272,7 +1270,7 @@ Skeleton in Unison: &quot;JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!&quo
         reference_id: "49",
         branch_title:"Final Door Locked",
         branch_content:
-         `You try the door but it is locked by kaycard access`,
+         `You try the door but it is locked by keycard access`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -1281,7 +1279,6 @@ Skeleton in Unison: &quot;JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!&quo
             }
         ]
     },
-
     
     
 ]
