@@ -92,7 +92,7 @@ const handleNewBranch = async () => {
         newBranchData.branch_content,
     ]
     
-    if (checkBranchContent.every(Boolean) && newChoiceData || newStoryData) {
+    if ((checkBranchContent.every(Boolean) || newChoiceData.next_branch) && (newChoiceData || newStoryData)) {
     let branch = await fetch(`/branch/monitor/`, {
         method: "POST",
         body: JSON.stringify({
@@ -156,17 +156,7 @@ $('#saveNewBranch').on('click', () => {
     handleNewBranch()
 })
 
-$('#required_item').change(() => {
-    $('option:selected').text() == 'no' ? $('#removeItemOption').hide() : $('#removeItemOption').show()
-})
 
-$('#use_old_branch').change(() => {
-    if ($('option:selected').text() == 'no') {
-        $('#writeNewBranchOption').show()
-    } else {
-        $('#writeNewBranchOption').hide()
-    }
-})
 
 $('#notepad').on('click', () => {
     $('#notepad').toggleClass('notepad-show')
@@ -229,25 +219,35 @@ const loadedNewContent = async () => {
         ambienceTrack.fade(0.0, 0.3, 2300, audio)
     }
 
-
+    
     $('#inventoryList').empty()
     $('#required_item').empty()
-    $('#required_item').append('<option value="null">no</option>')
+    $('#required_item').append($('<option value="null">no</option>'))
     $('input[data-item-name]').each((index, element) => {
         let item = $(element).data('item-name')
         $('#notepad').removeClass('notepad-gone')
         $('#inventoryList').append(`<li>${item}</li>`)
-        $('#required_item').append(`<option class="inventoryItem" value="${item}">${item}</option>`)
+        $('#required_item').append($(`<option class="inventoryItem" value="${item}">${item}</option>`))
     })
-    
+    $('#required_item').get()
+
     $('#use_old_branch').empty()
-    $('#use_old_branch').append('<option value="null">no</option>')
+    $('#use_old_branch').append($('<option value="null">New Branch</option>'))
     $('input[data-branch-id]').each((index, element) => {
         let branchTitle = $(element).data('branch-title')
         let branchID = $(element).data('branch-id')
-        $('#use_old_branch').append(`<option value="{{${branchID}}}">${branchTitle}</option>`)    
+        $('#use_old_branch').append($(`<option class="branchHistoryItem" value="${branchID}">${branchTitle}</option>`))    
     })
+    $('#use_old_branch').get()
 
+    $('#required_item').change(() => {
+        $('#required_item').val() === "null" ? $('#removeItemOption').hide() : $('#removeItemOption').show()
+    })
+    
+    $('#use_old_branch').change(() => {
+        $('#use_old_branch').val() === "null" ? $('#writeNewBranchOption').removeClass('hidden') : $('#writeNewBranchOption').addClass('hidden')
+    
+    })
   
 
     if ($('#sound_effect').val()) {

@@ -1,4 +1,3 @@
-
 const { Choice, Story, Branch } = require("..");
 const { v4: uuidv4  } = require('uuid')
 
@@ -9,7 +8,6 @@ const branchData = [
         story_reference_id: "andrew's story",
         start_here: true,
         reference_id: "1",
-        removed_item: "Working Flashlight",
         branch_title:"Awakening",
         branch_content:
          `You awake in a panic! You look around and realize
@@ -34,7 +32,7 @@ const branchData = [
         story_choices: [
             {
                 choice_text: "Pick up flashlight",
-                next_branch: "Flashlight description"
+                next_branch: "flashlight description"
             },
             {
                 id: uuidv4(),
@@ -48,8 +46,8 @@ const branchData = [
         id: uuidv4(),
         story_reference_id: "andrew's story",
         reference_id: "3",
-        branch_title: "Flashlight description",
-        received_item: "Flashlight",
+        branch_title: "flashlight description",
+        received_item: "flashlight",
         branch_content: "You notice the flashlight does not have batteries but you take it anyway",
         story_choices: [
             {   
@@ -104,9 +102,8 @@ const branchData = [
                 id: uuidv4(),
                 type: "input",
                 choice_text: "042?",
-                required_item: "dead flashlight", 
                 next_branch: "Drawer Success",
-                fail_branch: "Drawer flashlight Fail"
+                
             },
             {
                 id: uuidv4(),
@@ -151,8 +148,8 @@ const branchData = [
         story_reference_id: "andrew's story",
         reference_id: "8",
         branch_title:"Drawer Success",
-        received_item: "Working Flashlight",
-        removed_item: "Flashlight",
+        received_item: "Working flashlight",
+        removed_item: "flashlight",
         branch_content:
          `*click*
           The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,

@@ -26,7 +26,7 @@ const storeHistory = (branchHistory, branchData) => {
     try {
         if (branchData) {
             let branchHistoryEntry = {
-                id : branchData.id,
+                branch_id : branchData.id,
                 title: branchData.branch_title
             }
 

@@ -123,16 +123,31 @@ const db = {
     if (data.newBranchData && data.newChoiceData || data.newStoryData) {
       data.newBranchData.user_id = data.user_id
       data.newBranchData.story_id = storyData.id ? storyData.id : data.story_id 
-      branchData = await Branch.create(data.newBranchData, {returning: true})
-      .catch((err) => {
-        console.log(err)
-        return err
-      })
-      if (data.newStoryData) {
-        await Story.update({ start_branch : branchData.id }, {
-          where: {
-            id: storyData.id,
-          }    
+      if (!data.newChoiceData.next_branch) {
+        branchData = await Branch.create(data.newBranchData, {returning: true})
+        .catch((err) => {
+          console.log(err)
+          return err
+        })
+        if (data.newStoryData) {
+          await Story.update({ start_branch : branchData.id }, {
+            where: {
+              id: storyData.id,
+            }    
+          });
+        }
+      } else { 
+        branchData = await Branch.findByPk(data.newChoiceData.next_branch, {
+          plain: true,
+          nest: true,
+          include: [
+            { model: Story, attributes: ['story_title'] },
+            { model: User, attributes: ['id', 'author_name'] },
+            { model: Choice }
+          ],
+        })
+        .catch((err) => {
+          return err
         });
       }
       branchData = branchData.get({plain:true})
