@@ -35,7 +35,7 @@ var hbs = engine.create({
       }
     },
     censor: function (string) {
-      if (string) {
+      if (string && typeof string === 'string') {
         return new Handlebars.SafeString(filter.clean(string));
        } else {
         return null
