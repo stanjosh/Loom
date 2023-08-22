@@ -700,6 +700,7 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Connect blue to blue and red to red",
                 next_branch: "Power Success"
+
             }
         ]
     },
@@ -1282,6 +1283,7 @@ Skeleton in Unison: &quot;JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!&quo
             }
         ]
     },
+
     
     
 ]
