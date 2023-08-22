@@ -593,8 +593,8 @@ const branchData = [
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Go to altar",
-                next_branch: "Chapel Altar"
+                choice_text: "Go back to altar",
+                next_branch: "Altar 2"
             }
         ]
     },
