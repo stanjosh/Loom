@@ -7,8 +7,8 @@ const { db } = require('../model')
 const parseInventory = (inventory, branchData) => {
     try {
         if (branchData.received_item || branchData.removed_item) {
-        let receivedItem = branchData.received_item ? branchData.received_item : null
-        let removedItem = branchData.removed_item ? branchData.removed_item : null
+        let receivedItem = branchData.received_item ? branchData.received_item: null
+        let removedItem = branchData.removed_item ? branchData.removed_item: null
             if (receivedItem && !inventory.includes(receivedItem)) {
                 inventory.push(receivedItem)
             }

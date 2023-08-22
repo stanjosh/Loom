@@ -8,7 +8,7 @@ const storyData = [
         user_id: "",
         reference_id: "andrew's story",
         story_title: "Story Title # 1",
-        story_content: "This is a preface to the story.",
+        story_content: "The Awakening.",
     },
     {
         id: uuidv4(),
