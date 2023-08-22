@@ -254,7 +254,7 @@ const branchData = [
         reference_id: "13",
         branch_title:"Up Stairs",
         branch_content:
-         `You notice another locked door labeled "Roof Access."`,
+         `You notice another locked door labeled &quotRoof Access.&quot`,
         story_choices: [
             {
                 //2
