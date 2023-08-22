@@ -104,7 +104,6 @@ const branchData = [
                 id: uuidv4(),
                 type: "input",
                 choice_text: "042?",
-                required_item: "dead flashlight", 
                 next_branch: "Drawer Success",
                 fail_branch: "Drawer flashlight Fail"
             },
@@ -155,7 +154,7 @@ const branchData = [
         removed_item: "Flashlight",
         branch_content:
          `*click*
-          The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
+         The drawer opens to reveal batteries. You pick them up and slot them into the flashlight.`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -363,10 +362,10 @@ const branchData = [
         branch_title:"Who",
         sound_effect: "ticks",
         branch_content:
-         `&quot;You are the man that killed them....Do you not remember?&quot;
-            \n
-            You almost collapse to the sound of screeching metal.
-            When you regain your sanity the figure has disappeared.`,
+         `&quot;You're the man that killed them... Don't you remember?&quot;
+         
+         You almost collapse to the sound of screeching metal.
+        By the time you regain your sanity, the figure has disappeared.`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -700,7 +699,6 @@ const branchData = [
                 id: uuidv4(),
                 choice_text: "Connect blue to blue and red to red",
                 next_branch: "Power Success"
-
             }
         ]
     },
@@ -1274,7 +1272,7 @@ Skeleton in Unison: &quot;JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!&quo
         reference_id: "49",
         branch_title:"Final Door Locked",
         branch_content:
-         `You try the door but it is locked by kaycard access`,
+         `You try the door but it is locked by keycard access`,
         story_choices: [
             {
                 id: uuidv4(),
@@ -1283,7 +1281,6 @@ Skeleton in Unison: &quot;JOIN US! FAIR THAT YOU DIE WHERE YOUR SINS RESIDE!&quo
             }
         ]
     },
-
     
     
 ]
