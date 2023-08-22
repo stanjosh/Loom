@@ -1,0 +1,29 @@
+{{{body}}}
+
+    {{log session.currentBranch}}
+    <div id="branchHistory" style="display: none">
+
+    {{#each session.branchHistory}}
+        {{log this}}
+        <input type="hidden" data-branch-id="{{id}}" data-branch-title="{{censor title}}">
+        
+    {{/each}}
+    </div>
+
+    <div id="storyInventory" style="display: none">
+    {{#each session.storyInventory}}
+        <input type="hidden" data-item-name="{{censor this}}">
+    {{/each}}
+
+    </div>
+    
+ 
+
+<script>
+
+$(document).ready(() => {
+    loadedNewContent()
+    console.log('loaded new content')   
+})
+
+</script>

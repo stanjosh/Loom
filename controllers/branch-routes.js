@@ -8,7 +8,7 @@ router.get('/titles/:storyID', async (req, res) => {
     return res.status(200).json(branches)
   }
   else {
-    return res.status(404).send('No branches found')
+    return res.status(404).send('No branches found. Maybe use a story ID')
   }
 });
 

@@ -11,11 +11,12 @@ Branch.init(
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
     },
     user_id:{
         type: DataTypes.UUID,
         references: {
-            model: User,
+            model: 'user',
             key: 'id'
         },
         allowNull: false
@@ -23,19 +24,15 @@ Branch.init(
     story_id: {
         type: DataTypes.UUID,
         references: {
-            model: Story,
+            model: 'story',
             key: 'id'
         },
         allowNull: false
     },
-    reference_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        unique: true,
-    },
     branch_title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(24),
         allowNull: false
+        
     },
     branch_content: {
         type: DataTypes.TEXT,
@@ -49,13 +46,22 @@ Branch.init(
         type: DataTypes.STRING,
         allowNull: true
     },
-    start_here: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    },
     end_here: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+    },
+    ambient_track: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: 'hum'
+    },
+    sound_effect: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    visual_effect: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
     create_time: {
         type: DataTypes.DATE,

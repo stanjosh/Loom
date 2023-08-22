@@ -1,56 +1,59 @@
+
+    {{> header}}
+
     <input type="hidden" id="storyID" value="{{session.branchData.story_id}}"/>
 
-        {{#each session.branchData.choices}}
-            {{#if this.required_item}}
-                {{#if session.storyInventory}}
-                    {{#if (contains session.storyInventory this.requiredItem)}}
-                    <input type="hidden" class="choiceData" value="{{this.choice_text}}">
-                {{/if}}
-            {{/if}}
-        {{else}}
-                <input type="hidden" class="choiceData" value="{{this.choice_text}}">
-            {{/if}}
-        {{/each}}
 
-    {{#if session.storyInventory}}
-        <div class="inventory-box">
-            <ul>
-                {{#each session.storyInventory}}
-                    <li>{{this}}</li>
-                {{/each}}
-            </ul>
-        </div>
-    {{/if}}
 
-    <div style="overflow-y: auto">
-
-        <div class="title">{{session.branchData.branch_title}}</div>
-        <div class="passage" data-type-text="{{session.branchData.branch_content}}"></div>
-        <input type="hidden" class="storyID" id="storyTitle" value="{{session.branchData.story_id}}"/>
+    <div class="scrollable-content">
+        
+        <div class="passage" data-type-text="{{censor session.branchData.branch_content}}"></div>
+        <input type="hidden" class="storyID" id="storyTitle" value="{{censor session.branchData.story_id}}"/>
 
     </div>
 
     <div>
+        {{log session.storyInventory}}
         {{#each session.branchData.choices}}
-        {{#if this.required_item}}
-        {{#if session.storyInventory}}
-        {{#if (contains session.storyInventory this.requiredItem)}}
-        {{> choice this}}
-        {{/if}}
-        {{/if}}
-        {{else}}
-        {{> choice this}}
-        {{/if}}
+            
+            {{#if this.required_item}}
+                {{#contains ../session.storyInventory this.required_item}}
+                    {{> choice this}}
+                {{else}}
+                    {{> failChoice this}}
+                {{/contains}}
+            {{else}}
+                {{> choice this}}
+            {{/if}}
         {{/each}}
 
-        {{#if (compare session.branchData.end_here true)}}
-        <div class="passage" style="text-align: center;">Game Over</div>
+        {{#if session.branchData.end_here}}
+        <div style="text-align: center;" class="choice hidden">Game Over</div>
+        <a href="/" class="choice hidden"><div style="text-align: center;">Try Again</div></a>
         {{else}}
-        {{#unless (compare session.branchData.choices.length 3)}}
-        <a href="#" id="newChoiceButton" class="choice hidden">
+        {{#maximum session.branchData.choices 3}}
+        <a href="#" id="newChoiceButton" class="options hidden" data-bs-toggle="modal" data-bs-target="#newBranchModal">
             <div>Create Choice</div>
         </a>
-        {{/unless}}
+        {{/maximum}}
         {{/if}}
+
+        {{#if session.branchData.ambient_track}}
+            <input type="hidden" id="ambient_track" value="{{session.branchData.ambient_track}}">
+        {{/if}}
+        
+        {{#if session.branchData.sound_effect}}
+            <input type="hidden" id="sound_effect" value="{{session.branchData.sound_effect}}">
+        {{/if}}
+
+        {{#each session.storyInventory}}
+            <input class="inventoryItem" type="hidden" value="{{this}}">
+        {{/each}}
+
     </div>
 
+    {{> footer}}
+
+
+
+  

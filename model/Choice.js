@@ -10,12 +10,13 @@ Choice.init(
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       primaryKey: true
     },
     user_id:{
       type: DataTypes.UUID,
       references: {
-        model: User,
+        model: 'user',
         key: 'id'
       },
       allowNull: false
@@ -23,7 +24,7 @@ Choice.init(
     story_id: {
       type: DataTypes.UUID,
       references: {
-        model: Story,
+        model: 'story',
         key: 'id'
       },
       allowNull: false
@@ -31,12 +32,11 @@ Choice.init(
     branch_id: {
       type: DataTypes.UUID,
       references: {
-        model: Branch,
+        model: 'branch',
         key: 'id'
       },
       allowNull: false
     },
-
     choice_text: {
       type: DataTypes.TEXT,
       allowNull: false

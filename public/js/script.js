@@ -1,111 +1,128 @@
 
+const sounds = {
+    drone: '../sound/ambient/drone.ogg',
+    hum: '../sound/ambient/hum.ogg',
+    footsteps: '../sound/ambient/footsteps.ogg',
+    loudhum: '../sound/ambient/loudhum.ogg',
+    ticks: '../sound/ambient/ticks.ogg',
+    hit: '../sound/ambient/cpufanhit.ogg',
+}
+const soundsArray = Object.values(sounds)
 
-  $(document).ready(() => {
+
+const playKeySound = () => {
+    const key1 = new Audio("/sound/key1.mp3")
+    const key2 = new Audio("/sound/key2.mp3")
+    const key3 = new Audio("/sound/key3.mp3")
+    let keySounds = [key1, key2, key3]
+    keySounds[Math.floor(Math.random() * keySounds.length)].play()
+}
+
+const typeItOut = async () => {
     $('.passage').each(function() {
         let text = $(this).attr('data-type-text')
-        console.log(text)
+        text = text.replace(/\s+/g,' ').trim();
+
         let element = $(this)
         let i = 0;
-        let timer = setInterval(() => {
-            
+        let timer = setInterval( async () => {
             if (i < text.length) {
-
                 setTimeout(() => {
+                    text.charAt(i) === " " ? null : playKeySound()
                     element.append(text.charAt(i))
                     i++
-                }, Math.floor(Math.random() * 70) + 20);
+                }, Math.floor(Math.random() * 80));
             } else {
                 clearInterval(timer)
                 element.text(text)
-                $('.choice').removeClass('hidden')
+                $('.options').removeClass('hidden')
+                
             }
-        }, 50);
-        $(document).on('click', () => {
-            clearInterval(timer)
+        }, 110);
+        $(document).on('click', async () => {
+            i = text.length
             element.text(text)
             $('.choice').removeClass('hidden')
         })
     });    
-  })
+}
 
 
-const handleNewChoice = async () => {
-    let choiceText = $('#choice_text').val();
-    let requiredItem = $('#required_item').val()
-    let nextBranchTitle = $('#next_branch_title').val()
-    let nextBranchContent = $('#next_branch_content').val()
-    let receivedItem = $('#received_item').val()
-    let removeItem = $('#remove_item').val() === 'on' ? true : false
-    let endHere = $('#end_here').is('checked')
 
-    await fetch(`/branch/`, {
+const handleNewBranch = async () => {
+    let newBranchData = 
+        {
+            branch_title : $('#next_branch_title').val() 
+                ? $('#next_branch_title').val() 
+                : $('#story_branch_title').val() 
+                ? $('#story_branch_title').val() 
+                : null,
+            branch_content : $('#next_branch_content').val()
+                ? $('#next_branch_content').val() 
+                : $('#story_branch_content').val() 
+                ? $('#story_branch_content').val() 
+                : null,
+            received_item : $('#received_item').val() 
+                ? $('#received_item').val() 
+                : $('#story_received_item').val() 
+                ? $('#story_received_item').val() 
+                : null,
+            removed_item : $('#remove_item').is(':checked') ? $('#required_item').val() : null,
+            end_here : $('#end_here').is(':checked')
+        }
+
+    
+
+    let newChoiceData = $('#choice_text').val() ? 
+        {
+            choice_text : $('#choice_text').val() ? $('#choice_text').val() : null,
+            required_item : $('#required_item').val() !== 'null' ? $('#required_item').val() : null,
+            next_branch : $('#use_old_branch').val() !== 'null' ? $('#use_old_branch').val() : null
+        }
+        : null 
+
+    let newStoryData = ($('#story_title').val() && $('#story_content').val())
+        ? {
+            story_title : $('#story_title').val(),
+            story_content : $('#story_content').val()
+        } 
+        :null
+    let checkBranchContent = [
+        newBranchData.branch_title,
+        newBranchData.branch_content,
+    ]
+    
+    if (checkBranchContent.every(Boolean) && newChoiceData || newStoryData) {
+    let branch = await fetch(`/branch/monitor/`, {
         method: "POST",
         body: JSON.stringify({
-            branchData : {
-                branch_title : nextBranchTitle,
-                branch_content : nextBranchContent,
-                received_item : receivedItem ? receivedItem : null,
-                removed_item : removeItem ? requiredItem : null,
-                end_here : endHere
-            },
-            choiceData : {
-                choice_text : choiceText,
-                required_item : requiredItem ? requiredItem : null
-            }
+            newBranchData : newBranchData,
+            newChoiceData : newChoiceData ? newChoiceData : null,
+            newStoryData: newStoryData ? newStoryData : null
         }),
         headers: {
             "Content-Type": "application/json"
         }
         })
-        .then((_res) => {
-            location.reload()
-        })
+        .then((res) => res.text())
         .catch((err) => {
             console.log(err)
         })
+        $('#newBranchModal').modal('hide')
+        $('#newStoryModal').modal('hide')
+        $(".form-control").val('')
+        displayNextBranch(branch)
+    } else {
+        console.log (newBranchData + newStoryData + newChoiceData)
+        alert('This is not enough information to create!')
+    }
 }
-
-const handleNewStory = async () => {
-    let branchTitle = $('#branch_title').val();
-    let branchContent = $('#branch_content').val()
-    let receivedItem = $('#received_item').val()
-    let storyTitle = $('#story_title').val()
-    let storyContent = $('#story_content').val()
-
-
-    await fetch(`/story/`, {
-        method: "POST",
-        body: JSON.stringify({
-            branchData : {
-                branch_title : branchTitle,
-                branch_content : branchContent,
-                received_item : receivedItem ? receivedItem : null,
-                end_here : false,
-                start_here : true   
-            },
-            storyData : {
-                story_title : storyTitle,
-                story_content : storyContent
-            }
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-        })
-        .then((_res) => {
-            location.reload()
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
-
-
 
 const handleSignup = async () => {
     let authorName = $("#signupAuthorName").val();
     let email = $("#signupEmail").val();
     let password = $("#signupPassword").val();
+    console.log(authorName + email + password)
     await fetch(`/user/`, {
         method: "POST",
         body: JSON.stringify({
@@ -123,157 +140,131 @@ const handleSignup = async () => {
         .catch((err) => {
             console.log(err)
         })
+        $('#newUserModal').modal('hide')
 }
 
-const newChoiceDialog = (inventoryItems) => {
-    if (inventoryItems.length > 0) {
-        inventoryOptions = inventoryItems.map((item) => {
-        return `<option value="${item}">${item}</option>`
-    })
-        inventoryItems = `
-        optional required item: \
-        <select \
-            class="form-control" \
-            name="required_item" \
-            id="required_item" \
-            placeholder="required item" \
-            autocomplete="off" \
-            > \
-        <option value="null">none</option> \
-        ${inventoryOptions} \
-        </select> \
-        <input type="checkbox" name="remove_item" id="remove_item" />
-        <label for "remove_item">remove/destroy item?</label>
-        `
+$('#saveNewStory').on('click', ()=> {
+    handleNewBranch()
+})
+
+$('#saveNewUser').on('click', () => {
+    handleSignup()
+})
+
+
+$('#saveNewBranch').on('click', () => {
+    handleNewBranch()
+})
+
+$('#required_item').change(() => {
+    $('option:selected').text() == 'no' ? $('#removeItemOption').hide() : $('#removeItemOption').show()
+})
+
+$('#use_old_branch').change(() => {
+    if ($('option:selected').text() == 'no') {
+        $('#writeNewBranchOption').show()
+    } else {
+        $('#writeNewBranchOption').hide()
     }
-    let newChoiceDialog = $(`
-    <div class="modal fade" id="newChoiceDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
+})
 
-                    <input type="text" class="form-control" name="choice_text" id="choice_text" placeholder="choice text" required autocomplete="off"/>
-                    
-                    ${inventoryItems ? inventoryItems : null}
-                    
-                    <input type="text" class="form-control" name="next_branch_title" id="next_branch_title" placeholder="next branch title" required autocomplete="off"/>
-                    <textarea class="form-control" name="next_branch_content" id="next_branch_content" placeholder="next branch content" rows="5" required autocomplete="off"/></textarea>
-                    <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
-                    <input type="checkbox" name="end_here" id="end_here" />
-                    <label for="end_here">Game over?</label>
+$('#notepad').on('click', () => {
+    console.log('clicked')
+    $('#notepad').toggleClass('notepad-show')
+})
 
+$(document).on('click', '.choice', (e) => {
+    e.preventDefault();
+    let branchID = $(e.target).data('next-branch')
+    console.log(branchID)
+    loadNextBranch(branchID)
+})
 
-                <div class="modal-footer">
-                    <button type="button" 
-                        class="btn btn-secondary cancelButton" 
-                        data-bs-dismiss="modal"
-                    >Cancel</button>
-                    <button 
-                        type="button" 
-                        class="btn btn-primary confirmButton"
-                    >Create Branch!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    `)
-
-    newChoiceDialog.find(".confirmButton").on("click", function () {
-        handleNewChoice()
-        newChoiceDialog.modal("hide");
-    })
-
-    newChoiceDialog.modal("show");
+const loadNextBranch = async (branchID) => {
+    let page = await fetch(`/branch/monitor/${branchID}`)
+    .then((res) => res.text())
+    .catch((err) => console.log(err))
+    displayNextBranch(page)
 }
 
-const newStoryDialog = (inventoryItems) => {
-    let newStoryDialog = $(`
-    <div class="modal fade" id="newStoryDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
+const displayNextBranch = async (page) => {
+    let parser = new DOMParser();
+    page = parser.parseFromString(page, 'text/html')
+    $('#monitor').html(page.body.innerHTML)
+    $('#monitor').get()
 
-                    <input type="text" class="form-control" name="story_title" id="story_title" placeholder="Story title" required autocomplete="off"/>
-                    <input type="text" class="form-control" name="story_content" id="story_content" placeholder="Story preface" required autocomplete="off"/>
-                    
-                    
-                    
-                    <input type="text" class="form-control" name="branch_title" id="branch_title" placeholder="Starting Branch Title" required autocomplete="off"/>
-                    <textarea class="form-control" name="branch_content" id="branch_content" placeholder="Starting branch content" rows="5" required autocomplete="off"/></textarea>
-                    <input type="text" class="form-control" name="received_item" id="received_item" placeholder="optional received item" autocomplete="off"/>
-                    
+}
 
-
-                <div class="modal-footer">
-                    <button type="button" 
-                        class="btn btn-secondary cancelButton" 
-                        data-bs-dismiss="modal"
-                    >Cancel</button>
-                    <button 
-                        type="button" 
-                        class="btn btn-primary confirmButton"
-                    >Create Branch!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    `)
-
-    newStoryDialog.find(".confirmButton").on("click", function () {
-        handleNewStory()
-        newStoryDialog.modal("hide");
+const playJumpScare = async (sound) => {
+    let jumpScareSound = new Howl({
+        src: [sounds[sound]],
+        loop: false,
+        volume: 0.3,
+        autoplay: false
     })
 
-    newStoryDialog.modal("show");
+    setTimeout(() => {
+        jumpScareSound.play()
+    }, Math.floor(Math.random() * 2500));
 }
 
 
-
-const signupDialog = () => {
-    let signupDialog = $(`
-    <div class="modal fade" id="editPostDialog" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog crt">
-            <div class="modal-content">
-                <div class="modal-body">
-                <input type="text" class="form-control" id="signupAuthorName" placeholder="author name" autocomplete="off">
-                <input type="text" class="form-control" id="signupEmail" placeholder="email" autocomplete="off">
-                <input type="password" class="form-control" id="signupPassword" placeholder="password" autocomplete="off">
-                <div class="modal-footer">
-                    <button type="button" 
-                        class="btn btn-secondary cancelButton" 
-                        data-bs-dismiss="modal"
-                    >Cancel</button>
-                    <button 
-                        type="button" 
-                        class="btn btn-primary confirmButton"
-                    >Sign up!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    `)
-
-    signupDialog.find(".confirmButton").on("click", function () {
-        handleSignup()
-        signupDialog.modal("hide");
+const ambience = (track) => {
+    return new Howl({
+    src: [track],
+    loop: true,
+    volume: 0.0,
+    autoplay: false
     })
-
-    signupDialog.modal("show");
 }
 
-$('#newChoiceButton').on('click', () => {
-    let inventoryItems = $('.inventoryItem').map(function() {
-        return $(this).val();
-    }).get();
-    console.log(inventoryItems)
-    newChoiceDialog(inventoryItems ? inventoryItems : null)
+let audio, ambienceTrack;
+ambienceTrack = ambience(sounds[$('#ambient_track').val()])
+audio = ambienceTrack.play()
+
+
+const loadedNewContent = async () => {
+    let track = sounds[$('#ambient_track').val()]
+
+    console.log(ambienceTrack.playing(track) + ' ' + track + ' ' + ambienceTrack._src)
+    if (!ambienceTrack._src !== track) {
+        ambienceTrack.fade(0.3, 0.0, 2300, audio)
+        ambienceTrack = ambience(track)
+        audio = ambienceTrack.play()
+        ambienceTrack.fade(0.0, 0.3, 2300, audio)
+    }
+
+
+    $('#inventoryList').empty()
+    $('#required_item').empty()
+    $('#required_item').append('<option value="null">no</option>')
+    $('input[data-item-name]').each((index, element) => {
+        let item = $(element).data('item-name')
+        $('#notepad').removeClass('notepad-gone')
+        $('#inventoryList').append(`<li>${item}</li>`)
+        $('#required_item').append(`<option class="inventoryItem" value="${item}">${item}</option>`)
+    })
+    
+    $('#use_old_branch').empty()
+    $('#use_old_branch').append('<option value="null">no</option>')
+    $('input[data-branch-id]').each((index, element) => {
+        let branchTitle = $(element).data('branch-title')
+        let branchID = $(element).data('branch-id')
+        $('#use_old_branch').append(`<option value="{{${branchID}}}">${branchTitle}</option>`)    
+    })
+
+  
+
+    if ($('#sound_effect').val()) {
+        playJumpScare($('#sound_effect').val())
+        console.log($('#sound_effect').val())
+    }
+    
+    await typeItOut()
+}
+
+$(document).ready(() => {
+    loadedNewContent()
+    console.log('loaded new content')   
 })
 
-$('#signupButton').on('click', () => {
-    console.log('signup')
-    signupDialog()
-})
-
-$('#newStoryButton').on('click', () => {
-    newStoryDialog()
-})

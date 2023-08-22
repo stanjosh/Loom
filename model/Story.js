@@ -14,7 +14,7 @@ Story.init(
     user_id:{
       type: DataTypes.UUID,
       references: {
-        model: User,
+        model: 'user',
         key: 'id'
       },
       allowNull: false
@@ -25,8 +25,16 @@ Story.init(
       unique: true
     },
     story_title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(24),
         allowNull: false
+    },
+    start_branch: {
+        type: DataTypes.UUID,
+        allowNull: true,
+        // references: {
+        //   model: 'branch',
+        //   key: 'id'
+        // }  
     },
     story_content: {
         type: DataTypes.TEXT,

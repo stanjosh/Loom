@@ -83,7 +83,7 @@ const db = {
           attributes: ["id", "author_name"], 
           as: "user" },
         { model: Branch,
-          include: [ { model: Choice } ] }
+          include: Choice }
       ]
     })
     .catch((err) => {
@@ -96,37 +96,69 @@ const db = {
     let stories = await Story.findAll({
       raw: true,
       nest: true,
-      include: [
-        { model: User, 
-          attributes: ["id", "author_name"], 
-          as: "user" },
-      ],
+      include: User.scope('withoutPassword')
     })
     .catch((err) => {
       return err
     });
-    console.log(stories)
     return stories
   },
 
-
   createBranch: async (data) => {
-    let branchData = await Branch.create(data, {returning: true})
-    .catch((err) => {
-      console.log(err)
-      return err
-    })
-    
+    console.log(data)
+    let storyData = []
+    let branchData = []
+
+    if (data.newBranchData && data.newStoryData) {
+      data.newStoryData.user_id = data.user_id
+
+      storyData = await Story.create(data.newStoryData, {returning: true})
+      .catch((err) => {
+        console.log(err)
+        return err
+      })
+      storyData = storyData.get({plain: true})
+    }
+
+    if (data.newBranchData && data.newChoiceData || data.newStoryData) {
+      data.newBranchData.user_id = data.user_id
+      data.newBranchData.story_id = storyData.id ? storyData.id : data.story_id 
+      branchData = await Branch.create(data.newBranchData, {returning: true})
+      .catch((err) => {
+        console.log(err)
+        return err
+      })
+      if (data.newStoryData) {
+        await Story.update({ start_branch : branchData.id }, {
+          where: {
+            id: storyData.id,
+          }    
+        });
+      }
+      branchData = branchData.get({plain:true})
+    }
+
+    if (branchData && data.newChoiceData) {
+      data.newChoiceData.user_id = data.user_id
+      data.newChoiceData.story_id = storyData.id ? storyData.id : data.story_id 
+      data.newChoiceData.branch_id = data.branch_id
+      data.newChoiceData.next_branch = data.newChoiceData.next_branch
+        ? data.newChoiceData.next_branch 
+        : branchData.id
+
+      await Choice.create(data.newChoiceData, {returning: true})
+      .catch((err) => {
+        console.log(err)
+        return err
+      })
+    }
+
+    console.log("created" + branchData)
     return branchData
   },
 
-  getBranch: async (branchID=null, storyID=null) => {
-    let branchTerms = branchID 
-      ? { id : branchID }
-      : { start_here : true, story_id : storyID }
-       
-    let branchData = await Branch.findOne({
-      where: branchTerms,
+  getBranch: async (branchID) => {
+     let branchData = await Branch.findByPk(branchID, {
       plain: true,
       nest: true,
       include: [
@@ -138,6 +170,7 @@ const db = {
     .catch((err) => {
       return err
     });
+    console.log(branchData)
     return branchData
   },
 
@@ -207,7 +240,6 @@ const db = {
 
 
   createChoices: async (data) => {
-    console.log(data)
     return await Choice.bulkCreate(data, {returning: true})
     .catch((err) => {
       console.log(err)

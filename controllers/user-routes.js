@@ -12,6 +12,7 @@ router.post('/login', async (req,res) => {
     req.session.author_name=authUser.author_name;
     req.session.email=authUser.email;
     req.session.storyInventory = [];
+    req.session.branchHistory = [];
     req.session.loggedIn=true;
     req.session.save(function(err) {
       if (err) {
@@ -31,13 +32,14 @@ router.post('/', async (req, res) => {
   let authUser = await db.createUser(req.body)
   .catch((err) => {
     return res.status(500).render('error', { error: "There was an error creating the user."})
-  });;
+  });
   if ( authUser ) {  
     req.session.user_id=authUser.id;
     req.session.author_name=authUser.author_name;
     req.session.email=authUser.email;
     req.session.choice_history=[];
-    req.session.storyInventory=[]
+    req.session.storyInventory=[];
+    req.session.branchHistory = [];
     req.session.loggedIn=true;
     req.session.save(function(err) {
       if (err) {

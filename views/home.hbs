@@ -1,28 +1,32 @@
 
 
-<!--blog-->
 
 
+
+    {{> header}}
 
     {{#if session.loggedIn}}
 
-    
-
+    <div class="scrollable-content">
     {{#each stories}}
-        <a href="/story/{{id}}">
-            <div>
-            {{story_title}} {{story_content}}
-            </div>
-        </a>
+        {{#if this.start_branch}}
+            <a href="/start/main/{{start_branch}}/">
+                <div>
+                {{story_title}}
+                <div>{{story_content}}</div>
+                </div>
+            </a>
+        {{/if}}
     {{/each}}
+    </div>
 
-    <a href="#" id="newStoryButton"><div>Click to start a new story</div></a>
-
+    
+    <a href="#" data-bs-toggle="modal" data-bs-target="#newStoryModal">
+    <div>Start a new story</div>
+    </a>
+    
     {{/if}}
-
-
-
-
+    {{> footer}}
 
 
 

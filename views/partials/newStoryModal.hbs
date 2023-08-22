@@ -1,0 +1,24 @@
+  <div class="modal fade" id="newStoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">New Story</h5>
+        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" name="story_title" id="story_title" placeholder="Story title" maxlength="24" required autocomplete="off"/>
+        <input type="text" class="form-control" name="story_content" id="story_content" placeholder="Story preface" maxlength="128" autocomplete="off"/>
+        <input type="text" class="form-control" name="story_branch_title" id="story_branch_title" placeholder="Starting Branch Title" maxlength="24" required autocomplete="off"/>
+        <textarea class="form-control" name="story_branch_content" id="story_branch_content" placeholder="Starting branch content" rows="5" required autocomplete="off"/></textarea>
+        <input type="text" class="form-control" name="story_received_item" id="story_received_item" placeholder="optional received item" maxlength="16" autocomplete="off"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveNewStory">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
