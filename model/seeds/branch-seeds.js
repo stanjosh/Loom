@@ -218,7 +218,7 @@ const branchData = [
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Go up",
+                choice_text: "Go back up",
                 next_branch: "Stairwell Hallway"
             },
             {
@@ -238,7 +238,7 @@ const branchData = [
         story_choices: [
             {
                 id: uuidv4(),
-                choice_text: "Go up",
+                choice_text: "Go back up",
                 next_branch: "Stairwell Hallway"
             },
             {
