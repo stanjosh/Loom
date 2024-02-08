@@ -1,0 +1,55 @@
+---
+interface Props {
+	title: any
+}
+
+const { title = 'LOOM' } = Astro.props
+
+
+const pageTitle =  title ? title : "LOOM";
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+   		 <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="/reset.css" />
+    	<link rel="stylesheet" type="text/css" href="/style.css" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle || 'LOOM'}</title>
+	</head>
+
+<body>
+
+    <slot />
+
+</body>
+
+</html>
+
+<style is:global>
+
+  body {
+	background-color: var(--crt-panel);
+  }
+
+
+  :root {
+  --crt-main: #66ff00;
+  --crt-glow: #89bb68b6;
+  --crt-text: #44ee00;
+  --crt-background: #272717;
+  --crt-panel: #1f1e1c;
+  --panel-color: #c6ccab;
+  --crt-border-radius: 20px;
+  --crt-padding: 1.5rem;
+  --green-pixels: linear-gradient(rgba(63, 88, 63, 0.25), rgba(0, 255, 0, 0.055), rgba(0, 255, 0, 0.25));
+  --cga-pixels: linear-gradient(90deg, rgba(255, 85, 85, 0.15), rgba(85, 255, 85, 0.15), rgba(85, 255, 255, 0.15));
+}
+
+</style>

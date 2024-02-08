@@ -1,38 +1,28 @@
 {
-  "name": "project-2",
-  "version": "1.0.0",
-  "description": "Bootcamp project 2",
-  "main": "server.js",
+  "name": "loom2",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "seed": "node ./model/seeds/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/julianlosak/project-2.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/julianlosak/project-2/issues"
-  },
-  "homepage": "https://github.com/julianlosak/project-2#readme",
   "dependencies": {
-    "bad-words": "^3.0.4",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.2",
-    "connect-session-sequelize": "^7.1.7",
-    "cookie-parser": "^1.4.6",
-    "dayjs": "^1.11.9",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "express-handlebars": "^7.1.0",
-    "express-session": "^1.17.3",
-    "handlebars": "^4.7.7",
-    "mariadb": "^3.2.0",
-    "mysql2": "^3.5.2",
-    "sequelize": "^6.32.1",
-    "sequelize-bcrypt": "^1.2.0",
-    "uuid": "^9.0.0"
+    "@astrojs/node": "^8.2.0",
+    "@auth/core": "^0.18.6",
+    "@auth/mongodb-adapter": "^2.2.1",
+    "@types/node": "^20.11.16",
+    "astro": "^4.3.2",
+    "auth-astro": "^4.1.1",
+    "axios": "^1.6.7",
+    "dayjs": "^1.11.10",
+    "mongoose": "^8.1.1",
+    "mongoose-autopopulate": "^1.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.3"
   }
 }

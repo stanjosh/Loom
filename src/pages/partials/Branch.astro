@@ -1,0 +1,45 @@
+---
+import PostButton from "./PostButton.astro";
+import Notepad from "./Notepad.astro";
+
+export const partial = true;
+---
+
+<div id="branch-container" hx-swap-oob="innerHTML">
+    <div id="passage" data-type-text="blah blah blah blah">
+
+
+    </div>
+
+    <div class="options">
+        <PostButton>
+            option
+        </PostButton>
+        <PostButton>
+            option
+        </PostButton>
+        <PostButton>
+            choose your own adventure
+        </PostButton>
+        
+        
+    </div>
+    <Notepad />
+</div>
+
+
+<style>
+    .options {
+        display: flex;
+        flex-direction: column;
+        
+    }
+
+    #branch-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+</style>
+
+

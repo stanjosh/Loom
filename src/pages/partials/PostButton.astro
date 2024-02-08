@@ -1,0 +1,46 @@
+---
+
+export const partial = true;
+
+
+
+---
+
+
+<div>
+ <slot /> 
+</div>
+
+<style>
+
+
+
+div {
+    display: inline-flex;
+    font-family: 'Press Start 2P', cursive;
+    font-size: rem;
+    text-decoration: none;
+    color: var(--crt-background);
+    background-color: var(--crt-main);
+    filter: drop-shadow(var(--crt-glow) 0 0 0.65rem );
+    padding: 0rem 1rem;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+div:hover {
+    color: var(--crt-background);
+    background-color: var(--crt-main);
+    filter: drop-shadow(0 0 1.15rem var(--crt-glow));
+}
+
+div:active {
+    color: var(--crt-background);
+    background-color: var(--crt-main);
+    filter: drop-shadow(var(--crt-glow) 0 0 1.05rem );
+}
+
+
+
+
+</style>

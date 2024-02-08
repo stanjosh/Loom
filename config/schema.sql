@@ -1,6 +1,0 @@
--- DROP DATABASE
-DROP DATABASE IF EXISTS storytime_db;
-
--- CREATE DATABASE
-CREATE DATABASE storytime_db;
-

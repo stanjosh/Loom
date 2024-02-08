@@ -1,0 +1,106 @@
+---
+import { Branch } from "../../../lib/models";
+import PostButton from "./PostButton.astro";
+
+let branch = {
+    title: "",
+    content: ""
+}
+
+
+
+
+export const partial = true;
+---
+
+
+
+<div class="new-branch-form">
+    <form hx-target="branch-container">
+
+
+        <input
+            value = {branch.title}
+            name="title"
+            id="title-input"
+            placeholder = "Title your descision"
+            type="text"
+            required
+        />
+        
+
+        <textarea
+            
+            value = {branch.content}
+            name="content"
+            id="story-input"
+            placeholder="Continue your story here..."
+            rows="10"
+            cols="50"
+            required
+        />
+
+        </textarea>
+
+        <PostButton>
+            jerk
+        </PostButton>
+
+    </form>
+
+</div>
+
+<style>
+    .new-branch-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        padding: 2rem;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    input, textarea {
+        margin: 1rem 0;
+        padding: 1rem;
+        width: 100%;
+        border: 1px solid #000;
+        border-radius: 5px;
+    }
+
+    input::placeholder, textarea::placeholder {
+        color: #000;
+    }
+
+    input:focus, textarea:focus {
+        outline: none;
+        border: 1px solid #000;
+    }
+
+    button {
+        margin: 1rem 0;
+        padding: 1rem;
+        width: 100%;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background-color: #000;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #fff;
+        color: #000;
+    }
+
+    button:focus {
+        outline: none;
+        border: 1px solid #000;
+    }
+
+
+
+
+</style>

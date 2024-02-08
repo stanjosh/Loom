@@ -1,0 +1,64 @@
+---
+
+
+---
+
+
+<div>
+    <slot />
+</div>
+
+
+<style>
+    #notepad ul {
+  list-style-type: none;
+}
+ 
+.notepad-show {
+  transition: all 0.5s ease-in-out;
+  transform: scale(0.8) translate(-60vw, -110vh)!important;
+}
+
+.notepad-gone {
+  transition: all 0.5s ease-in-out;
+  transform: scale(1.5) translatey(200vh)!important;
+  
+}
+
+.modal-content {
+  background-color: var(--crt-background);
+  color: var(--crt-text);
+  font: 1rem 'VT323', monospace;
+}
+
+.passage {
+    display: inline-block;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    position: relative;
+    background-color: var(--crt-background);
+    color: var(--crt-text);
+    border-radius: 15px;
+    padding: 1.5rem;
+    min-height: max-content;
+}
+
+
+#notepad, .notepad {
+  font-family: 'Annie Use Your Telescope', cursive;
+  font-size: 3.5rem;
+  position: absolute;
+  top: 100vh;
+  left: 60vw;
+  background-image: url(../img/notes.png);
+  background-repeat: no-repeat;
+  background-size: fill;
+  min-width: 546px;
+  min-height: 807px;
+  padding: 1.5rem;
+  transform: scale(0.5) rotate(-10deg) translatey(-90vh);
+  transition: all 0.5s ease-in-out;
+}
+
+
+</style>

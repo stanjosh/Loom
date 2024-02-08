@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Annie+Use+Your+Telescope&display=swap');
+
+@keyframes flicker {
+    0% {
+    opacity: 0.27861;
+    }
+    5% {
+    opacity: 0.34769;
+    }
+    10% {
+    opacity: 0.23604;
+    }
+    15% {
+    opacity: 0.90626;
+    }
+    20% {
+    opacity: 0.18128;
+    }
+    25% {
+    opacity: 0.83891;
+    }
+    30% {
+    opacity: 0.65583;
+    }
+    35% {
+    opacity: 0.67807;
+    }
+    40% {
+    opacity: 0.26559;
+    }
+    45% {
+    opacity: 0.84693;
+    }
+    50% {
+    opacity: 0.96019;
+    }
+    55% {
+    opacity: 0.08594;
+    }
+    60% {
+    opacity: 0.20313;
+    }
+    65% {
+    opacity: 0.71988;
+    }
+    70% {
+    opacity: 0.53455;
+    }
+    75% {
+    opacity: 0.37288;
+    }
+    80% {
+    opacity: 0.71428;
+    }
+    85% {
+    opacity: 0.70419;
+    }
+    90% {
+    opacity: 0.7003;
+    }
+    95% {
+    opacity: 0.36108;
+    }
+    100% {
+    opacity: 0.24387;
+    }
+  }
+  
+  .passage::after {
+    position: absolute;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    content: "\2588";
+    animation: cursor-blink 1.5s steps(2) infinite;
+  }
+
+  @keyframes cursor-blink {
+    0% {
+      opacity: 0;
+    }
+  }
+  
+.inventory-box {
+    font-family: 'Press Start 2P', cursive;
+    font-size: medium;
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    color: #404140;
+    background-color: var(--crt-main);
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    filter: drop-shadow(0 0 0.30rem var(--crt-shadow));
+    z-index: 1;
+    pointer-events: none;
+    
+}
+
+.inventory-box ul {
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0;
+  padding: 0;
+}
+
+.scrollable-content {
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overflow-x: visible;
+  padding: 0px 5px;
+  z-index: 1;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  background: var(--crt-background);
+  width: 0.75rem;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: var(--crt-background);
+
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background-color: var(--crt-main);
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--crt-shadow);
+}
+
+
+
+

@@ -1,90 +1,54 @@
-# Loom
+# Astro Starter Kit: Basics
 
-## **Description**
-Loom is a create your own adventure game in which players choose their fate through a series of answered questions and prompts. Users can further personalize their journey with custom paths and the ability to collect and store any item the along the way. Various packages and technologies such as Bootstrap, Handlebars.js, MySQL, Sequelize, Bad-words and Howler.js provide CSS framework, JavaScript, and audio to opimize user experience.  
+```sh
+npm create astro@latest -- --template basics
+```
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
 
-- - - -
-## **Table of Contents**
-- [Usage](#usage)
-- [Website Preview](#website-preview)
-- [Credits](#credits)
-    - [Collaborators](#collaborators)
-    - [CSS Framework](#css-framework)
-    - [JavaScript](#javascript)
-    - [Audio](#audio)
-    - [Additional](#additional)
-- [License](#license)
-- [How to Contribute](#how-to-contribute)
-- - - -
-## **Usage**
-To access and use our project, click the "Loom" link shown in the [Website Preview](#website-preview)<a name="website_preview"></a> section below. 
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-Click on the "sign up" button at the top right to enter your name, email and password. After login, select a storyline and continue to follow the prompts as they appear. Each decision alters the escape journey, as players are able to create custom paths and items to collect, store and use along the way. 
- 
+![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-- - - -
-## **Website Preview**
-[Loom](https://loom-story-633054131188.herokuapp.com/) 
+## 🚀 Project Structure
 
-![Preview of website](./images/Login.png)
+Inside of your Astro project, you'll see the following folders and files:
 
-![Homepage Screenshot](./images/Home.png)
+```text
+/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   └── Card.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-![First prompt](./images/FirstPrompt.png)
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-- - - - 
-## **Credits**
+Any static assets, like images, can be placed in the `public/` directory.
 
-### **Collaborators:**  
-- Andrew Evans- https://github.com/MrMcEvans
-- Julian Losak- https://github.com/julianlosak 
-- Joshua Stanford- https://github.com/stanjosh
-- Alexis Strong- https://github.com/alexisstrong11
+## 🧞 Commands
 
-### **CSS Framework**
-[Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/ "Bootstrap")
+All commands are run from the root of the project, from a terminal:
 
-### **JavaScript**
-[Bad-words](https://www.npmjs.com/package/bad-words "Bad-words")
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-[Handlebars.js](https://handlebarsjs.com/guide/#installation "Handlebars.js")
+## 👀 Want to learn more?
 
-### **Audio**
-[Howler.js](https://github.com/goldfire/howler.js#documentation "Howler.js")
-
-### **Additional**
-[Sequelize](https://sequelize.org/docs/v6/getting-started/ "Sequelize")
-
-[MySQL](https://www.mysql.com/ "MySQL")
-
-
-- - - - 
-## **License**
-MIT License
-
-Copyright (c) 2023 Andrew Evans, Julian Losak, Joshua Stanford, Alexis Strong
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-- - - - 
-## **How to Contribute**
-[Contributor Covenant](https://www.contributor-covenant.org/)
-
-
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
