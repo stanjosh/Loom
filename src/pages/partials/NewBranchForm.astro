@@ -1,39 +1,32 @@
 ---
 
-const { currentBranchId } = Astro.props;
+const { id } = Astro.props;
 
-console.log(currentBranchId);
+console.log(id);
 
 type Branch = {
     title: string;
     content: string;
+    gameOver: boolean;
 }
 
 const branch: Branch = {
     title: '',
-    content: ''
+    content: '',
+    gameOver: false
 }
 
 
 ---
 
-
-
-
-    <form hx-post={`/api/branch/${currentBranchId}`}  
-        class="new-branch-form" 
-        id="new-branch-form"
-        target="main" 
-        hx-swap="innerHTML swap:1s"
-        hx-transition="true"
-        style = "width: 100%;"
-        >
+<main id="main" hx-swap-oob="outerHTML">
+    <form hx-post={`/api/branch/new/${id}`} class="new-branch-form">
 
 
         <input
-            value = {branch.title}
-            name="title"
-            id="title-input"
+            value = {branch.description}
+            name="description"
+            id="description-input"
             placeholder = "What do you do?"
             type="text"
             required
@@ -50,68 +43,14 @@ const branch: Branch = {
             cols="50"
             required
         />
-
-        </textarea>
+        
+        <div>
+            <input id="gameOver" name="gameOver" type="checkbox" value="true"/>
+            <label for="gameOver">Game Over</label>
+        </div>
 
         <button type="submit">do it</button> 
 
     </form>
+</main>
 
-</div>
-
-<style>
-    .new-branch-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        padding: 2rem;
-        width: 100%;
-        max-width: 600px;
-    }
-
-    input, textarea {
-        margin: 1rem 0;
-        padding: 1rem;
-        width: 100%;
-        height: 100%
-        border: 1px solid #000;
-        background-color: var(--crt-background);
-        border-radius: 5px;
-    }
-
-    input::placeholder, textarea::placeholder {
-        color: #000;
-    }
-
-    input:focus, textarea:focus {
-        outline: none;
-        border: 1px solid #000;
-    }
-
-    button {
-        margin: 1rem 0;
-        padding: 1rem;
-        width: 100%;
-        border: 1px solid #000;
-        border-radius: 5px;
-        background-color: #000;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #fff;
-        color: #000;
-    }
-
-    button:focus {
-        outline: none;
-        border: 1px solid #000;
-    }
-
-
-
-
-</style>
