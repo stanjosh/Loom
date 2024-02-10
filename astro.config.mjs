@@ -4,7 +4,13 @@ import auth from "auth-astro";
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
+  output: "hybrid",
+        adapter: node({
+            mode: "standalone"
+        }),
+        server: {
+            host: "0.0.0.0"
+        },
   adapter: node({
     mode: "standalone"
   }),
