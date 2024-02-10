@@ -1,5 +1,5 @@
 ---
-import PostButton from "./PostButton.astro";
+
 
 
 const title = "you hit your head on the ceiling"
@@ -21,25 +21,23 @@ export const partial = true;
 
 <nav>
         <div class="title">
-        <PostButton>
+        <button>
             loom
-        </PostButton>
+        </button>
         </div>
 
 
-            
-            <PostButton>
-                {title}
-            </PostButton>
-        
-            <PostButton>
+       <div>
+
+            <button id="home-button" hx-get="/partials/HomeScreen" hx-swap="outerHTML">
                 home
-            </PostButton>
+            </button>
 
-            <PostButton>
+
+            <button>
                 log out
-            </PostButton>
-
+            </button>
+        </div>
 
 
     
@@ -51,13 +49,14 @@ export const partial = true;
 <style>
 
 nav {
-
+    max-height: 70px;
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
+    justify-items: center;
+    align-items: center;
     justify-content: space-between;
-    padding: 1rem;
-
+    gap: 1rem;
 }
 
 

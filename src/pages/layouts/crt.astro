@@ -6,7 +6,7 @@ import BaseLayout from "./BaseLayout.astro"
 
 
 ---
-	<BaseLayout>
+	<BaseLayout title="loom">
     <div class="crt-frame">
 			<div class="crt">
 				<slot />
@@ -15,8 +15,42 @@ import BaseLayout from "./BaseLayout.astro"
   </BaseLayout>
 
 
-  <style>
-    .crt-frame {
+<style is:global>
+  @font-face {
+    font-family: Tandy;
+    src: url(/WebPlus_Tandy1K-II_225L.woff);
+  }
+
+  .crt button  {
+    display: inline-flex;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--crt-background);
+    background-color: var(--crt-main);
+    border: none;
+    filter: drop-shadow(var(--crt-glow) 0 0 0.65rem );
+    padding: 0rem 1rem;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    height: 100%;
+  }
+
+  .crt button :hover {
+      color: var(--crt-background);
+      background-color: var(--crt-main);
+      filter: drop-shadow( var(--crt-glow) 0 0 1.15rem);
+  }
+
+  .crt button :active {
+      color: var(--crt-background);
+      background-color: var(--crt-main);
+      filter: drop-shadow(var(--crt-glow) 0 0 1.05rem );
+  }
+
+
+  .crt-frame {
     border-color: rgb(32, 32, 32) rgb(44, 44, 44)  rgb(51, 50, 50) rgb(39, 39, 39);
     border-width: 25px;
     border-style: solid;
@@ -33,6 +67,8 @@ import BaseLayout from "./BaseLayout.astro"
     font-size: 10px;
     min-width: 640px;
     min-height: 480px;
+    max-width: 640px;
+    max-height: 480px;
 
     padding: var(--crt-padding);
     background-color: var(--crt-background);
@@ -40,9 +76,6 @@ import BaseLayout from "./BaseLayout.astro"
     filter: contrast(1.6) brightness(1.1) saturate(1.2);
     text-rendering: geometricPrecision;
   }
-
-
-
 
   .crt::before {
     content: " ";
@@ -62,8 +95,6 @@ import BaseLayout from "./BaseLayout.astro"
     border-radius: var(--crt-border-radius);
   }
 
-
-
   .crt::after {
     content: " ";
     display: block;
@@ -78,31 +109,92 @@ import BaseLayout from "./BaseLayout.astro"
     pointer-events: none;
     animation: flicker 0.15s infinite;
     border-radius: var(--crt-border-radius);
+  }
+
+  .choices {
+      display: flex;
+      flex-direction: column;
+      
+  }
+
+  #branch-container {
+      display: inline-block;
+      
+      height: 100%;
+      width: 100%;
+      max-height: 100%;
 
   }
-@media screen and (prefers-reduced-motion: reduce) {
-  .crt::after {
-    animation: none;
+
+  .passage {
+      display: inline-block;
+      font-family: 'Tandy', sans-serif;
+      min-height: 270px;
+      max-height: 270px;
+      height: 100%;
+      margin: 0;
+      overflow-y: scroll;
+      font-size: min(1rem, 1.5vh);
+      scroll-snap-type: y mandatory;
   }
+
+  .passage p {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+  }
+
+
+  .passage::-webkit-scrollbar {
+      width: 1em;
+  }
+
+
+
+  .passage::-webkit-scrollbar-thumb {
+      background-color: var(--crt-main);
+
+  }
+
+
+@media screen and (max-width: 768px), (display-mode: fullscreen) {
+    .passage {
+        max-height: 100%;
+        font-size: min(2vh, 1rem);
+    }
 }
 
-@media screen and (max-width: 768px) {
-  .crt-frame {
-    border: 0;
-    transform: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .crt {
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    min-width: 100vw;
+
+
+
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    .crt::after {
+      animation: none;
+    }
   }
 
+  @media screen and (max-width: 768px), (display-mode: fullscreen) {
+    .crt-frame {
+      border: 0;
+      transform: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      
+    }
+    .crt {
+      min-height: 100vh;
+      min-width: 100vw;
+      justify-content: space-around;
+      
+    }
 
+    .crt::after {
+      animation: none;
+    }
 
-  </style>
+  }
+
+</style>

@@ -1,29 +1,40 @@
 ---
-import { Branch } from "../../../lib/models";
-import PostButton from "./PostButton.astro";
 
-let branch = {
-    title: "",
-    content: ""
+const { currentBranchId } = Astro.props;
+
+console.log(currentBranchId);
+
+type Branch = {
+    title: string;
+    content: string;
+}
+
+const branch: Branch = {
+    title: '',
+    content: ''
 }
 
 
-
-
-export const partial = true;
 ---
 
 
 
-<div class="new-branch-form">
-    <form hx-target="branch-container">
+
+    <form hx-post={`/api/branch/${currentBranchId}`}  
+        class="new-branch-form" 
+        id="new-branch-form"
+        target="main" 
+        hx-swap="innerHTML swap:1s"
+        hx-transition="true"
+        style = "width: 100%;"
+        >
 
 
         <input
             value = {branch.title}
             name="title"
             id="title-input"
-            placeholder = "Title your descision"
+            placeholder = "What do you do?"
             type="text"
             required
         />
@@ -34,7 +45,7 @@ export const partial = true;
             value = {branch.content}
             name="content"
             id="story-input"
-            placeholder="Continue your story here..."
+            placeholder="What happens?"
             rows="10"
             cols="50"
             required
@@ -42,9 +53,7 @@ export const partial = true;
 
         </textarea>
 
-        <PostButton>
-            jerk
-        </PostButton>
+        <button type="submit">do it</button> 
 
     </form>
 
@@ -66,7 +75,9 @@ export const partial = true;
         margin: 1rem 0;
         padding: 1rem;
         width: 100%;
+        height: 100%
         border: 1px solid #000;
+        background-color: var(--crt-background);
         border-radius: 5px;
     }
 

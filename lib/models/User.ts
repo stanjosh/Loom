@@ -1,23 +1,22 @@
-const { Schema, model } = require('mongoose');
+import mongoose, { Schema, model, type InferSchemaType } from 'mongoose';
 
-const bcrypt = require('bcryptjs');
+import autopopulate from 'mongoose-autopopulate';
+import bcrypt from 'bcrypt';
 
-User.init({
+
+const userSchema = new Schema({
     username:{
-      type: DataTypes.STRING,
+      type: String,
       unique: true,
       default: 'some jerk',
     },
     email:{
-      type: DataTypes.STRING,
+      type: String,
       required: true,
       unique: true,
-      validate:{
-        isEmail: true
-      }
     },
     password:{
-      type: DataTypes.STRING,
+      type: String,
       required: true,
     },
   },
@@ -36,8 +35,13 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model('User', userSchema);
+userSchema.plugin(autopopulate);
 
-User.ensureIndexes();
 
-module.exports = User;
+type User = InferSchemaType<typeof userSchema>;
+
+
+const User = mongoose.models.User || model('User', userSchema);
+
+
+export default User;

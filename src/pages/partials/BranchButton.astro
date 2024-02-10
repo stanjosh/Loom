@@ -1,0 +1,13 @@
+---
+
+
+const { branchData } = Astro.props
+const { description, _id: id } = branchData
+
+---
+
+
+<button 
+    hx-get={`/api/branch/${id}`}
+    >{description}
+</button>

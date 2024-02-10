@@ -1,16 +1,27 @@
 ---
 import Layout from './layouts/crt.astro';
 import Header from './partials/Header.astro';
-import Branch from './partials/Branch.astro';
+
 ---
 
 <Layout title="loom.">
 	<Header />
-	<main>
-		<Branch />
+	<main id="main">
+
+			<button 
+				hx-get="/api/stories"
+				hx-trigger="load"
+				>Load Stories
+			</button>		
+
+
 	</main>
+	<script>
+		htmx.onLoad(function(evt) {
+			if (evt.id === 'branch-display') {
+				typeItOut();
+			}
+		});
+	</script>
 </Layout>
 
-<style>
-
-</style>

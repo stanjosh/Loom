@@ -16,9 +16,10 @@ const pageTitle =  title ? title : "LOOM";
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-   		 <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-		<link rel="stylesheet" type="text/css" href="/reset.css" />
-    	<link rel="stylesheet" type="text/css" href="/style.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script src="/script.js" is:inline></script>
+    <link rel="stylesheet" type="text/css" href="/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle || 'LOOM'}</title>
@@ -34,10 +35,12 @@ const pageTitle =  title ? title : "LOOM";
 
 <style is:global>
 
-  body {
-	background-color: var(--crt-panel);
-  }
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+  body {
+	  background-color: var(--crt-panel);
+    font-family: 'VT323', monospace;
+  }
 
   :root {
   --crt-main: #66ff00;
@@ -48,7 +51,7 @@ const pageTitle =  title ? title : "LOOM";
   --panel-color: #c6ccab;
   --crt-border-radius: 20px;
   --crt-padding: 1.5rem;
-  --green-pixels: linear-gradient(rgba(63, 88, 63, 0.25), rgba(0, 255, 0, 0.055), rgba(0, 255, 0, 0.25));
+  --green-pixels: linear-gradient(rgba(0, 0, 0, 0.723), rgba(0, 255, 0, 0.055), rgba(0, 255, 0, 0.25));
   --cga-pixels: linear-gradient(90deg, rgba(255, 85, 85, 0.15), rgba(85, 255, 85, 0.15), rgba(85, 255, 255, 0.15));
 }
 

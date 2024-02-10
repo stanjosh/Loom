@@ -1,0 +1,52 @@
+---
+import Notepad from "./Notepad.astro";
+import BranchButton from "./BranchButton.astro";
+
+export const partial = true;
+
+
+const { branchData } = Astro.props;
+const { content, choices, gameOver, _id: id } = branchData;
+
+---
+
+
+<main id="main" hx-swap-oob="innerHTML">
+    <div id="branch-display">
+        <div id="passage" class="passage" data-type-text={content}/>
+        
+        { gameOver ?
+            <div>game over</div>
+
+        :
+        <div class="choices">
+            {choices.map((choice) => <BranchButton branchData={choice} />)}
+            {choices.length < 3 ? 
+                <button 
+                    id="new-post-button"
+                    class=""
+                    hx-get={`/api/branch/new/${id}`}
+                    hx-swap="innerHTML transition:true" 
+                    hx-target="main"
+                    >do something else
+                </button>
+            : null}
+
+
+        </div>
+        }
+        
+            
+        
+        
+        
+        
+        <Notepad />
+
+
+    </div>
+</main>
+
+  
+
+

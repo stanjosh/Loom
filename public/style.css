@@ -67,9 +67,8 @@
   }
   
   .passage::after {
-    position: absolute;
+    position: relative;
     font-family: 'VT323', monospace;
-    font-size: 1.5rem;
     content: "\2588";
     animation: cursor-blink 1.5s steps(2) infinite;
   }
@@ -129,7 +128,6 @@
 .scrollable-content::-webkit-scrollbar-thumb:hover {
   background-color: var(--crt-shadow);
 }
-
 
 
 

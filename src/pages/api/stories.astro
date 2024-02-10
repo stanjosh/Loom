@@ -1,0 +1,24 @@
+---
+
+import useMongoDB from '../../../lib/useMongoDB'
+
+const storyData = await useMongoDB.getStories()
+
+
+
+
+---
+
+<main id="main" hx-swap-oob="innerHTML">
+
+    {storyData.map((story) => 
+        <button 
+            id="new-post-button"
+            class=""
+            hx-get={`/api/branch/${story.branch._id}`} 
+            hx-trigger="click, keyup[altKey&&key=='n'] from:body"
+            >{story.description}
+        </button>
+    )}
+
+</main>
