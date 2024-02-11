@@ -16,14 +16,23 @@ import BaseLayout from "./BaseLayout.astro"
 
 
 <style is:global>
-  @font-face {
-    font-family: Tandy;
-    src: url(/WebPlus_Tandy1K-II_225L.woff);
+
+
+  main {
+    display: inline-block;
+    height: 100%;
+    max-height: 400px;
+
+  }
+
+  .scroll-container {
+    max-height: 100%;
+    overflow-y: scroll;
   }
 
   .crt button  {
     display: inline-flex;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Tandy', sans-serif;
     font-size: 1rem;
     text-decoration: none;
     color: var(--crt-background);
@@ -33,17 +42,17 @@ import BaseLayout from "./BaseLayout.astro"
     padding: 5px 1rem;
     margin: 0.5rem 0;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.42s ease-in-out;
     height: 100%;
   }
 
-  .crt button :hover {
+  .crt button:hover {
       color: var(--crt-background);
       background-color: var(--crt-main);
-      filter: drop-shadow( var(--crt-glow) 0 0 1.15rem);
+      filter: drop-shadow( var(--crt-glow) 0 0 0.85rem);
   }
 
-  .crt button :active {
+  .crt button:active {
       color: var(--crt-background);
       background-color: var(--crt-main);
       filter: drop-shadow(var(--crt-glow) 0 0 1.05rem );
@@ -59,7 +68,8 @@ import BaseLayout from "./BaseLayout.astro"
     bottom: 50%;
     transform: translate(-50%, 50%) ;
     border-radius: var(--crt-border-radius);
-    filter: drop-shadow(0 0 1.75rem var(--crt-glow));
+    filter: drop-shadow(0 0 2.75rem var(--crt-glow));
+
   }
 
   .crt  {
@@ -75,6 +85,7 @@ import BaseLayout from "./BaseLayout.astro"
     color: var(--crt-text);
     filter: contrast(1.6) brightness(1.1) saturate(1.2);
     text-rendering: geometricPrecision;
+    overflow: hidden;
   }
 
   .crt::before {
@@ -117,14 +128,11 @@ import BaseLayout from "./BaseLayout.astro"
       
   }
 
-  #branch-container {
-      display: inline-block;
-      
-      height: 100%;
-      width: 100%;
-      max-height: 100%;
-
+  #choices {
+    display: none
   }
+
+
 
   .passage {
       display: inline-block;
@@ -144,13 +152,23 @@ import BaseLayout from "./BaseLayout.astro"
   }
 
 
-  .passage::-webkit-scrollbar {
+  ::-webkit-scrollbar {
       width: 1em;
   }
 
+  ::-webkit-scrollbar-track {
+      background-color: var(--crt-background);
+  }
+  
+  ::-webkit-scrollbar-corner {
+      background-color: var(--crt-background);
+  }
 
+  ::-webkit-scrollbar::after {
+      background-color: var(--crt-main);
+  }
 
-  .passage::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
       background-color: var(--crt-main);
 
   }
@@ -162,8 +180,9 @@ import BaseLayout from "./BaseLayout.astro"
             justify-content: center;
             margin: 0 auto;
             padding: 2rem;
-            width: 100%;
-            max-width: 600px;
+            height: 100%;
+            max-height: 100%;
+
     }
 
     .new-branch-form input, textarea {
@@ -175,6 +194,7 @@ import BaseLayout from "./BaseLayout.astro"
         font-family: 'Tandy', sans-serif;
         background-color: var(--crt-text);
         border-radius: 0;
+        caret-color: var(--crt-background);
     }
 
     input[type="checkbox"] {
@@ -207,23 +227,29 @@ import BaseLayout from "./BaseLayout.astro"
     }
 
     ::placeholder {
-        color: var(--crt-background);
+        color: var(--crt-shadow);
     }
 
 
 
     .new-branch-form input:focus, textarea:focus {
         outline: none;
-        border: 1px solid #000;
+        filter: drop-shadow(0 0 0.5rem var(--crt-glow));
+    }
+
+    .new-branch-form::after input:focus, textarea:focus {
+        position: relative;
+        z-index: 2;
+
     }
 
 
-@media screen and (max-width: 768px), (display-mode: fullscreen) {
+  @media screen and (max-width: 768px), (display-mode: fullscreen) {
     .passage {
         max-height: 100%;
         font-size: min(2vh, 1rem);
     }
-}
+  }
 
 
 

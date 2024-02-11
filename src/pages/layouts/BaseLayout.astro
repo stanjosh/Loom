@@ -9,6 +9,7 @@
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/script.js" is:inline></script>
     <link rel="stylesheet" type="text/css" href="/reset.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
@@ -29,22 +30,57 @@
 
   @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+  @font-face {
+    font-family: Tandy;
+    src: url(/WebPlus_Tandy1K-II_225L.woff);
+  }
+
   body {
 	  background-color: var(--crt-panel);
     font-family: 'VT323', monospace;
   }
 
   :root {
-  --crt-main: #66ff00;
-  --crt-glow: #89bb68b6;
-  --crt-text: #44ee00;
-  --crt-background: #272717;
-  --crt-panel: #1f1e1c;
-  --panel-color: #c6ccab;
-  --crt-border-radius: 20px;
-  --crt-padding: 1.5rem;
-  --green-pixels: linear-gradient(rgba(0, 0, 0, 0.723), rgba(0, 255, 0, 0.055), rgba(0, 255, 0, 0.25));
-  --cga-pixels: linear-gradient(90deg, rgba(255, 85, 85, 0.15), rgba(85, 255, 85, 0.15), rgba(85, 255, 255, 0.15));
-}
+    --crt-main: #66ff00;
+    --crt-shadow: #1f211d88;
+    --crt-glow: #89bb68b6;
+    --crt-text: #44ee00;
+    --crt-background: #272717;
+    --crt-panel: #1f1e1c;
+    --panel-color: #c6ccab;
+    --crt-border-radius: 20px;
+    --crt-padding: 1.5rem;
+    --green-pixels: linear-gradient(rgba(0, 0, 0, 0.723), rgba(0, 255, 0, 0.055), rgba(0, 255, 0, 0.25));
+
+  }
+
+  .amber {
+    --crt-main: #ffd000;
+    --crt-shadow: #1f211d88;
+    --crt-glow: #e3b41946;
+    --crt-text: #ee9300;
+    --crt-background: #272717;
+    --crt-panel: #1f1e1c;
+    --panel-color: #c6ccab;
+    --crt-border-radius: 35px;
+    --crt-padding: 1.5rem;
+    --green-pixels: linear-gradient(rgba(0, 0, 0, 0.723), rgba(174, 255, 0, 0.055), rgba(255, 196, 0, 0.25));
+
+  }
+
+  .cga {
+    --crt-main: #ff00d9;
+    --crt-shadow: #1f211d88;
+    --crt-glow: #b368bbb6;
+    --crt-text: #00fffb;
+    --crt-background: #272717;
+    --crt-panel: #1f1e1c;
+    --panel-color: #c6ccab;
+    --crt-border-radius: 20px;
+    --crt-padding: 1.5rem;
+    --green-pixels: linear-gradient(rgba(0, 0, 0, 0.723), rgba(255, 0, 179, 0.055), rgba(0, 247, 255, 0.25));
+    
+  }
+
 
 </style>

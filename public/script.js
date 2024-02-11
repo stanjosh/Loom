@@ -1,11 +1,11 @@
 
 const sounds = {
-    drone: '../sound/ambient/drone.ogg',
-    hum: '../sound/ambient/hum.ogg',
-    footsteps: '../sound/ambient/footsteps.ogg',
-    loudhum: '../sound/ambient/loudhum.ogg',
-    ticks: '../sound/ambient/ticks.ogg',
-    hit: '../sound/ambient/cpufanhit.ogg',
+    drone: '../sound/drone.ogg',
+    hum: '../sound/hum.ogg',
+    footsteps: '../sound/footsteps.ogg',
+    loudhum: '../sound/loudhum.ogg',
+    ticks: '../sound/ticks.ogg',
+    hit: '../sound/cpufanhit.ogg',
 }
 const soundsArray = Object.values(sounds)
 
@@ -18,6 +18,7 @@ const playKeySound = () => {
 }
 
 const typeItOut = async () => {
+    document.getElementById('choices').style.display = 'none'
     const passage = document.getElementById('passage')  
     if (passage === null) return
     let text = passage.getAttribute('data-type-text')
@@ -43,7 +44,7 @@ const typeItOut = async () => {
         document.onclick = async () => {
             i = text.length
             passage.innerHTML = text
-
+            document.getElementById('choices').style.display = 'flex'
         };    
 }
 
@@ -70,8 +71,8 @@ const ambience = (track) => {
 }
 
 let audio, ambienceTrack;
-// ambienceTrack = ambience(sounds[$('#ambient_track').val()])
-// audio = ambienceTrack.play()
+ambienceTrack = ambience(sounds[$('#ambient_track').val()])
+audio = ambienceTrack.play()
 
 
 

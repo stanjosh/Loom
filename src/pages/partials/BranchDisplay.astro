@@ -1,4 +1,6 @@
 ---
+import { getSession } from 'auth-astro/server'
+const session = await getSession(Astro.request)
 import Notepad from "./Notepad.astro";
 import BranchButton from "./BranchButton.astro";
 
@@ -21,9 +23,11 @@ const { content, choices, gameOver, _id: id } = branchData;
             <div>game over</div>
 
         :
-        <div class="choices">
+        <div id="choices" class="choices">
             {choices.map((choice) => <BranchButton branchData={choice} />)}
             {choices.length < 3 ? 
+                
+                session ?
                 <button 
                     id="new-post-button"
                     class=""
@@ -32,6 +36,8 @@ const { content, choices, gameOver, _id: id } = branchData;
                     hx-target="main"
                     >do something else
                 </button>
+                : <div>sign in to make a new branch</div>
+
             : null}
 
 

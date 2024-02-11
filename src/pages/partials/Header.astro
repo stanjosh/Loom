@@ -1,6 +1,7 @@
 ---
 
-
+import Google from "@auth/core/providers/google";
+import GoogleAuthButton from "./GoogleAuthButton.astro"
 
 const title = "you hit your head on the ceiling"
 
@@ -34,9 +35,7 @@ export const partial = true;
             </button>
 
 
-            <button>
-                log out
-            </button>
+            <GoogleAuthButton />
         </div>
 
 
@@ -56,6 +55,14 @@ nav {
     justify-items: center;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+}
+
+nav div {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-items: center;
+    align-items: center;
     gap: 1rem;
 }
 
