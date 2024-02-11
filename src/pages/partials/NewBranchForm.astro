@@ -26,35 +26,35 @@ const branch: Branch = {
     <div class="scroll-container">
     <form hx-post={`/api/branch/new/${id}`} class="new-branch-form">
 
-        <label for="title-input"><h2>What do you do?</h2></label>
+        <label for="title-input" class="hidden"><h2>What do you do?</h2></label>
         <input
             value = {branch.description}
             name="description"
             id="description-input"
-            
+            placeholder="What do you do?"
             type="text"
             required
         />
         
-        <label for="story-input"><h2>What happens?</h2></label>
+        <label for="story-input" class="hidden"><h2>What happens?</h2></label>
         <textarea
             
             value = {branch.content}
             name="content"
             id="story-input"
-            
+            placeholder="What happens?"
             rows="10"
             cols="50"
             required
         />
-        
-        <div>
-            <input id="gameOver" name="gameOver" type="checkbox" value="true"/>
-            <label for="gameOver">Game Over</label>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div>
+                <input id="gameOver" name="gameOver" type="checkbox" value="true"/>
+                <label for="gameOver">Game Over</label>
+            </div>
+
+            <button type="submit">do it</button> 
         </div>
-
-        <button type="submit">do it</button> 
-
     </form>
     </div>
 </main>
