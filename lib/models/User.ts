@@ -38,7 +38,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 userSchema.plugin(autopopulate);
 
 
-type User = InferSchemaType<typeof userSchema>;
+export type userSchema = InferSchemaType<typeof userSchema>;
 
 
 const User = mongoose.models.User || model('User', userSchema);

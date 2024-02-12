@@ -1,8 +1,8 @@
 ---
 
-import useMongoDB from '../../../lib/useMongoDB'
+import db from '../../../lib/db'
 
-const storyData = await useMongoDB.getStories()
+const storyData = await db.story.getAll()
 
 
 
@@ -16,7 +16,6 @@ const storyData = await useMongoDB.getStories()
             id="new-post-button"
             class=""
             hx-get={`/api/branch/${story.branch._id}`} 
-            hx-trigger="click, keyup[altKey&&key=='n'] from:body"
             >{story.description}
         </button>
     )}

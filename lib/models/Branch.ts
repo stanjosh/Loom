@@ -52,7 +52,7 @@ const branchSchema = new Schema({
 
 branchSchema.plugin(autopopulate);
 
-type Branch = InferSchemaType<typeof branchSchema>;
+export type branchSchema = InferSchemaType<typeof branchSchema>;
 
 const Branch = mongoose.models.Branch || model('Branch', branchSchema);
 export default Branch;

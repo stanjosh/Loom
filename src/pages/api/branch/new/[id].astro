@@ -1,7 +1,7 @@
 ---
 import BranchDisplay from '../../../partials/BranchDisplay.astro';
 import NewBranchForm from '../../../partials/NewBranchForm.astro';
-import useMongoDB from '../../../../../lib/useMongoDB';
+import db from '../../../../../lib/db';
 
 
 
@@ -21,9 +21,9 @@ const handleBranch = async () => {
             gameOver: newBranchData.get('gameOver'),
                 }
         console.log("parsed new branch data: " + parsedNewBranchData);
-        currentBranch = await useMongoDB.createBranch(id, parsedNewBranchData);
+        currentBranch = await db.branch.create(id, parsedNewBranchData);
     } else if (method === 'GET') {
-        currentBranch = await useMongoDB.getBranch(id);
+        currentBranch = await db.branch.getOne(id);
     }
     console.log("current branch: " + currentBranch);
     return currentBranch;
@@ -42,7 +42,3 @@ const branchData = await handleBranch();
     ? <NewBranchForm id={id}/>
     : <BranchDisplay branchData={branchData} />
     }
-
-
-
-   

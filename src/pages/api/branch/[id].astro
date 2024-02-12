@@ -1,13 +1,12 @@
 ---
 import BranchDisplay from '../../partials/BranchDisplay.astro';
-import useMongoDB from '../../../../lib/useMongoDB';
+import db from '../../../../lib/db';
 
 
 
 const { id } = Astro.params;
 
-
-const branchData = await useMongoDB.getBranch(id);
+const branchData = await db.branch.getOne(id);
 
 
 

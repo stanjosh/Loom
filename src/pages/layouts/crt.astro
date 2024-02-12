@@ -19,9 +19,33 @@ import BaseLayout from "./BaseLayout.astro"
 
 
   main {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     height: 100%;
     max-height: 400px;
+    align-items: space-between;
+  }
+
+  ::-webkit-scrollbar {
+      width: 1em;
+
+  }
+
+  ::-webkit-scrollbar-track {
+      background-color: var(--crt-background);
+  }
+  
+  ::-webkit-scrollbar-corner {
+      background-color: var(--crt-background);
+  }
+
+  ::-webkit-scrollbar::after {
+      background-color: var(--crt-main);
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background-color: var(--crt-main);
 
   }
 
@@ -43,7 +67,7 @@ import BaseLayout from "./BaseLayout.astro"
     margin: 0.5rem 0;
     cursor: pointer;
     transition: all 0.42s ease-in-out;
-    height: 100%;
+    max-height: 50px;
   }
 
   .crt button:hover {
@@ -122,65 +146,61 @@ import BaseLayout from "./BaseLayout.astro"
     border-radius: var(--crt-border-radius);
   }
 
-  .choices {
-      display: flex;
-      flex-direction: column;
-      
-  }
-
-  #choices {
-    display: none
-  }
-
-
-
   .passage {
-      display: inline-block;
-      font-family: 'Tandy', sans-serif;
-      min-height: 270px;
-      max-height: 270px;
-      height: 100%;
-      margin: 0;
-      overflow-y: scroll;
-      font-size: min(1rem, 1.5vh);
-      scroll-snap-type: y mandatory;
+    flex: 1 0 175px;
+    display: inline-block;
+    font-family: 'Tandy', sans-serif;
+    min-height: 50%;
+    margin: 50px;
+    overflow-y: scroll;
+    font-size: min(1rem, 1.5vh);
   }
 
   .passage p {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-  }
-
-  .scroll-container {
     scroll-snap-align: start;
-    max-height: 420px;
-    overflow-y: scroll;
+    scroll-snap-stop: always;
+  }
+
+  #choices {
+    flex: 1 0 125px;
+    flex-direction: column;
+    display: none;
+    justify-content: end;
+    height: 100%;
+    width: 100%;
   }
 
 
-  ::-webkit-scrollbar {
-      width: 1em;
 
-  }
 
-  ::-webkit-scrollbar-track {
-      background-color: var(--crt-background);
-  }
-  
-  ::-webkit-scrollbar-corner {
-      background-color: var(--crt-background);
-  }
 
-  ::-webkit-scrollbar::after {
-      background-color: var(--crt-main);
-  }
 
-  ::-webkit-scrollbar-thumb {
-      background-color: var(--crt-main);
 
-  }
 
-  .new-branch-form {
+    .checkbox-inline {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+    }
+
+    ::placeholder {
+        color: var(--crt-shadow);
+    }
+
+
+
+    .new-branch-form input:focus, textarea:focus {
+        outline: none;
+        filter: drop-shadow(0 0 0.5rem var(--crt-glow));
+    }
+
+    .new-branch-form::after input:focus, textarea:focus {
+        position: relative;
+        z-index: 2;
+
+    }
+
+    .new-branch-form {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -227,38 +247,6 @@ import BaseLayout from "./BaseLayout.astro"
       display: none;
     }
 
-    .checkbox-inline {
-      display: inline-block;
-      margin: 0;
-      padding: 0;
-    }
-
-    ::placeholder {
-        color: var(--crt-shadow);
-    }
-
-
-
-    .new-branch-form input:focus, textarea:focus {
-        outline: none;
-        filter: drop-shadow(0 0 0.5rem var(--crt-glow));
-    }
-
-    .new-branch-form::after input:focus, textarea:focus {
-        position: relative;
-        z-index: 2;
-
-    }
-
-
-  @media screen and (max-width: 768px), (display-mode: fullscreen) {
-    .passage {
-        max-height: 100%;
-        font-size: min(2vh, 1rem);
-    }
-  }
-
-
 
 
 
@@ -269,6 +257,15 @@ import BaseLayout from "./BaseLayout.astro"
   }
 
   @media screen and (max-width: 768px), (display-mode: fullscreen) {
+    main {
+      max-height: unset;
+      height: 100%;
+    }
+    .passage {
+      max-height: unset;
+      font-size: min(2vh, 1rem);
+    }
+
     .crt-frame {
       border: 0;
       transform: none;
@@ -281,14 +278,10 @@ import BaseLayout from "./BaseLayout.astro"
     }
     .crt {
       min-height: 100vh;
-      min-width: 100vw;
-      justify-content: space-around;
-      
+      min-width: 100vw;      
     }
 
-    .crt::after {
-      animation: none;
-    }
+
 
   }
 

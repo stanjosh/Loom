@@ -3,6 +3,7 @@ import { getSession } from 'auth-astro/server'
 const session = await getSession(Astro.request)
 import Notepad from "./Notepad.astro";
 import BranchButton from "./BranchButton.astro";
+import type { branchSchema } from '../../../lib/models/Branch';
 
 export const partial = true;
 
@@ -16,7 +17,7 @@ const { content, choices, gameOver, _id: id } = branchData;
 
 
 <main id="main" hx-swap-oob="innerHTML">
-    <div id="branch-display">
+
         <div id="passage" class="passage" data-type-text={content}/>
         
         { gameOver ?
@@ -24,7 +25,7 @@ const { content, choices, gameOver, _id: id } = branchData;
 
         :
         <div id="choices" class="choices">
-            {choices.map((choice) => <BranchButton branchData={choice} />)}
+            {choices.map((choice: branchSchema) => <BranchButton branchData={choice} />)}
             {choices.length < 3 ? 
                 
                 session ?
@@ -52,7 +53,7 @@ const { content, choices, gameOver, _id: id } = branchData;
         <Notepad />
 
 
-    </div>
+
 </main>
 
   

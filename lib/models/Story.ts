@@ -21,7 +21,7 @@ const storySchema = new Schema({
 
 storySchema.plugin(autopopulate);
 
-type Story = InferSchemaType<typeof storySchema>;
+export type storySchema = InferSchemaType<typeof storySchema>;
 
 
 
