@@ -18,7 +18,7 @@ const { content, choices, audio, gameOver, _id: id } = branchData;
 
 <main id="main" hx-swap-oob="innerHTML">
 
-        <div id="passage" class="passage" data-type-text={content} data-audio-track={audio} />
+        <div id="passage" class="passage" data-type-text={content} data-audio-track={audio.track} data-audio-loop={audio.loop ? 'true' : 'false'}/>
         <div id="choices" class="choices">
             { gameOver
                 ? <div>game over</div>

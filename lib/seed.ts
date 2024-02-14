@@ -36,6 +36,10 @@ const branchData = [
         description: 'Go to the house',
         content:
          `You walk up to the house and knock on the door. No one answers.`,
+        audio: {
+                track: 'footsteps',
+                loop: false
+            },
         choices: [
             mapObjectIds('dirt path')
         ]

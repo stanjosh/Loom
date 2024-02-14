@@ -27,14 +27,14 @@ const ambience = {
     footsteps: '../sound/ambient/footsteps.ogg',
     loudhum: '../sound/ambient/loudhum.ogg',
     ticks: '../sound/ambient/ticks.ogg',
-    hit: '../sound/ambient/cpufanhit.ogg',
-    play: async (track) => {
+    cpufanhit: '../sound/ambient/cpufanhit.ogg',
+    play: async (track, loop) => {
         if (track === ambience.playingTrack?.src) return
         if (ambience.playingTrack) ambience.playingTrack.fade(0.3, 0, 2300)
         
         ambience.playingTrack = new Howl({
             src: [ambience[track]],
-            loop: true,
+            loop: loop,
             volume: ambience.playingTrack ? 0 : 0.3,
             autoplay: true,
             onload: () => {ambience.playingTrack.fade(0, 0.3, 2300)}
@@ -58,7 +58,9 @@ const initPassage = async () => {
     document.getElementById('choices').style.display = 'none'
     const passage = document.getElementById('passage')  
     const audioTrack = passage.getAttribute('data-audio-track')
-    ambience.play(audioTrack)
+    const loop = (passage.getAttribute('data-audio-loop') === 'true')
+    console.log(audioTrack, loop)
+    ambience.play(audioTrack, loop)
     if (passage === null) return
     let text = passage.getAttribute('data-type-text')
     if (text === null) return

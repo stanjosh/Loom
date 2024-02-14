@@ -35,10 +35,19 @@ const branchSchema = new Schema({
     },
 
     audio: {
-        type: String,
-        allowNull: true,
-        default: 'hum'
+        track : {
+            type: String,
+            allowNull: true,
+            default: 'hum'
+        },
+        loop: {
+            type: Boolean,
+            default: true,
+            required: false
+        }
     },
+
+    
 
     choices: [{
             type: Schema.Types.ObjectId,
