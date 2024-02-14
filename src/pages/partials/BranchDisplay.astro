@@ -9,7 +9,7 @@ export const partial = true;
 
 
 const { branchData } = Astro.props;
-const { content, choices, gameOver, _id: id } = branchData;
+const { content, choices, audio, gameOver, _id: id } = branchData;
 
 
 
@@ -18,33 +18,26 @@ const { content, choices, gameOver, _id: id } = branchData;
 
 <main id="main" hx-swap-oob="innerHTML">
 
-        <div id="passage" class="passage" data-type-text={content}/>
-        
-        { gameOver ?
-            <div>game over</div>
-
-        :
+        <div id="passage" class="passage" data-type-text={content} data-audio-track={audio} />
         <div id="choices" class="choices">
-            {choices.map((choice: branchSchema) => <BranchButton branchData={choice} />)}
-            {choices.length < 3 ? 
-                
-                session ?
-                <button 
-                    id="new-post-button"
-                    class=""
-                    hx-get={`/api/branch/new/${id}`}
-                    hx-swap="innerHTML transition:true" 
-                    hx-target="main"
-                    >do something else
-                </button>
+            { gameOver
+                ? <div>game over</div>
+                : choices.map((choice: branchSchema) => <BranchButton branchData={choice} />)
+            
+            }
+
+            { (choices.length < 3 && session) 
+                ?   <button 
+                        id="new-post-button"
+                        class=""
+                        hx-get={`/api/branch/new/${id}`}
+                        hx-swap="innerHTML transition:true" 
+                        hx-target="main"
+                        >do something else
+                    </button>
                 : <div>sign in to make a new branch</div>
-
-            : null}
-
-
+            }
         </div>
-        }
-        
             
         
         
@@ -53,9 +46,7 @@ const { content, choices, gameOver, _id: id } = branchData;
         <Notepad />
 
 
-
 </main>
 
-  
 
 

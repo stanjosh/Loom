@@ -45,7 +45,7 @@ const branchData = [
         userId: fakeUserId,
         description: 'Check the mailbox',
         content:
-         `You open the mailbox and find a letter. It's address to you.`,
+         `You open the mailbox and find a letter. It's addressed to you.`,
         choices: []
     }
 

@@ -17,9 +17,12 @@ import Header from './partials/Header.astro';
 
 	</main>
 	<script>
-		htmx.onLoad(function(evt) {
-			if (evt.id === 'passage') {
-				typeItOut();
+
+		htmx.onLoad(function(elt) {
+			console.log(elt);
+			if (elt.id === 'passage') {
+				initPassage();
+				
 			}
 		});
 	</script>
