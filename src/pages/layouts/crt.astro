@@ -3,15 +3,18 @@
 import BaseLayout from "./BaseLayout.astro"
 
 
-
+import { getSession } from 'auth-astro/server'
+const session = await getSession(Astro.request)
+const { theme } = session?.user || { theme: 'green' }
 
 ---
 	<BaseLayout title="loom">
-    <div class="crt-frame">
-			<div class="crt">
+    <div class=`crt-frame ${theme}`>
+			<div class=`crt ${theme}`>
 				<slot />
 			</div>
     </div>
+    
   </BaseLayout>
 
 

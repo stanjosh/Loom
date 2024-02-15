@@ -1,40 +1,23 @@
 ---
-
-import Google from "@auth/core/providers/google";
 import GoogleAuthButton from "./GoogleAuthButton.astro"
-
-const title = "you hit your head on the ceiling"
-
-const session = {
-  loggedin: false,
-  username: "Guest",
-  branch: {
-    id: "0"
-  }
-}
-
-const {loggedin, username, branch} = session;
+import { getSession } from 'auth-astro/server'
+const session = await getSession(Astro.request)
 
 export const partial = true;
+
+
 
 ---
 
 
 <nav>
         <div class="title">
-        <button>
-            loom
-        </button>
+            <button id="home-button" hx-get="/partials/HomeScreen" hx-swap="outerHTML">
+                LOOM
+            </button>
         </div>
 
-
-       <div>
-
-            <button id="home-button" hx-get="/partials/HomeScreen" hx-swap="outerHTML">
-                home
-            </button>
-
-
+        <div>
             <GoogleAuthButton />
         </div>
 

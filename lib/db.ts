@@ -1,4 +1,4 @@
-import connectMongo from "./mongodb";
+import connectMongo from "./mongoose";
 import { Branch, User, Story } from "./models/index";
 import { type branchSchema } from "./models/Branch";
 
@@ -52,6 +52,16 @@ const db = {
             const userData =  await User.findById(id);
             return userData;
         },
+
+        updateUser: async (id: string, userData: any) => {
+            console.log('userData', userData);
+            await connectMongo();
+            const updatedUserData =  await User.findById(id)
+            updatedUserData.theme = userData.theme;
+            updatedUserData.save();            
+            console.log('updatedUserData', updatedUserData);
+            return updatedUserData;
+        }
 
     }
 };

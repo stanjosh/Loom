@@ -1,0 +1,20 @@
+---
+import db from '../../../../lib/db'
+const updatedUserData = await Astro.request.formData()
+import { getSession } from 'auth-astro/server'
+const session = await getSession(Astro.request)
+const { id } = Astro.params
+
+if (!session || session?.user?.id !== id) {
+  return Astro.response.status('401')
+}
+
+if (!updatedUserData) {
+  return Astro.response.status('501')
+}
+
+db.user.updateUser(id, updatedUserData)
+
+---
+
+

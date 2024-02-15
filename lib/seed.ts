@@ -1,6 +1,6 @@
 import { Branch, Story } from './models/index.js';
 import { Types } from 'mongoose';
-import connectMongo from './mongodb.js';
+import connectMongo from './mongoose.js';
 
 type objectIdsListType = {
     [key: string]: Types.ObjectId;

@@ -1,0 +1,21 @@
+---
+import db from '../../../../lib/db'
+import { getSession } from 'auth-astro/server'
+const session = await getSession(Astro.request)
+const { theme } = Astro.params
+
+
+
+const id = session?.user?.id
+
+if (!theme) {
+  return Astro.response.status('501')
+}
+
+console.log('theme', theme)
+await db.user.updateUser( id, { theme: theme } )
+
+
+return Astro.redirect('/')
+---
+

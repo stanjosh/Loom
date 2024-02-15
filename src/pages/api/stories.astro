@@ -19,5 +19,8 @@ const storyData = await db.story.getAll()
             >{story.description}
         </button>
     )}
+    <button id="theme-picker" hx-get="/partials/ThemePicker" hx-swap="outerHTML">
+        Theme
+    </button>
 
 </main>

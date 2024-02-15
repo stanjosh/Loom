@@ -1,0 +1,19 @@
+---
+
+
+const themes = ['green', 'amber', 'cga' ]
+
+
+---
+
+
+
+
+<div id="theme-picker" style="display: flex; justify-content: space-around; width: 100%">
+    {themes.map((theme: string) => (
+        
+        <button hx-post=`/api/theme/${theme}` hx-target="#body">
+            {theme}
+        </button>
+    ))}
+</div>
